@@ -14,8 +14,18 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         Vector3 wantedPosition;
+
+        followBehind = true;
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            followBehind = false;
+        }
+
         if (followBehind)
+        {
             wantedPosition = target.TransformPoint(0, height, -distance);
+        }
         else
             wantedPosition = target.TransformPoint(0, height, distance);
 
