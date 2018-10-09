@@ -6,13 +6,13 @@ using UnityEngine.Networking;
 public class CarController : NetworkBehaviour
 {
     public float velocity = 10;
+    public GameObject bulletPrefab;
+    public Transform bulletRightSpawn;
+    public Transform bulletLeftSpawn;
 
     public override void OnStartLocalPlayer()
     {
-        Car.instance = new Car
-        {
-            transform = GetComponent<Transform>()
-        };
+        Car.transform = GetComponent<Transform>();
     }
 
     // Use this for initialization
@@ -35,11 +35,43 @@ public class CarController : NetworkBehaviour
         var speed = Input.GetAxis("Vertical") * velocity;
         transform.position += transform.forward * speed * Time.deltaTime;
 
+        //Fire
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CmdFire();
+        }
+
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
+
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
+
         //Todo - Jump
         //if (Input.GetKey(KeyCode.W))
         //{
         //    transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20, 0), ForceMode.Force);
         //}
 
+    }
+
+    [Command]
+    void CmdFire()
+    {
+        // Create the Bullets from the Bullet Prefab
+        var bulletLeft = Instantiate(bulletPrefab, bulletLeftSpawn.position, bulletLeftSpawn.rotation);
+        var bulletRight = Instantiate(bulletPrefab, bulletRightSpawn.position, bulletRightSpawn.rotation);
+
+        // Add velocity to the bullets
+        bulletLeft.GetComponent<Rigidbody>().velocity = bulletLeft.transform.forward * 40;
+        bulletRight.GetComponent<Rigidbody>().velocity = bulletRight.transform.forward * 40;
+
+        // Spawn the bullets on the Clients
+        NetworkServer.Spawn(bulletLeft);
+        NetworkServer.Spawn(bulletRight);
+
+        // Destroy the bullet after 2 seconds
+        Destroy(bulletLeft, 2.0f);
+        Destroy(bulletRight, 2.0f);
     }
 }

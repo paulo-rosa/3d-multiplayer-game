@@ -5,11 +5,5 @@ using UnityEngine.Networking;
 
 public class Car : MonoBehaviour
 {
-    public static Car instance;
-    public new Transform transform;
-
-    void Awake()
-    {
-        instance = this;
-    }
+    public new static Transform transform;
 }

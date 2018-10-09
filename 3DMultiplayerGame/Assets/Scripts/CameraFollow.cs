@@ -13,14 +13,13 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if (Car.instance == null && Car.instance.transform == null)
+        if (Car.transform == null)
         {
             return;
         }
         else
         {
-            target = Car.instance.transform;
-            Debug.Log(Car.instance);
+            target = Car.transform;
         }
         
         Vector3 wantedPosition;
