@@ -587,6 +587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnDeath: 0
+  explosionPrefab: {fileID: 1838733926544000, guid: 8d5e3901c0c8f7d4aae707ac4eca462f,
+    type: 2}
   currentHealth: 100
   healthBar: {fileID: 224026973978370874}
 --- !u!136 &136360151717258532

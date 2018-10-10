@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
+    public int bulletDamage = 10;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -10,7 +11,7 @@ public class Bullet : MonoBehaviour
         var health = hit.GetComponent<Health>();
         if (health != null)
         {
-            health.TakeDamage(1);
+            health.TakeDamage(bulletDamage);
         }
 
         Destroy(gameObject);

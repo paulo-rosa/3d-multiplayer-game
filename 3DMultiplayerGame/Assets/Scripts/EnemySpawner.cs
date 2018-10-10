@@ -21,7 +21,7 @@ public class EnemySpawner : NetworkBehaviour
                 Random.Range(0, 180),
                 0.0f);
 
-            var enemy = (GameObject)Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+            var enemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
             NetworkServer.Spawn(enemy);
         }
     }
