@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;
-    public float distance = 3.0f;
+    private Transform target;
+    public float distance = 5.0f;
     public float height = 3.0f;
     public float damping = 5.0f;
     public bool smoothRotation = true;
@@ -13,6 +13,15 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        if (Car.transform == null)
+        {
+            return;
+        }
+        else
+        {
+            target = Car.transform;
+        }
+        
         Vector3 wantedPosition;
 
         followBehind = true;
