@@ -4,10 +4,8 @@ using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour
 {
-
     public const int maxHealth = 100;
     public bool destroyOnDeath;
-    public GameObject explosionPrefab;
 
     [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth = maxHealth;
@@ -32,8 +30,8 @@ public class Health : NetworkBehaviour
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-
-            RpcExplode();
+            var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
+            explosion.Explode(transform.position);
 
             if (destroyOnDeath)
             {
@@ -52,14 +50,6 @@ public class Health : NetworkBehaviour
     void OnChangeHealth(int currentHealth)
     {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
-    }
-
-    [ClientRpc]
-    void RpcExplode()
-    {
-        var explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
-        NetworkServer.Spawn(explosion);
-        var particleSystem = explosion.GetComponent<ParticleSystem>();
     }
 
     [ClientRpc]

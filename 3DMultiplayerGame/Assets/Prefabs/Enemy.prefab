@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 114377637119103028}
   - component: {fileID: 114681287159368352}
   - component: {fileID: 114655887933157780}
+  - component: {fileID: 114633101718379828}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -555,6 +556,19 @@ MonoBehaviour:
     type: 2}
   bulletRightSpawn: {fileID: 4495905524135234}
   bulletLeftSpawn: {fileID: 4790467675456676}
+--- !u!114 &114633101718379828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642719305111456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1448a2aa1787ce34a8981449b0635559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1838733926544000, guid: 8d5e3901c0c8f7d4aae707ac4eca462f,
+    type: 2}
 --- !u!114 &114655887933157780
 MonoBehaviour:
   m_ObjectHideFlags: 1

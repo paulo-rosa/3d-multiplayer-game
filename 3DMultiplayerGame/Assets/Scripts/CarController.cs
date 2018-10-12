@@ -18,7 +18,7 @@ public class CarController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -41,12 +41,11 @@ public class CarController : NetworkBehaviour
             CmdFire();
         }
 
-        //Todo - Jump
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20, 0), ForceMode.Force);
-        //}
-
+        //Jump
+        if (Input.GetKey(KeyCode.F))
+        {
+            transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
+        }
     }
 
     [Command]
