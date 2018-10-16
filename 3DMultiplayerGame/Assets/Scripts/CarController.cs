@@ -9,16 +9,24 @@ public class CarController : NetworkBehaviour
     public GameObject bulletPrefab;
     public Transform bulletRightSpawn;
     public Transform bulletLeftSpawn;
+    public AudioClip CarSound;
+    public AudioClip ShotSound;
+    private AudioSource _audioSource;
 
     public override void OnStartLocalPlayer()
     {
         Car.transform = GetComponent<Transform>();
     }
 
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start()
     {
-
+        _audioSource.clip = CarSound;
     }
 
     // Update is called once per frame
@@ -33,11 +41,27 @@ public class CarController : NetworkBehaviour
         transform.Rotate(0, direction, 0);
 
         var speed = Input.GetAxis("Vertical") * velocity;
-        transform.position += transform.forward * speed * Time.deltaTime;
+
+        if (speed != 0)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+            if (!_audioSource.isPlaying)
+            {
+                PlayCarSound();
+            }
+        }
+        else
+        {
+            if (!_audioSource.clip.Equals(ShotSound))
+            {
+                _audioSource.Stop();
+            }
+        }
 
         //Fire
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            PlayShotSound();
             CmdFire();
         }
 
@@ -66,5 +90,21 @@ public class CarController : NetworkBehaviour
         // Destroy the bullet after 2 seconds
         Destroy(bulletLeft, 2.0f);
         Destroy(bulletRight, 2.0f);
+    }
+
+    public void PlayCarSound()
+    {
+        _audioSource.volume = 0.1f;
+        _audioSource.clip = CarSound;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
+
+    public void PlayShotSound()
+    {
+        _audioSource.volume = 0.5f;
+        _audioSource.clip = ShotSound;
+        _audioSource.loop = false;
+        _audioSource.Play();
     }
 }

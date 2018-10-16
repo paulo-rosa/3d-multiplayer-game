@@ -6,6 +6,9 @@ public class Health : NetworkBehaviour
 {
     public const int maxHealth = 100;
     public bool destroyOnDeath;
+    public AudioClip ExplosionSound;
+    public AudioClip GotShotSound;
+    private AudioSource _audioSource;
 
     [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth = maxHealth;
@@ -21,6 +24,10 @@ public class Health : NetworkBehaviour
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
     }
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void TakeDamage(int amount)
     {
@@ -31,11 +38,19 @@ public class Health : NetworkBehaviour
         if (currentHealth <= 0)
         {
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
+            PlayExplosionSound();
             explosion.Explode(transform.position);
 
             if (destroyOnDeath)
             {
-                Destroy(gameObject);
+                GetComponentInChildren<Canvas>().enabled = false;
+                var components = GetComponentsInChildren<MeshRenderer>();
+                foreach (var component in components)
+                {
+                    component.enabled = false;
+                }
+
+                Destroy(gameObject, ExplosionSound.length);
             }
             else
             {
@@ -44,6 +59,10 @@ public class Health : NetworkBehaviour
                 // called on the Server, invoked on the Clients
                 RpcRespawn();
             }
+        }
+        else
+        {
+            PlayGotShotSound();
         }
     }
 
@@ -69,5 +88,21 @@ public class Health : NetworkBehaviour
             // Set the player’s position to the chosen spawn point
             transform.position = spawnPoint;
         }
+    }
+
+    public void PlayExplosionSound()
+    {
+        _audioSource.volume = 1.0f;
+        _audioSource.clip = ExplosionSound;
+        _audioSource.loop = false;
+        _audioSource.Play();
+    }
+
+    public void PlayGotShotSound()
+    {
+        _audioSource.volume = 1.0f;
+        _audioSource.clip = GotShotSound;
+        _audioSource.loop = false;
+        _audioSource.Play();
     }
 }
