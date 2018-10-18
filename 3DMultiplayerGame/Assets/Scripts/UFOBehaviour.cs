@@ -26,7 +26,9 @@ public class UFOBehaviour : MonoBehaviour {
 
     private void FollowPLayer()
     {
-        var newPosition = new Vector3(0, 3, 0) + FirstPlayer.position + FirstPlayer.forward * Offset;
+        var x = FirstPlayer.position.x + FirstPlayer.forward.x * Offset;
+        var z = FirstPlayer.position.z + FirstPlayer.forward.z * Offset;
+        var newPosition = new Vector3(x, 15, z); 
 
         // Set our position as a fraction of the distance between the markers.
         transform.position = Vector3.Lerp(FirstPlayer.position, newPosition, Time.deltaTime * 100);

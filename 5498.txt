@@ -1,0 +1,14 @@
+estados de jogo
+*pregame
+*ingame
+*endgame
+
+eatados de rede
+*connecting
+*lobby
+*gamescene
+
+isServer call RPC
+Command are sended by the client (send information from client to server)
+para atualizar variáveis no cliente é possível utilizar as syncvars, quando mudam
+no server, mudam também no cliente.
