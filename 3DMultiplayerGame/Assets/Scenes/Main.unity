@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &333778023 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1613514152}
 --- !u!1 &375675046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1173645057396578, guid: b33a962e5c464aa46be6ce6db79d0f1b,
@@ -168,12 +173,71 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 636487175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 144.6, y: 47.4, z: 915.4}
+  m_LocalPosition: {x: 178.36, y: 28.8, z: 895.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &639104665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639104667}
+  - component: {fileID: 639104666}
+  - component: {fileID: 639104668}
+  m_Layer: 13
+  m_Name: LandMine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639104666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 639104665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8faf64dbc3214e84698db143966a3a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionLayer:
+    serializedVersion: 2
+    m_Bits: 1536
+  Explosion: {fileID: 1338006775}
+--- !u!4 &639104667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 639104665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 214, y: 23.013, z: 895}
+  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_Children:
+  - {fileID: 333778023}
+  - {fileID: 1338006773}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &639104668
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 639104665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000004, y: 0.98587036, z: 1}
+  m_Center: {x: -0.0000038146973, y: -0.0070648193, z: 0}
 --- !u!1 &649432906
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +695,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1338006772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338006773}
+  - component: {fileID: 1338006774}
+  - component: {fileID: 1338006775}
+  m_Layer: 13
+  m_Name: LandMineExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1338006773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338006772}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639104667}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1338006774
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338006772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1338006775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338006772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb5cf1a7de39bf40a656f8e36bc8e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplosionLayer:
+    serializedVersion: 2
+    m_Bits: 2560
 --- !u!1 &1495244812
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1558657056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,6 +960,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1613514152
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 639104667}
+    m_Modifications:
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114378449727040366, guid: dcd81a485c1799f4da5d85253948db2a,
+        type: 2}
+      propertyPath: ExplosionLayer.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.13241014
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405142274190856, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.64976054
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512157884914046, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_Name
+      value: LandMineGraphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512157884914046, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923376095033020, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114378449727040366, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+    - {fileID: 65588784800164330, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1682565021
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +1141,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1724757082}
   m_LocalRotation: {x: -0.16860421, y: -0.3132803, z: 0.056622643, w: -0.9328569}
-  m_LocalPosition: {x: -4.312925, y: 3.4297676, z: -5.703831}
+  m_LocalPosition: {x: -4.312925, y: 339, z: -5.703831}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
