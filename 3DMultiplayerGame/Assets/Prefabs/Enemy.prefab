@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4790467675456676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletLeftSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 224067039499331224}
   - component: {fileID: 222547977672500154}
   - component: {fileID: 114199071584131164}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: 'Foreground '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33640530543486156}
   - component: {fileID: 23374755383203716}
   - component: {fileID: 136555226169013536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CannonLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4495905524135234}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BulletRightSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 114655887933157780}
   - component: {fileID: 114633101718379828}
   - component: {fileID: 82499997996193180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 224217260492734876}
   - component: {fileID: 222272976929444876}
   - component: {fileID: 114162485834152696}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 33040577484924114}
   - component: {fileID: 23542754513355458}
   - component: {fileID: 136473876224478106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CannonRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4783763748033808}
   - component: {fileID: 33470215333543444}
   - component: {fileID: 23417810072301120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 114404280400639666}
   - component: {fileID: 114249023510844246}
   - component: {fileID: 114182310668274610}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
