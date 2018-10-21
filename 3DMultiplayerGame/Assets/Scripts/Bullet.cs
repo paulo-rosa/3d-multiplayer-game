@@ -5,9 +5,15 @@ public class Bullet : MonoBehaviour
 {
     public int bulletDamage = 10;
     public LayerMask layerMask;
+    public LayerMask layerOrigin;
 
     void OnCollisionEnter(Collision collision)
     {
+        if (layerOrigin == collision.gameObject.layer)
+        {
+            return;
+        }
+
         if (layerMask == (layerMask | (1 << collision.gameObject.layer)))
         {
             //Debug.Log("Bateu" + collision.gameObject.name);

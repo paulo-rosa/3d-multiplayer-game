@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -12,14 +13,21 @@ public class UFOController : NetworkBehaviour {
     public float RotationFactor = 90f;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public AudioClip UFOEngine;
 
-    private float timeToShoot = 1;
+    private float timeToShoot = 2;
     private float shootCounter = 0;
+    private AudioSource[] _audioSources;
     float alpha = 0f;
 
-    // Use this for initialization
-    void Start () {
-
+    private void Awake()
+    {
+        _audioSources = GetComponents<AudioSource>();
+        var audioSource = _audioSources.Where(a => a.clip == UFOEngine).FirstOrDefault();
+        audioSource.volume = 1.0f;
+        audioSource.clip = UFOEngine;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -33,7 +41,7 @@ public class UFOController : NetworkBehaviour {
 
         if (shootCounter > timeToShoot)
         {
-            //CmdFire();
+            CmdFire();
             shootCounter = 0;
         }
 
@@ -47,6 +55,7 @@ public class UFOController : NetworkBehaviour {
     {
         // Create the Bullets from the Bullet Prefab
         var bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        bullet.GetComponent<Bullet>().layerOrigin = gameObject.layer;
 
         Vector3 shoot = (Car.transform.position - bulletSpawn.position).normalized;
 
@@ -85,6 +94,7 @@ public class UFOController : NetworkBehaviour {
         transform.position = new Vector3(x + (5f * Mathf.Sin(Mathf.Deg2Rad * alpha)),
                                         FirstPlayer.position.y + 10,
                                         z + (2f * Mathf.Cos(Mathf.Deg2Rad * alpha)));
+
         alpha += 2f;//can be used as speed
     }
 }

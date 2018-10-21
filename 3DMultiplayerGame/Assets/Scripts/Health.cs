@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,7 +9,7 @@ public class Health : NetworkBehaviour
     public bool destroyOnDeath;
     public AudioClip ExplosionSound;
     public AudioClip GotShotSound;
-    private AudioSource _audioSource;
+    private AudioSource[] _audioSources;
 
     [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth = maxHealth;
@@ -26,7 +27,7 @@ public class Health : NetworkBehaviour
     }
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioSources = GetComponents<AudioSource>();
     }
 
     public void TakeDamage(int amount)
@@ -92,17 +93,19 @@ public class Health : NetworkBehaviour
 
     public void PlayExplosionSound()
     {
-        _audioSource.volume = 1.0f;
-        _audioSource.clip = ExplosionSound;
-        _audioSource.loop = false;
-        _audioSource.Play();
+        var audioSource = _audioSources.Where(a => a.clip == ExplosionSound).FirstOrDefault();
+        audioSource.volume = 1.0f;
+        audioSource.clip = ExplosionSound;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 
     public void PlayGotShotSound()
     {
-        _audioSource.volume = 1.0f;
-        _audioSource.clip = GotShotSound;
-        _audioSource.loop = false;
-        _audioSource.Play();
+        var audioSource = _audioSources.Where(a => a.clip == GotShotSound).FirstOrDefault();
+        audioSource.volume = 1.0f;
+        audioSource.clip = GotShotSound;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 }

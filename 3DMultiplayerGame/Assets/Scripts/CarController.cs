@@ -133,8 +133,13 @@ public class CarController : NetworkBehaviour
     {
         // Create the Bullets from the Bullet Prefab
         var bulletLeft = Instantiate(bulletPrefab, bulletLeftSpawn.position, bulletLeftSpawn.rotation);
+        bulletLeft.GetComponent<Bullet>().layerOrigin = gameObject.layer;
+
         var bulletRight = Instantiate(bulletPrefab, bulletRightSpawn.position, bulletRightSpawn.rotation);
+        bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
+
         var bulletCenter = Instantiate(bulletPrefab, bulletCenterSpawn.position, bulletCenterSpawn.rotation);
+        bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
 
         // Add velocity to the bullets
         bulletLeft.GetComponent<Rigidbody>().velocity = bulletLeft.transform.forward * 80;
