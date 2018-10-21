@@ -8,11 +8,12 @@ public class LandMineExplosion : MonoBehaviour {
 
     private SphereCollider _collider;
     private float _timeToExplode = 0;
-    private float _explosiontTime = .7f;
+    private float _explosionTime = 2f;
     private float _damageAmount;
-    private float _maxRadius = 8;
+    private float _maxRadius = 4;
     private float _maxDamage = 100;
-    // Use this for initialization
+    private float _maxDistanceToDamage = 30f;
+
 
     private void Start ()
     {
@@ -26,6 +27,7 @@ public class LandMineExplosion : MonoBehaviour {
             var hit = other.GetComponent<Health>();
             if(hit != null)
             {
+                Debug.Log("Give damage");
                 hit.TakeDamage(CalculateDamage(other.transform));
             }
         }
@@ -33,18 +35,33 @@ public class LandMineExplosion : MonoBehaviour {
 
     public void StartExplosion()
     {
-        while (_collider.radius < _maxDamage)
+        while (_collider.radius < _maxRadius)
         {
-            _collider.radius *= 1.1f;
+            _timeToExplode += Time.deltaTime;
+            if(_timeToExplode >= _explosionTime)
+            {
+                _collider.radius *= 1.1f;
+                _timeToExplode = 0;
+            }
         }
-
-        Destroy(gameObject);
+        if (_collider.radius >= _maxRadius)
+            Destroy(transform.parent.gameObject, .5f);
     }
 
     private int CalculateDamage(Transform other)
     {
         var distance = Vector3.Distance(transform.position, other.position);
-        var damage = (int)(((distance * 100)/ _maxRadius) * _maxDamage);
+        Debug.Log("Distance" + distance);
+        
+        var damage = (int)(((_maxDistanceToDamage - 
+            (distance - (transform.lossyScale.z + other.lossyScale.z))) / 
+            _maxDistanceToDamage) * _maxDamage);
+
+        if (damage < 0)
+            damage = 0;
+        Debug.Log(damage);
         return damage;
+
     }
+
 }

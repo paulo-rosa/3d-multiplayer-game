@@ -19,6 +19,7 @@ public class LandMineBehavior : MonoBehaviour
         {
             Debug.Log("Explode");
             //Explosion
+            GetComponent<BoxCollider>().enabled = false;
             Explosion.StartExplosion();
             MakeDamage();
         }

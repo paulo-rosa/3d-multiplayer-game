@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4941318013900900}
   - component: {fileID: 33332444361186334}
   - component: {fileID: 23593545352946426}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UFO_cockpi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   - component: {fileID: 4513176274250608}
   - component: {fileID: 135313824085977482}
   - component: {fileID: 65602613729057656}
-  m_Layer: 0
+  - component: {fileID: 114502960089214418}
+  m_Layer: 11
   m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4585781075000078}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mr Area S0.target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +71,7 @@ GameObject:
   - component: {fileID: 4434146008387100}
   - component: {fileID: 33178743746601918}
   - component: {fileID: 23440863412358246}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UFO_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4866057286397378}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mr Area Sp.target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,6 +258,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 56.29, y: 15.56, z: 65.13}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114502960089214418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173645057396578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a65e34a79c42647878336821163c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstPlayer: {fileID: 0}
+  Offset: 20
+  FloatFactor: 0.5
+  FloatSpeed: 2
+  RotationFactor: 25
 --- !u!135 &135313824085977482
 SphereCollider:
   m_ObjectHideFlags: 1
