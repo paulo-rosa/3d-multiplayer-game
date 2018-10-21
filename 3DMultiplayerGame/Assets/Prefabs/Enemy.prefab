@@ -654,6 +654,9 @@ MonoBehaviour:
   bulletLeftSpawn: {fileID: 4790467675456676}
   CarSound: {fileID: 8300000, guid: abcb608db0a16134aa1ab81932c6d220, type: 3}
   ShotSound: {fileID: 8300000, guid: 8b1a47994155313488bb20d2a9ad64df, type: 3}
+  axleInfoList: []
+  maxMotorTorque: 400
+  maxSteeringAngle: 30
 --- !u!114 &114633101718379828
 MonoBehaviour:
   m_ObjectHideFlags: 1
