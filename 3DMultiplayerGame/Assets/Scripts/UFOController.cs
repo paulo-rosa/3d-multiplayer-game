@@ -59,6 +59,10 @@ public class UFOController : NetworkBehaviour {
 
         Vector3 shoot = (Car.transform.position - bulletSpawn.position).normalized;
 
+        shoot = new Vector3(Random.Range(shoot.x - 0.2f, shoot.x + 0.2f),
+                            Random.Range(shoot.y - 0.2f, shoot.y + 0.2f),
+                            shoot.z);
+
         // Add velocity to the bullets
         bullet.GetComponent<Rigidbody>().velocity = shoot * 40;
 
@@ -72,7 +76,7 @@ public class UFOController : NetworkBehaviour {
     private void FollowPLayer()
     {
         FloatAnimation();
-        //RotationAnimation();
+        RotationAnimation();
         OrbitAnimation();
     }
 
@@ -83,7 +87,7 @@ public class UFOController : NetworkBehaviour {
 
     private void RotationAnimation()
     {
-        //transform.RotateAround(transform.position, transform.up, Time.deltaTime * RotationFactor);
+        transform.RotateAround(transform.position, transform.up, Time.deltaTime * RotationFactor);
     }
 
     private void OrbitAnimation()

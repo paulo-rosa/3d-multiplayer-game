@@ -1920,8 +1920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba01de0623cf594d9a7a3b06d5148ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 10
-  height: 2
+  distance: 6
+  height: 1.5
   damping: 5
   smoothRotation: 1
   followBehind: 1
