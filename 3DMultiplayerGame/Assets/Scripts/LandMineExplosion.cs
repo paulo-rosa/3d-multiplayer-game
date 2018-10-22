@@ -13,7 +13,7 @@ public class LandMineExplosion : MonoBehaviour {
     private float _maxRadius = 4;
     private float _maxDamage = 100;
     private float _maxDistanceToDamage = 30f;
-
+    private List<GameObject> _objectsAffected = new List<GameObject>();
 
     private void Start ()
     {
@@ -24,11 +24,15 @@ public class LandMineExplosion : MonoBehaviour {
     {
         if ((ExplosionLayer | (1 << other.gameObject.layer)) == ExplosionLayer)
         {
-            var hit = other.GetComponent<Health>();
+            var hit = other.GetComponentInParent<Health>();
             if(hit != null)
             {
-                Debug.Log("Give damage");
-                hit.TakeDamage(CalculateDamage(other.transform));
+                if (!_objectsAffected.Contains(other.transform.parent.gameObject))
+                {
+                    _objectsAffected.Add(other.transform.parent.gameObject);
+                    Debug.Log("Give damage");
+                    hit.TakeDamage(CalculateDamage(other.transform));
+                }
             }
         }
     }
@@ -45,7 +49,10 @@ public class LandMineExplosion : MonoBehaviour {
             }
         }
         if (_collider.radius >= _maxRadius)
+        {
+            _objectsAffected.Clear();
             Destroy(transform.parent.gameObject, .5f);
+        }
     }
 
     private int CalculateDamage(Transform other)

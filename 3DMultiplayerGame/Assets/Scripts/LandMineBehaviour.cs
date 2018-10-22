@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LandMineBehavior : MonoBehaviour
+public class LandMineBehaviour : MonoBehaviour
 {
     public LayerMask ExplosionLayer;
 
@@ -21,13 +21,8 @@ public class LandMineBehavior : MonoBehaviour
             //Explosion
             GetComponent<BoxCollider>().enabled = false;
             Explosion.StartExplosion();
-            MakeDamage();
         }
     }
 
-    private void MakeDamage()
-    {
-
-    }
 
 }

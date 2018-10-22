@@ -25,8 +25,11 @@ public class GameManager : MonoBehaviour {
     private UserInterfaceManager _userInterfaceManager;
     private GameState _currentState;
 
+    
     public GameObject _playerPrefab;
     public Transform _startPosition;
+    public Transform _player;
+
     public event Action<GameState> onStateChange;
 
 	private void Start ()
@@ -55,13 +58,21 @@ public class GameManager : MonoBehaviour {
 
     public void Die()
     {
-        _lifes--;
+        Debug.Log("MOrreu");
+        DeacreaseLife();
         if(_lifes == 0)
         {
             //GAME OVER;
             ChangeState(GameState.GAME_OVER);
         }
     }
+
+    private void PlayerRespawn()
+    {
+        
+    }
+
+
     #region States Change
     public void StartGame()
     {
@@ -96,6 +107,12 @@ public class GameManager : MonoBehaviour {
                 StartLevel();
                 break;
         }
+    }
+
+    private void DeacreaseLife()
+    {
+        _lifes--;
+        UpdateUI();
     }
 
     private void UpdateUI()
