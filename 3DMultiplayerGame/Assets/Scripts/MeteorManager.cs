@@ -8,7 +8,7 @@ public class MeteorManager : MonoBehaviour {
     public GameObject Meteor;
     public Transform SpawnPoint;
 
-    private float _timeToSpawn = 4;
+    private float _timeToSpawn = 15;
     private float _timeCounter = 0;
 
 	// Use this for initialization
@@ -21,8 +21,10 @@ public class MeteorManager : MonoBehaviour {
         _timeCounter += Time.deltaTime;
         if (_timeCounter > _timeToSpawn)
         {
+            var pos = SpawnPoint.position;
+
             _timeCounter = 0;
-            var go = Instantiate(Meteor, SpawnPoint.position, Quaternion.identity);
+            var go = Instantiate(Meteor, new Vector3(Random.Range(pos.x - 3, pos.x + 3), pos.y, Random.Range(pos.z - 3, pos.z + 3)), Quaternion.identity);
             go.GetComponent<MeteorBehaviour>().Init(SpawnPoint.GetComponent<MeteorSpawner>().Direction);
             
         }

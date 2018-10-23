@@ -62,8 +62,6 @@ public class Health : NetworkBehaviour
             }
             else
             {
-                currentHealth = maxHealth;
-
                 // called on the Server, invoked on the Clients
                 RpcRespawn();
 
@@ -87,6 +85,8 @@ public class Health : NetworkBehaviour
     [ClientRpc]
     void RpcRespawn()
     {
+        currentHealth = maxHealth;
+
         if (isLocalPlayer)
         {
             // Set the spawn point to origin as a default value
