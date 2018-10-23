@@ -6,4 +6,5 @@ using UnityEngine.Networking;
 public class Car : MonoBehaviour
 {
     public new static Transform transform;
+
 }

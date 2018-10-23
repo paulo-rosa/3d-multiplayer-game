@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -17,6 +18,10 @@ public class Health : NetworkBehaviour
     public RectTransform healthBar;
 
     private NetworkStartPosition[] spawnPoints;
+    private GameManager _gameManager;
+    private GameObject _owner;
+
+    public event Action onDie;
 
     void Start()
     {
@@ -24,6 +29,8 @@ public class Health : NetworkBehaviour
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
+        _gameManager = GameManager.Instance;
+        
     }
     private void Awake()
     {
@@ -59,6 +66,10 @@ public class Health : NetworkBehaviour
 
                 // called on the Server, invoked on the Clients
                 RpcRespawn();
+
+                //
+                onDie();
+                //
             }
         }
         else
@@ -72,6 +83,7 @@ public class Health : NetworkBehaviour
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
     }
 
+    //Respawn precisa mudar de lugar
     [ClientRpc]
     void RpcRespawn()
     {
@@ -83,7 +95,7 @@ public class Health : NetworkBehaviour
             // If there is a spawn point array and the array is not empty, pick one at random
             if (spawnPoints != null && spawnPoints.Length > 0)
             {
-                spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)].transform.position;
             }
 
             // Set the player’s position to the chosen spawn point
