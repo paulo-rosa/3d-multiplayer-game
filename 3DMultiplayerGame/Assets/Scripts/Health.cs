@@ -23,7 +23,11 @@ public class Health : NetworkBehaviour
 
     public event Action onDie;
 
-    void Start()
+    private void Awake()
+    {
+        _audioSources = GetComponents<AudioSource>();
+    }
+    private void Start()
     {
         if (isLocalPlayer)
         {
@@ -31,10 +35,6 @@ public class Health : NetworkBehaviour
         }
         _gameManager = GameManager.Instance;
         
-    }
-    private void Awake()
-    {
-        _audioSources = GetComponents<AudioSource>();
     }
 
     public void TakeDamage(int amount)
@@ -79,11 +79,15 @@ public class Health : NetworkBehaviour
         }
     }
 
-    void OnChangeHealth(int currentHealth)
+    private void OnChangeHealth(int currentHealth)
     {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
     }
 
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+    }
     //Respawn precisa mudar de lugar
     [ClientRpc]
     void RpcRespawn()

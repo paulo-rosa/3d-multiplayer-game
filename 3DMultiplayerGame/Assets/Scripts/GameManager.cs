@@ -113,6 +113,14 @@ public class GameManager : MonoBehaviour {
         UpdateUI();
     }
 
+    private void IncreaseLife()
+    {
+        if (_lifes >= 3) return;
+
+        _lifes++;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         _userInterfaceManager.UpdateLifes(_lifes);

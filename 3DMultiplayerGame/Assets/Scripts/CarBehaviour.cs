@@ -28,13 +28,22 @@ public class CarBehaviour : MonoBehaviour {
         if (_gameManager.Die())
         {
             transform.position = _gameManager._spawnPosition.position;
-            transform.rotation = Quaternion.Euler(0, 90, 0); // _gameManager._startPosition.rotation;
+            transform.rotation = _gameManager._spawnPosition.rotation;
             _rigidBody.velocity = Vector3.zero;
+            _health.ResetHealth();
         }
         else
         {
             gameObject.SetActive(false);
         }
          
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            _health.TakeDamage(20);
+        }
     }
 }
