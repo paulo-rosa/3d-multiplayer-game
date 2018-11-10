@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 public class CarBehaviour : MonoBehaviour {
@@ -24,10 +25,16 @@ public class CarBehaviour : MonoBehaviour {
 
     private void PlayerDie()
     {
-        _gameManager.Die();
-        transform.position = _gameManager._startPosition.position;
-        transform.rotation = Quaternion.Euler(0, 90, 0); // _gameManager._startPosition.rotation;
-        _rigidBody.velocity = Vector3.zero;
-        
+        if (_gameManager.Die())
+        {
+            transform.position = _gameManager._spawnPosition.position;
+            transform.rotation = Quaternion.Euler(0, 90, 0); // _gameManager._startPosition.rotation;
+            _rigidBody.velocity = Vector3.zero;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+         
     }
 }

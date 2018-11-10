@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 
     
     public GameObject _playerPrefab;
-    public Transform _startPosition;
+    public Transform _spawnPosition;
     public Transform _player;
 
     public event Action<GameState> onStateChange;
@@ -43,20 +43,13 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-    private void StartLevel()
-    {
-        _lifes = 3;
-        _score = 0;
-        UpdateUI();
-    }
-
     public void GiveScore(int score)
     {
         _score += score;
         _userInterfaceManager.UpdateScore(_score);
     }
 
-    public void Die()
+    public bool Die()
     {
         Debug.Log("MOrreu");
         DeacreaseLife();
@@ -64,7 +57,9 @@ public class GameManager : MonoBehaviour {
         {
             //GAME OVER;
             ChangeState(GameState.GAME_OVER);
+            return false;
         }
+        return true;
     }
 
     private void PlayerRespawn()
@@ -104,7 +99,10 @@ public class GameManager : MonoBehaviour {
         switch (state)
         {
             case GameState.GAME:
-                StartLevel();
+                OnStartGame();
+                break;
+            case GameState.GAME_OVER:
+                OnGameOver();
                 break;
         }
     }
@@ -120,6 +118,27 @@ public class GameManager : MonoBehaviour {
         _userInterfaceManager.UpdateLifes(_lifes);
         _userInterfaceManager.UpdateScore(_score);
     }
+
+    #region 
+    public void SetSpawnPosition(Transform position)
+    {
+        _spawnPosition = position;
+    }
+    #endregion
+
+    #region STATES
+    private void OnStartGame()
+    {
+        _lifes = 3;
+        _score = 0;
+        UpdateUI();
+    }
+
+    private void OnGameOver()
+    {
+        
+    }
+    #endregion
 }
 
 public enum GameState

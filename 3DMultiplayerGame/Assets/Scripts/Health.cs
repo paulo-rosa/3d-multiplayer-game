@@ -63,10 +63,13 @@ public class Health : NetworkBehaviour
             else
             {
                 // called on the Server, invoked on the Clients
-                RpcRespawn();
+                //RpcRespawn();
 
                 //
-                onDie();
+                if(onDie != null)
+                {
+                    onDie();
+                }
                 //
             }
         }

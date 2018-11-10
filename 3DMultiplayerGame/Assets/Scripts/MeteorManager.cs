@@ -8,7 +8,7 @@ public class MeteorManager : MonoBehaviour {
     public GameObject Meteor;
     public Transform SpawnPoint;
 
-    private float _timeToSpawn = 15;
+    public float _timeToSpawn = 15;
     private float _timeCounter = 0;
 
 	// Use this for initialization

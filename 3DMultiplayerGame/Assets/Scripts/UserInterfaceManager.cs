@@ -76,6 +76,7 @@ public class UserInterfaceManager : MonoBehaviour
         _currentPanel.SetActive(true);
     }
 
+    #region Game State
     //Atualiza a pontuação do player
     public void UpdateScore(int score)
     {
@@ -97,11 +98,16 @@ public class UserInterfaceManager : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region GameOver State
+    
+    #endregion
 
     //Inicia o vetor de imagens da vida
     private void GetImages()
     {
-        for(int i =0; i < _lifes.Length; i++)
+        for(int i = 0; i < _lifes.Length; i++)
         {
             _lifes[i] = _lifesHolder.transform.GetChild(i).GetComponent<Image>();
         }

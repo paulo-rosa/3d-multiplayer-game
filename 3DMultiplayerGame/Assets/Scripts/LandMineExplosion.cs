@@ -22,7 +22,8 @@ public class LandMineExplosion : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((ExplosionLayer | (1 << other.gameObject.layer)) == ExplosionLayer)
+        //if ((ExplosionLayer | (1 << other.gameObject.layer)) == ExplosionLayer)
+        if(Utils.CompareLayer(ExplosionLayer, other.gameObject.layer))
         {
             var hit = other.GetComponentInParent<Health>();
             if(hit != null)
@@ -36,6 +37,8 @@ public class LandMineExplosion : MonoBehaviour {
             }
         }
     }
+
+
 
     public void StartExplosion()
     {

@@ -19,18 +19,20 @@ public class MeteorBehaviour : MonoBehaviour {
 
     private void Start ()
     {
-        gravity = gameObject.AddComponent<ConstantForce>();
-        gravity.force = new Vector3(0.0f, -100000f, 0.0f);
+        //gravity = gameObject.AddComponent<ConstantForce>();
+        //gravity.force = new Vector3(0.0f, -100000f, 0.0f);
     }
 	
 	public void Init(Vector3 dir)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Rigidbody>().AddForce(dir * 100, ForceMode.Force);
+        GetComponent<Rigidbody>().angularVelocity = new Vector3(5,5,5);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((ExplosionLayer | (1 << collision.gameObject.layer)) == ExplosionLayer)
+        if (Utils.CompareLayer(ExplosionLayer, collision.gameObject.layer))
         {
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
             PlayExplosionSound();

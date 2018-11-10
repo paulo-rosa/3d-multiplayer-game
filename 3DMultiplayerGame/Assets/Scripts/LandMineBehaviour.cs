@@ -15,7 +15,7 @@ public class LandMineBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if ((ExplosionLayer | (1<< other.gameObject.layer))== ExplosionLayer)
+        if (Utils.CompareLayer(ExplosionLayer, other.gameObject.layer))
         {
             Debug.Log("Explode");
             //Explosion
