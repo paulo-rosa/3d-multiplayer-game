@@ -8,7 +8,7 @@ public class UFOSpawner : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player") && !triggerEntered)
+        if (other.CompareTag("Player") && !triggerEntered)
         {
             triggerEntered = true;
             SpawnUFO();            
