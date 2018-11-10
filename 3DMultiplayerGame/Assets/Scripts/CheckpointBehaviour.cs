@@ -19,7 +19,4 @@ public class CheckpointBehaviour : MonoBehaviour {
             _gameManager.SetSpawnPosition(transform);
         }
     }
-
-
-
 }

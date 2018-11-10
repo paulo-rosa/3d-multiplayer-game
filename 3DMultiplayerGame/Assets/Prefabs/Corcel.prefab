@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4550120358080012}
-  - component: {fileID: 54714838077373806}
   - component: {fileID: 114853561844336238}
+  - component: {fileID: 65636380556708834}
   m_Layer: 9
   m_Name: FrontAntiRollBar
   m_TagString: Untagged
@@ -88,8 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4090966623255306}
-  - component: {fileID: 54229515172097600}
   - component: {fileID: 114528768520290366}
+  - component: {fileID: 65165793318558358}
   m_Layer: 9
   m_Name: RearAntiRollBar
   m_TagString: Untagged
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 114070825247550028}
   m_Layer: 9
   m_Name: Corcel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -848,36 +848,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!54 &54229515172097600
-Rigidbody:
+--- !u!65 &65165793318558358
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315341939771218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &54714838077373806
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1052606306158836}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 1.23, y: 0.11, z: 0.19}
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!65 &65214715909452372
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -902,6 +884,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.66, y: 0.78, z: 1.25}
   m_Center: {x: 0, y: 0.62, z: 1.06}
+--- !u!65 &65636380556708834
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052606306158836}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.23, y: 0.11, z: 0.19}
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!65 &65904114923007176
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2029,6 +2023,7 @@ MonoBehaviour:
   WheelL: {fileID: 146634334003470626}
   WheelR: {fileID: 146028067850250462}
   AntiRoll: 5000
+  carRigidBody: {fileID: 54127065016713746}
 --- !u!114 &114594986156721176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2105,6 +2100,7 @@ MonoBehaviour:
   WheelL: {fileID: 146283557756774194}
   WheelR: {fileID: 146655387061613358}
   AntiRoll: 5000
+  carRigidBody: {fileID: 54127065016713746}
 --- !u!120 &120295604140666090
 LineRenderer:
   m_ObjectHideFlags: 1
