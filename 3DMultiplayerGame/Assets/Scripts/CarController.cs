@@ -43,7 +43,7 @@ public class CarController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        transform.GetComponent<Rigidbody>().centerOfMass = centerOfGravity;
+        transform.GetComponent<Rigidbody>().centerOfMass += centerOfGravity;
     }
     
     private void FixedUpdate()
@@ -59,8 +59,8 @@ public class CarController : NetworkBehaviour
         //Fire
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PlayShotSound();
-            CmdFire();
+            //PlayShotSound();
+            //CmdFire();
         }
 
         //Jump
@@ -188,7 +188,11 @@ public class CarController : NetworkBehaviour
             {
                 minGearValue = GearRatio[i];
             }
-            maxGearValue = GearRatio[i + 1];
+
+            if (GearRatio.Length > i + 1)
+            {
+                maxGearValue = GearRatio[i + 1];
+            }
 
             float pitch = ((currentSpeed - minGearValue) / (maxGearValue - minGearValue) + 0.3f * (gear + 1));
             audioSource.pitch = pitch;
