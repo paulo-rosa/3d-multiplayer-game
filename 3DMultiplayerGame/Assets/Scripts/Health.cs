@@ -32,6 +32,7 @@ public class Health : NetworkBehaviour
         _gameManager = GameManager.Instance;
         
     }
+
     private void Awake()
     {
         _audioSources = GetComponents<AudioSource>();

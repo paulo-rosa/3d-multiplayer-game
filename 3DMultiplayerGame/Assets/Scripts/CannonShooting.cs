@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CannonShooting: NetworkBehaviour
+public class CannonShooting: MonoBehaviour
 {
     public int damagePerShot = 20;                  // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
@@ -27,7 +27,7 @@ public class CannonShooting: NetworkBehaviour
     void Awake()
     {
         // Create a layer mask for the Shootable layer.
-        shootableMask = LayerMask.GetMask("UFOs");
+        shootableMask = LayerMask.GetMask("Shootable");
 
         // Set up the references.
         gunParticles = GetComponent<ParticleSystem>();
@@ -40,10 +40,10 @@ public class CannonShooting: NetworkBehaviour
 
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
+        //if (!isLocalPlayer)
+        //{
+        //    return;
+        //}
         
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
@@ -71,7 +71,7 @@ public class CannonShooting: NetworkBehaviour
         gunLight.enabled = false;
     }
 
-    [Command]
+    
     void Shoot()
     {
         // Reset the timer.
