@@ -25,7 +25,7 @@ public class MeteorBehaviour : MonoBehaviour {
 	
 	public void Init(Vector3 dir)
     {
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().AddForce(dir * 100, ForceMode.Force);
         GetComponent<Rigidbody>().angularVelocity = new Vector3(5,5,5);
     }
