@@ -37,11 +37,6 @@ public class Health : NetworkBehaviour
         
     }
 
-    private void Awake()
-    {
-        _audioSources = GetComponents<AudioSource>();
-    }
-
     public void TakeDamage(int amount)
     {
         if (!isServer)
