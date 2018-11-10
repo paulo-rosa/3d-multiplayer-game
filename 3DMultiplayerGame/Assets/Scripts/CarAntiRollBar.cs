@@ -10,13 +10,14 @@ namespace Assets.Scripts
     {
         public WheelCollider WheelL;
         public WheelCollider WheelR;
-        public float AntiRoll = 5000.0f;
+        public float AntiRoll = 2000.0f;
+        public  Rigidbody carRigidBody;
 
         private void FixedUpdate()
         {
             var hit = new WheelHit();
-            var travelL = 2.0f;
-            var travelR = 2.0f;
+            var travelL = 1.0f;
+            var travelR = 1.0f;
 
             var groundedL = WheelL.GetGroundHit(out hit);
             if (groundedL)
@@ -29,11 +30,11 @@ namespace Assets.Scripts
             var antiRollForce = (travelL - travelR) * AntiRoll;
 
             if (groundedL)
-                GetComponent<Rigidbody>().AddForceAtPosition(WheelL.transform.up * -antiRollForce,
+                carRigidBody.AddForceAtPosition(WheelL.transform.up * -antiRollForce,
                        WheelL.transform.position);
 
             if (groundedR)
-                GetComponent<Rigidbody>().AddForceAtPosition(WheelR.transform.up * antiRollForce,
+                carRigidBody.AddForceAtPosition(WheelR.transform.up * antiRollForce,
                        WheelR.transform.position);
         }
 

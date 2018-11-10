@@ -4,10 +4,20 @@ using UnityEngine.Networking;
 public class UFOSpawner : NetworkBehaviour
 {
     public GameObject UFOPrefab;
+    private bool triggerEntered;
 
-    public override void OnStartServer()
+    private void OnTriggerEnter(Collider other)
     {
-        var spawnPosition = transform.position;
+        if (!other.CompareTag("Player") && !triggerEntered)
+        {
+            triggerEntered = true;
+            SpawnUFO();            
+        }
+    }
+
+    private void SpawnUFO()
+    {
+        var spawnPosition = transform.position + new Vector3(0, 15f, 0);
         var spawnRotation = transform.rotation;
 
         var UFO = Instantiate(UFOPrefab, spawnPosition, spawnRotation);
