@@ -56,17 +56,10 @@ public class CarController : NetworkBehaviour
         //Move
         DoMovement();
 
-        ////Fire
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    //PlayShotSound();
-        //    //CmdFire();
-        //}
-
         //Jump
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && IsGrounded())
         {
-            transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
+            transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 8500, 0), ForceMode.Impulse);
         }
 
         PlayEngineSound();
@@ -74,6 +67,20 @@ public class CarController : NetworkBehaviour
         currentSpeed = GetComponent<Rigidbody>().velocity.magnitude * 2.23693629f;//convert currentspeed into MPH
 
         localCurrentSpeed = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
+    }
+
+    private bool IsGrounded()
+    {
+        if (wheels == null || wheels.wheelFL == null || wheels.wheelFR == null || wheels.wheelRL == null || wheels.wheelRR == null)
+        {
+            return false;
+        }
+        else if(wheels.wheelFL.isGrounded || wheels.wheelFR.isGrounded || wheels.wheelRL.isGrounded || wheels.wheelRR.isGrounded)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void DoMovement()
@@ -127,45 +134,6 @@ public class CarController : NetworkBehaviour
             wheels.wheelRR.brakeTorque = 0f;
         }
     }
-
-    //[Command]
-    //void CmdFire()
-    //{
-    //    // Create the Bullets from the Bullet Prefab
-    //    var bulletLeft = Instantiate(bulletPrefab, bulletLeftSpawn.position, bulletLeftSpawn.rotation);
-    //    bulletLeft.GetComponent<Bullet>().layerOrigin = gameObject.layer;
-
-    //    var bulletRight = Instantiate(bulletPrefab, bulletRightSpawn.position, bulletRightSpawn.rotation);
-    //    bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
-
-    //    var bulletCenter = Instantiate(bulletPrefab, bulletCenterSpawn.position, bulletCenterSpawn.rotation);
-    //    bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
-
-    //    // Add velocity to the bullets
-    //    bulletLeft.GetComponent<Rigidbody>().velocity = bulletLeft.transform.forward * 80;
-    //    bulletRight.GetComponent<Rigidbody>().velocity = bulletRight.transform.forward * 80;
-    //    bulletCenter.GetComponent<Rigidbody>().velocity = bulletCenter.transform.forward * 80;
-
-    //    // Spawn the bullets on the Clients
-    //    NetworkServer.Spawn(bulletLeft);
-    //    NetworkServer.Spawn(bulletRight);
-    //    NetworkServer.Spawn(bulletCenter);
-
-    //    // Destroy the bullet after 2 seconds
-    //    Destroy(bulletLeft, 2.0f);
-    //    Destroy(bulletRight, 2.0f);
-    //    Destroy(bulletCenter, 2.0f);
-    //}
-
-    //public void PlayShotSound()
-    //{
-    //    var audioSource = _audioSources.Where(a => a.clip == ShotSound).FirstOrDefault();
-    //    audioSource.pitch = 1;
-    //    audioSource.volume = 0.5f;
-    //    audioSource.clip = ShotSound;
-    //    audioSource.loop = false;
-    //    audioSource.Play();
-    //}
 
     void PlayEngineSound()
     {
