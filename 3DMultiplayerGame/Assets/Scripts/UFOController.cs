@@ -82,7 +82,7 @@ public class UFOController : NetworkBehaviour {
 
     private void FloatAnimation()
     {
-        transform.position = transform.position + new Vector3(0, transform.position.y + FloatFactor * Mathf.Sin(FloatSpeed * Time.time), 0);
+        //transform.position = transform.position + new Vector3(0, transform.position.y + FloatFactor * Mathf.Sin(FloatSpeed * Time.time), 0);
     }
 
     private void RotationAnimation()
@@ -92,13 +92,24 @@ public class UFOController : NetworkBehaviour {
 
     private void OrbitAnimation()
     {
+        //var x = FirstPlayer.position.x + FirstPlayer.forward.x * Offset;
+        //var z = FirstPlayer.position.z + FirstPlayer.forward.z * Offset;
+
+        //transform.position = new Vector3(x + (5f * Mathf.Sin(Mathf.Deg2Rad * alpha)),
+        //                                FirstPlayer.position.y + 10,
+        //                                z + (2f * Mathf.Cos(Mathf.Deg2Rad * alpha)));
+
+        //alpha += 2f;//can be used as speed
+
+
         var x = FirstPlayer.position.x + FirstPlayer.forward.x * Offset;
         var z = FirstPlayer.position.z + FirstPlayer.forward.z * Offset;
 
-        transform.position = new Vector3(x + (5f * Mathf.Sin(Mathf.Deg2Rad * alpha)),
-                                        FirstPlayer.position.y + 10,
-                                        z + (2f * Mathf.Cos(Mathf.Deg2Rad * alpha)));
+        Vector3 relativePos = new Vector3(x, 15f, z) - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos);
+        Quaternion current = transform.localRotation;
 
-        alpha += 2f;//can be used as speed
+        transform.localRotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+        transform.Translate(0, 0, 25 * Time.deltaTime);
     }
 }
