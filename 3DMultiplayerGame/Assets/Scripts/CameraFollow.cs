@@ -10,7 +10,8 @@ public class CameraFollow : MonoBehaviour
     public bool smoothRotation = true;
     public bool followBehind = true;
     public float rotationDamping = 10.0f;
-
+    public float lookRotation;
+    
     void Update()
     {
         if (Car.transform == null)
@@ -42,9 +43,14 @@ public class CameraFollow : MonoBehaviour
 
         if (smoothRotation)
         {
-            Quaternion wantedRotation = Quaternion.LookRotation(target.position - transform.position, target.up);
+            //new Vector3(lookTotation, 0, 0)
+            Quaternion wantedRotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
+            
             transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping);
+            
         }
-        else transform.LookAt(target, target.up);
+        else transform.LookAt(target, Vector3.up);
+
+        transform.eulerAngles = new Vector3(lookRotation, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

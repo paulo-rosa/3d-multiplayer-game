@@ -27,10 +27,7 @@ public class CarBehaviour : MonoBehaviour {
     {
         if (_gameManager.Die())
         {
-            transform.position = _gameManager._spawnPosition.position;
-            transform.rotation = _gameManager._spawnPosition.rotation;
-            _rigidBody.velocity = Vector3.zero;
-            _health.ResetHealth();
+            StartCoroutine(TimeToSpawn());
         }
         else
         {
@@ -39,9 +36,18 @@ public class CarBehaviour : MonoBehaviour {
          
     }
 
+    IEnumerator TimeToSpawn()
+    {
+        yield return new WaitForSeconds(2f);
+        transform.position = _gameManager._spawnPosition.position;
+        transform.rotation = _gameManager._spawnPosition.rotation;
+        _rigidBody.velocity = Vector3.zero;
+        _health.ResetHealth();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             _health.TakeDamage(20);
         }

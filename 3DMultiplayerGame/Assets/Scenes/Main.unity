@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.044414505, g: 0.0418735, b: 0.045859963, a: 1}
+  m_IndirectSpecularColor: {r: 0.4343265, g: 0.4343265, b: 0.4343265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -215,13 +215,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 208303503}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 69, y: 7, z: 826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 421976825}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &208303505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100.18403, y: 12.036371, z: 1}
+  m_Size: {x: 1, y: 12.036371, z: 100}
   m_Center: {x: 5.7620354, y: 5.5181856, z: 0}
 --- !u!1 &209375533
 GameObject:
@@ -1503,13 +1503,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1048904283}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 348, y: 7, z: 792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 421976825}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1048904285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1534,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 10.567034, z: 115.09204}
+  m_Size: {x: 115.092, y: 10.567034, z: 1}
   m_Center: {x: 0, y: 4.783517, z: -2.5583496}
 --- !u!1 &1079960183
 GameObject:
@@ -1979,13 +1979,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1467212818}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 40.3, y: 7, z: 121.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 421976825}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1467212820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2272,6 +2272,7 @@ MonoBehaviour:
   smoothRotation: 1
   followBehind: 1
   rotationDamping: 10
+  lookRotation: 0
 --- !u!1 &1766703622
 GameObject:
   m_ObjectHideFlags: 0
