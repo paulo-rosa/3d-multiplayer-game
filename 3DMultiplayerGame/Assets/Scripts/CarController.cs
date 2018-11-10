@@ -43,7 +43,7 @@ public class CarController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        transform.GetComponent<Rigidbody>().centerOfMass = centerOfGravity;
+        transform.GetComponent<Rigidbody>().centerOfMass += centerOfGravity;
     }
     
     private void FixedUpdate()
@@ -56,12 +56,12 @@ public class CarController : NetworkBehaviour
         //Move
         DoMovement();
 
-        //Fire
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayShotSound();
-            CmdFire();
-        }
+        ////Fire
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    //PlayShotSound();
+        //    //CmdFire();
+        //}
 
         //Jump
         if (Input.GetKey(KeyCode.F))
@@ -128,44 +128,44 @@ public class CarController : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdFire()
-    {
-        // Create the Bullets from the Bullet Prefab
-        var bulletLeft = Instantiate(bulletPrefab, bulletLeftSpawn.position, bulletLeftSpawn.rotation);
-        bulletLeft.GetComponent<Bullet>().layerOrigin = gameObject.layer;
+    //[Command]
+    //void CmdFire()
+    //{
+    //    // Create the Bullets from the Bullet Prefab
+    //    var bulletLeft = Instantiate(bulletPrefab, bulletLeftSpawn.position, bulletLeftSpawn.rotation);
+    //    bulletLeft.GetComponent<Bullet>().layerOrigin = gameObject.layer;
 
-        var bulletRight = Instantiate(bulletPrefab, bulletRightSpawn.position, bulletRightSpawn.rotation);
-        bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
+    //    var bulletRight = Instantiate(bulletPrefab, bulletRightSpawn.position, bulletRightSpawn.rotation);
+    //    bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
 
-        var bulletCenter = Instantiate(bulletPrefab, bulletCenterSpawn.position, bulletCenterSpawn.rotation);
-        bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
+    //    var bulletCenter = Instantiate(bulletPrefab, bulletCenterSpawn.position, bulletCenterSpawn.rotation);
+    //    bulletRight.GetComponent<Bullet>().layerOrigin = gameObject.layer;
 
-        // Add velocity to the bullets
-        bulletLeft.GetComponent<Rigidbody>().velocity = bulletLeft.transform.forward * 80;
-        bulletRight.GetComponent<Rigidbody>().velocity = bulletRight.transform.forward * 80;
-        bulletCenter.GetComponent<Rigidbody>().velocity = bulletCenter.transform.forward * 80;
+    //    // Add velocity to the bullets
+    //    bulletLeft.GetComponent<Rigidbody>().velocity = bulletLeft.transform.forward * 80;
+    //    bulletRight.GetComponent<Rigidbody>().velocity = bulletRight.transform.forward * 80;
+    //    bulletCenter.GetComponent<Rigidbody>().velocity = bulletCenter.transform.forward * 80;
 
-        // Spawn the bullets on the Clients
-        NetworkServer.Spawn(bulletLeft);
-        NetworkServer.Spawn(bulletRight);
-        NetworkServer.Spawn(bulletCenter);
+    //    // Spawn the bullets on the Clients
+    //    NetworkServer.Spawn(bulletLeft);
+    //    NetworkServer.Spawn(bulletRight);
+    //    NetworkServer.Spawn(bulletCenter);
 
-        // Destroy the bullet after 2 seconds
-        Destroy(bulletLeft, 2.0f);
-        Destroy(bulletRight, 2.0f);
-        Destroy(bulletCenter, 2.0f);
-    }
+    //    // Destroy the bullet after 2 seconds
+    //    Destroy(bulletLeft, 2.0f);
+    //    Destroy(bulletRight, 2.0f);
+    //    Destroy(bulletCenter, 2.0f);
+    //}
 
-    public void PlayShotSound()
-    {
-        var audioSource = _audioSources.Where(a => a.clip == ShotSound).FirstOrDefault();
-        audioSource.pitch = 1;
-        audioSource.volume = 0.5f;
-        audioSource.clip = ShotSound;
-        audioSource.loop = false;
-        audioSource.Play();
-    }
+    //public void PlayShotSound()
+    //{
+    //    var audioSource = _audioSources.Where(a => a.clip == ShotSound).FirstOrDefault();
+    //    audioSource.pitch = 1;
+    //    audioSource.volume = 0.5f;
+    //    audioSource.clip = ShotSound;
+    //    audioSource.loop = false;
+    //    audioSource.Play();
+    //}
 
     void PlayEngineSound()
     {
@@ -188,7 +188,11 @@ public class CarController : NetworkBehaviour
             {
                 minGearValue = GearRatio[i];
             }
-            maxGearValue = GearRatio[i + 1];
+
+            if (GearRatio.Length > i + 1)
+            {
+                maxGearValue = GearRatio[i + 1];
+            }
 
             float pitch = ((currentSpeed - minGearValue) / (maxGearValue - minGearValue) + 0.3f * (gear + 1));
             audioSource.pitch = pitch;
