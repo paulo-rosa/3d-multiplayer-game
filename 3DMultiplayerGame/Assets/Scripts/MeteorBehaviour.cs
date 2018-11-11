@@ -8,7 +8,6 @@ public class MeteorBehaviour : MonoBehaviour {
 
     private Rigidbody _rigidbody;
     public LayerMask ExplosionLayer;
-    public ConstantForce gravity;
     public AudioClip ExplosionSound;
     private AudioSource[] _audioSources;
 
@@ -27,6 +26,7 @@ public class MeteorBehaviour : MonoBehaviour {
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().AddForce(dir * 100, ForceMode.Force);
+        GetComponent<Rigidbody>().velocity = dir;
         GetComponent<Rigidbody>().angularVelocity = new Vector3(5,5,5);
     }
 

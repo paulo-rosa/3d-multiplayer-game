@@ -11,9 +11,20 @@ public class CameraFollow : MonoBehaviour
     public bool followBehind = true;
     public float rotationDamping = 10.0f;
     public float lookRotation;
-    
-    void Update()
+
+    private float minHeight;
+    private CarBehaviour _carBehaviour;
+
+    private void Start()
     {
+        
+    }
+
+    private void Update()
+    {
+        //if (_carBehaviour.GetState() != PlayerStates.ALIVE)
+        //    return;
+
         if (Car.transform == null)
         {
             return;
@@ -38,6 +49,12 @@ public class CameraFollow : MonoBehaviour
         }
         else
             wantedPosition = target.TransformPoint(0, height, distance);
+        if(minHeight == 0) { minHeight = height; }
+
+        if(wantedPosition.y < minHeight)
+        {
+            wantedPosition = new Vector3(wantedPosition.x, minHeight, wantedPosition.z);
+        }
 
         transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * damping);
 

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23400426500484146}
   - component: {fileID: 54107715254583648}
   - component: {fileID: 114300512038682528}
-  - component: {fileID: 135318177246084208}
+  - component: {fileID: 136903204448873806}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544430360714292}
   m_LocalRotation: {x: 0.7032953, y: 0.12079844, z: 0.1207996, w: 0.6900659}
-  m_LocalPosition: {x: 896.33246, y: 25.32226, z: 110.49027}
-  m_LocalScale: {x: 1.629902, y: 1, z: 1}
+  m_LocalPosition: {x: 342.5, y: 18.909, z: 97.43}
+  m_LocalScale: {x: 0.42802855, y: 0.26261, z: 0.26261}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,17 +115,17 @@ MonoBehaviour:
   ExplosionLayer:
     serializedVersion: 2
     m_Bits: 512
-  gravity: {fileID: 0}
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
---- !u!135 &135318177246084208
-SphereCollider:
+--- !u!136 &136903204448873806
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544430360714292}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e24a57966c73237458b4d64e4e6e080b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 12.347171
-  m_Center: {x: 2.3664625, y: -0.98601604, z: 0.65624636}
+  m_Radius: 11.980348
+  m_Height: 24.694344
+  m_Direction: 0
+  m_Center: {x: 2.3664627, y: -0.98604655, z: 0.65621567}
