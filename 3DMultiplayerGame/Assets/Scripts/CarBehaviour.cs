@@ -13,6 +13,10 @@ public class CarBehaviour : MonoBehaviour {
     private Rigidbody _rigidBody;
     private PlayerStates _currentState;
 
+    private void Awake()
+    {
+        Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
+    }
     private void Start()
     {
         _rigidBody = GetComponentInChildren<Rigidbody>();
@@ -30,9 +34,9 @@ public class CarBehaviour : MonoBehaviour {
 
     private void PlayerDie()
     {
+        ChangeState(PlayerStates.DEAD);
         if (_gameManager.Die())
         {
-            ChangeState(PlayerStates.DEAD);
             StartCoroutine(TimeToSpawn());
         }
         else
@@ -54,7 +58,8 @@ public class CarBehaviour : MonoBehaviour {
     #region
     public void ChangeState(PlayerStates state)
     {
-        switch (state)
+        _currentState = state;
+        switch (_currentState)
         {
             case PlayerStates.ALIVE:
                 OnAliveEnter();

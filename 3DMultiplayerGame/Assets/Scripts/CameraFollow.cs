@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform target;
+    public GameObject _target;
     public float distance = 5.0f;
     public float height = 3.0f;
     public float damping = 5.0f;
@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     public float rotationDamping = 10.0f;
     public float lookRotation;
 
+    private Transform target;
     private float minHeight;
     private CarBehaviour _carBehaviour;
 
@@ -22,18 +23,24 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        //if (_carBehaviour.GetState() != PlayerStates.ALIVE)
-        //    return;
-
-        if (Car.transform == null)
-        {
+        if (_target == null)
             return;
-        }
-        else
+
+        if (_carBehaviour.GetState() != PlayerStates.ALIVE)
+            return;
+
+        //if (Car.transform == null)
+        //{
+        //    return;
+        //}
+        //else
+        //{
+        //    target = Car.transform;
+        //}
+        if (target == null)
         {
-            target = Car.transform;
+            target = _target.transform;
         }
-        
         Vector3 wantedPosition;
 
         followBehind = true;
@@ -69,5 +76,11 @@ public class CameraFollow : MonoBehaviour
         else transform.LookAt(target, Vector3.up);
 
         transform.eulerAngles = new Vector3(lookRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+    }
+
+    public void SetTheTarget(GameObject obj)
+    {
+        _target = obj;
+        _carBehaviour = _target.GetComponent<CarBehaviour>();
     }
 }
