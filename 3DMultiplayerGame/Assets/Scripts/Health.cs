@@ -20,7 +20,7 @@ public class Health : NetworkBehaviour
     private NetworkStartPosition[] spawnPoints;
     private GameManager _gameManager;
     private GameObject _owner;
-
+    private bool _isAlive = true;
     public event Action onDie;
 
     private void Awake()
@@ -41,10 +41,13 @@ public class Health : NetworkBehaviour
     {
         if (!isServer)
             return;
+        if (!_isAlive)
+            return;
 
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
+            _isAlive = false;
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
             PlayExplosionSound();
             explosion.Explode(transform.position);
@@ -87,6 +90,7 @@ public class Health : NetworkBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        _isAlive = true;
     }
     //Respawn precisa mudar de lugar
     [ClientRpc]

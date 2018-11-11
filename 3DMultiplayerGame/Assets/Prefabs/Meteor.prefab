@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 54107715254583648}
   - component: {fileID: 114300512038682528}
   - component: {fileID: 136903204448873806}
+  - component: {fileID: 114808402522305408}
+  - component: {fileID: 114699901185873550}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -116,6 +118,54 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
+--- !u!114 &114699901185873550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544430360714292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnDeath: 1
+  ExplosionSound: {fileID: 0}
+  GotShotSound: {fileID: 0}
+  currentHealth: 20
+  healthBar: {fileID: 0}
+--- !u!114 &114808402522305408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544430360714292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 84
+    i1: 7
+    i2: 154
+    i3: 219
+    i4: 89
+    i5: 14
+    i6: 130
+    i7: 116
+    i8: 153
+    i9: 226
+    i10: 21
+    i11: 230
+    i12: 180
+    i13: 28
+    i14: 192
+    i15: 128
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!136 &136903204448873806
 CapsuleCollider:
   m_ObjectHideFlags: 1

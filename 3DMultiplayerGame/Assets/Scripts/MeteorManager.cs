@@ -20,18 +20,19 @@ public class MeteorManager : MonoBehaviour {
     }
 
     public GameObject Meteor;
-    public float _timeToSpawn = 15;
+    public float _timeToSpawn = 10;
     public Transform SpawnPointsHolder;
 
     private float _timeCounter = 0;
     private bool _isActive;
     private List<GameObject> _spawnPoints = new List<GameObject>();
     private int _currentId = 0;
-
+    private MeteorPool _meteorPool;
 
 	// Use this for initialization
 	void Start () {
         FillTheList();
+        _meteorPool = GetComponent<MeteorPool>();
     }
 	
 	// Update is called once per frame
@@ -42,11 +43,15 @@ public class MeteorManager : MonoBehaviour {
             var pos = _spawnPoints[_currentId].transform.position;
 
             _timeCounter = 0;
-            var go = Instantiate(Meteor, new Vector3(UnityEngine.Random.Range(pos.x - 3, pos.x + 3), pos.y, UnityEngine.Random.Range(pos.z - 3, pos.z + 3)), Quaternion.identity);
+            //var go = Instantiate(Meteor, new Vector3(UnityEngine.Random.Range(pos.x - 3, pos.x + 3), pos.y, UnityEngine.Random.Range(pos.z - 3, pos.z + 3)), Quaternion.identity);
+            //go.GetComponent<MeteorBehaviour>().Init(_spawnPoints[_currentId].GetComponent<MeteorSpawner>().Direction);
+            var go = _meteorPool.GetObject();
+            go.transform.position = new Vector3(UnityEngine.Random.Range(pos.x - 3, pos.x + 3), pos.y, UnityEngine.Random.Range(pos.z - 3, pos.z + 3));
             go.GetComponent<MeteorBehaviour>().Init(_spawnPoints[_currentId].GetComponent<MeteorSpawner>().Direction);
-            
+
+
         }
-	}
+    }
 
     public void OnChangeSpawner()
     {
