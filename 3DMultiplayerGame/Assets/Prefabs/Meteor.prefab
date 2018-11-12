@@ -118,6 +118,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
+  Explosion: {fileID: 1838733926544000, guid: 8d5e3901c0c8f7d4aae707ac4eca462f, type: 2}
 --- !u!114 &114699901185873550
 MonoBehaviour:
   m_ObjectHideFlags: 1

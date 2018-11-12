@@ -10,13 +10,9 @@ public class MeteorPool : MonoBehaviour {
     private int _currentIndex;
     private int _poolSize = 20;
 
-    void Start() {
+    void Start()
+    {
         StartPool();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     private void StartPool()

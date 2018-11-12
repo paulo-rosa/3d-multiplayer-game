@@ -9,8 +9,9 @@ public class ExplosionSpawner : NetworkBehaviour
     public void Explode(Vector3 position)
     {
         var explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
-        NetworkServer.Spawn(explosion);
+        //NetworkServer.Spawn(explosion);
         StartCoroutine(DestroyExplosion(explosion));
+
     }
 
     IEnumerator DestroyExplosion(GameObject explosion)

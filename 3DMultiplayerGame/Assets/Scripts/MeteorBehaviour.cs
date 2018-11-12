@@ -8,7 +8,7 @@ public class MeteorBehaviour : MonoBehaviour {
 
     public LayerMask ExplosionLayer;
     public AudioClip ExplosionSound;
-
+    public ParticleSystem Explosion;
     private Rigidbody _rigidbody;
     private AudioSource[] _audioSources;
     private float _timeToExplode = 10f;
@@ -31,8 +31,7 @@ public class MeteorBehaviour : MonoBehaviour {
         if(_timeCount >= _timeToExplode)
         {
             _timeCount = 0;
-            transform.position = new Vector3(847f, 181f, -192f);
-            gameObject.SetActive(false);
+            DisableObject();
         }
     }
     public void Init(Vector3 dir)
@@ -56,18 +55,24 @@ public class MeteorBehaviour : MonoBehaviour {
             //{
             //    component.enabled = false;
             //}
-
             var hit = collision.gameObject;
             var health = hit.GetComponent<Health>();
+            
             if (health != null)
             {
                 health.TakeDamage(100);
             }
 
-            Destroy(gameObject, 2f);
+            DisableObject();
         }
     }
 
+    private void DisableObject()
+    {
+        gameObject.SetActive(false);
+        Explosion.Play();
+        transform.position = new Vector3(847f, 181f, -192f);
+    }
     public void PlayExplosionSound()
     {
         var audioSource = _audioSources.Where(a => a.clip == ExplosionSound).FirstOrDefault();
