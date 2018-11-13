@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4343265, g: 0.4343265, b: 0.4343265, a: 1}
+  m_IndirectSpecularColor: {r: 0.044414505, g: 0.0418735, b: 0.045859963, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -298,6 +298,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &121707637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121707638}
+  m_Layer: 0
+  m_Name: Meteor Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121707638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 121707637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 879.8351, y: -131.43391, z: 180.58644}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1155809138}
+  - {fileID: 937478109}
+  - {fileID: 1908842658}
+  - {fileID: 1540548845}
+  - {fileID: 372917413}
+  - {fileID: 892238301}
+  - {fileID: 265600347}
+  - {fileID: 7977877}
+  - {fileID: 730928322}
+  - {fileID: 1613454698}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &158349173
 Prefab:
   m_ObjectHideFlags: 0
@@ -353,44 +391,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4935554988309454, guid: 7b4d3dbd9828eb34489286f45ced8cb9,
     type: 2}
   m_PrefabInternal: {fileID: 158349173}
---- !u!1 &121707637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 121707638}
-  m_Layer: 0
-  m_Name: Meteor Spawners
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &121707638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 121707637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 879.8351, y: -131.43391, z: 180.58644}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1155809138}
-  - {fileID: 937478109}
-  - {fileID: 1908842658}
-  - {fileID: 1540548845}
-  - {fileID: 372917413}
-  - {fileID: 892238301}
-  - {fileID: 265600347}
-  - {fileID: 7977877}
-  - {fileID: 730928322}
-  - {fileID: 1613454698}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &169816262
 Prefab:
   m_ObjectHideFlags: 0
@@ -1332,92 +1332,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 100
---- !u!1 &612370813
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 612370814}
-  - component: {fileID: 612370817}
-  - component: {fileID: 612370816}
-  - component: {fileID: 612370815}
-  m_Layer: 0
-  m_Name: HoleTrap (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &612370814
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 612370813}
-  m_LocalRotation: {x: 0, y: 0.6245613, z: 0, w: 0.7809758}
-  m_LocalPosition: {x: 541, y: 2.1999998, z: 448}
-  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
-  m_Children: []
-  m_Father: {fileID: 761815089}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 77.3, z: 0}
---- !u!114 &612370815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 612370813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &612370816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 612370813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &612370817
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 612370813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 27.74, y: -6.65, z: 90}
-  m_Center: {x: -8.83, y: -21.8, z: 0}
 --- !u!1 &634329148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,92 +1841,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &713104505
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 713104506}
-  - component: {fileID: 713104509}
-  - component: {fileID: 713104508}
-  - component: {fileID: 713104507}
-  m_Layer: 0
-  m_Name: HoleTrap (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &713104506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713104505}
-  m_LocalRotation: {x: 0, y: 0.053207383, z: 0, w: 0.9985835}
-  m_LocalPosition: {x: 336.2, y: 2.2, z: 694}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 761815089}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 6.1, z: 0}
---- !u!114 &713104507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713104505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &713104508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713104505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &713104509
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 713104505}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.5, y: -6.65, z: -174.5}
-  m_Center: {x: -8.83, y: -21.8, z: 0}
 --- !u!1 &716666679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,12 +2045,6 @@ Transform:
   - {fileID: 1949091231}
   - {fileID: 218950395}
   - {fileID: 2017012317}
-  - {fileID: 1531790861}
-  - {fileID: 1826802760}
-  - {fileID: 1208872923}
-  - {fileID: 1393711330}
-  - {fileID: 713104506}
-  - {fileID: 612370814}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2529,6 +2351,63 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &937478108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 937478109}
+  - component: {fileID: 937478110}
+  - component: {fileID: 937478111}
+  m_Layer: 0
+  m_Name: MeteorSpawner (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &937478109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937478108}
+  m_LocalRotation: {x: 0, y: 0.38671097, z: 0, w: 0.92220104}
+  m_LocalPosition: {x: 14.6, y: 164.04329, z: 754}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 121707638}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 45.5, z: 0}
+--- !u!114 &937478110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937478108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b70c0dc64edac4f849a95f0915db66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: {x: 0, y: -10, z: -100}
+  CarLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!65 &937478111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937478108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20, z: 300}
+  m_Center: {x: 0, y: -16.63, z: 0}
 --- !u!1001 &1018844364
 Prefab:
   m_ObjectHideFlags: 0
@@ -2622,63 +2501,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4935554988309454, guid: 7b4d3dbd9828eb34489286f45ced8cb9,
     type: 2}
   m_PrefabInternal: {fileID: 1018844364}
---- !u!1 &937478108
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 937478109}
-  - component: {fileID: 937478110}
-  - component: {fileID: 937478111}
-  m_Layer: 0
-  m_Name: MeteorSpawner (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &937478109
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 937478108}
-  m_LocalRotation: {x: 0, y: 0.38671097, z: 0, w: 0.92220104}
-  m_LocalPosition: {x: 14.6, y: 164.04329, z: 754}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 121707638}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 45.5, z: 0}
---- !u!114 &937478110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 937478108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b70c0dc64edac4f849a95f0915db66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Direction: {x: 0, y: -10, z: -100}
-  CarLayer:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!65 &937478111
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 937478108}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 20, z: 300}
-  m_Center: {x: 0, y: -16.63, z: 0}
 --- !u!1 &1048904283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +2594,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 748eb41b584bb49b99a42da7420e5d1e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 748eb41b584bb49b99a42da7420e5d1e, type: 2}
@@ -2969,92 +2791,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcd81a485c1799f4da5d85253948db2a, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &1208872922
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1208872923}
-  - component: {fileID: 1208872926}
-  - component: {fileID: 1208872925}
-  - component: {fileID: 1208872924}
-  m_Layer: 0
-  m_Name: HoleTrap (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1208872923
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208872922}
-  m_LocalRotation: {x: 0, y: 0.44768104, z: 0, w: 0.89419335}
-  m_LocalPosition: {x: 96, y: -0.10000038, z: 360.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 761815089}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 53.19, z: 0}
---- !u!114 &1208872924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208872922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &1208872925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208872922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1208872926
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208872922}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.5, y: -6.65, z: -174.5}
-  m_Center: {x: -8.83, y: -21.8, z: 0}
 --- !u!1 &1278905848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,92 +3088,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1389590083}
   m_CullTransparentMesh: 0
---- !u!1 &1393711329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1393711330}
-  - component: {fileID: 1393711333}
-  - component: {fileID: 1393711332}
-  - component: {fileID: 1393711331}
-  m_Layer: 0
-  m_Name: HoleTrap (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1393711330
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393711329}
-  m_LocalRotation: {x: 0, y: -0.29962367, z: 0, w: 0.9540575}
-  m_LocalPosition: {x: -1, y: -0.10000038, z: 778}
-  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
-  m_Children: []
-  m_Father: {fileID: 761815089}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -34.87, z: 0}
---- !u!114 &1393711331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393711329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &1393711332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393711329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1393711333
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1393711329}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.5, y: -6.65, z: -174.5}
-  m_Center: {x: -8.83, y: -21.8, z: 0}
 --- !u!1 &1467212818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,92 +3131,6 @@ MonoBehaviour:
   CarLayer:
     serializedVersion: 2
     m_Bits: 512
---- !u!1 &1531790860
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1531790861}
-  - component: {fileID: 1531790864}
-  - component: {fileID: 1531790863}
-  - component: {fileID: 1531790862}
-  m_Layer: 0
-  m_Name: HoleTrap (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1531790861
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1531790860}
-  m_LocalRotation: {x: -0, y: 0.088459626, z: -0, w: 0.9960798}
-  m_LocalPosition: {x: 643.5, y: 5.1, z: 67.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 761815089}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 10.15, z: 0}
---- !u!114 &1531790862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1531790860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &1531790863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1531790860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1531790864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1531790860}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 331.90424, y: 6.6500015, z: 174.5}
-  m_Center: {x: 141.87268, y: -21.8, z: -0.000022775375}
 --- !u!1 &1540548844
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,97 +3814,68 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1820518653}
   m_CullTransparentMesh: 0
---- !u!1 &1826802759
+--- !u!4 &1895276620 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4845376937076800, guid: d45b76866c2a36f47b6eb756c38314ed,
+    type: 2}
+  m_PrefabInternal: {fileID: 11195308}
+--- !u!1 &1908842657
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1826802760}
-  - component: {fileID: 1826802763}
-  - component: {fileID: 1826802762}
-  - component: {fileID: 1826802761}
+  - component: {fileID: 1908842658}
+  - component: {fileID: 1908842659}
+  - component: {fileID: 1908842660}
   m_Layer: 0
-  m_Name: HoleTrap (1)
+  m_Name: MeteorSpawner (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1826802760
+--- !u!4 &1908842658
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826802759}
-  m_LocalRotation: {x: 0, y: 0.009162842, z: 0, w: 0.99995804}
-  m_LocalPosition: {x: 252, y: -0.10000038, z: 195.2}
+  m_GameObject: {fileID: 1908842657}
+  m_LocalRotation: {x: 0, y: 0.25839755, z: 0, w: 0.9660387}
+  m_LocalPosition: {x: -809, y: 164.04329, z: 78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 761815089}
+  m_Father: {fileID: 121707638}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 1.05, z: 0}
---- !u!114 &1826802761
+  m_LocalEulerAnglesHint: {x: 0, y: 29.95, z: 0}
+--- !u!114 &1908842659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826802759}
+  m_GameObject: {fileID: 1908842657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b70c0dc64edac4f849a95f0915db66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &1826802762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826802759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b7346ea46ae3f45b234dfbeee677ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1826802763
+  Direction: {x: 0, y: -10, z: 100}
+  CarLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!65 &1908842660
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1826802759}
+  m_GameObject: {fileID: 1908842657}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30.5, y: -6.65, z: -174.5}
-  m_Center: {x: -8.83, y: -21.8, z: 0}
---- !u!4 &1895276620 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4845376937076800, guid: d45b76866c2a36f47b6eb756c38314ed,
-    type: 2}
-  m_PrefabInternal: {fileID: 11195308}
+  m_Size: {x: 1, y: 20, z: 158.6}
+  m_Center: {x: -1.4, y: -13.71, z: 8.78}
 --- !u!1001 &1949091230
 Prefab:
   m_ObjectHideFlags: 0
@@ -4456,63 +3991,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4935554988309454, guid: 7b4d3dbd9828eb34489286f45ced8cb9,
     type: 2}
   m_PrefabInternal: {fileID: 2017012316}
---- !u!1 &1908842657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1908842658}
-  - component: {fileID: 1908842659}
-  - component: {fileID: 1908842660}
-  m_Layer: 0
-  m_Name: MeteorSpawner (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1908842658
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1908842657}
-  m_LocalRotation: {x: 0, y: 0.25839755, z: 0, w: 0.9660387}
-  m_LocalPosition: {x: -809, y: 164.04329, z: 78}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 121707638}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 29.95, z: 0}
---- !u!114 &1908842659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1908842657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b70c0dc64edac4f849a95f0915db66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Direction: {x: 0, y: -10, z: 100}
-  CarLayer:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!65 &1908842660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1908842657}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 20, z: 158.6}
-  m_Center: {x: -1.4, y: -13.71, z: 8.78}
 --- !u!1001 &2060336500
 Prefab:
   m_ObjectHideFlags: 0

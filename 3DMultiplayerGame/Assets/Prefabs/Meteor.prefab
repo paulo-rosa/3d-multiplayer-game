@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 136903204448873806}
   - component: {fileID: 114808402522305408}
   - component: {fileID: 114699901185873550}
+  - component: {fileID: 82743327583141572}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -105,7 +106,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!82 &82743327583141572
 AudioSource:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544430360714292}
