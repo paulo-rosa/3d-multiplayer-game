@@ -29,6 +29,7 @@ public class CarController : NetworkBehaviour
     Vector3 localCurrentSpeed;
     private AudioSource[] _audioSources;
     private bool reversing;//read only
+    private CarBehaviour _carBehaviour;
 
     public override void OnStartLocalPlayer()
     {
@@ -44,15 +45,16 @@ public class CarController : NetworkBehaviour
     void Start()
     {
         transform.GetComponent<Rigidbody>().centerOfMass += centerOfGravity;
+        _carBehaviour = GetComponent<CarBehaviour>();
     }
     
     private void FixedUpdate()
     {
         if (!isLocalPlayer)
-        {
             return;
-        }
 
+        if (_carBehaviour.GetState() != PlayerStates.ALIVE)
+            return;
         //Move
         DoMovement();
 

@@ -6,11 +6,13 @@ using UnityEngine;
 public class MeteorBehaviour : MonoBehaviour {
 
 
-    private Rigidbody _rigidbody;
     public LayerMask ExplosionLayer;
-    public ConstantForce gravity;
     public AudioClip ExplosionSound;
+    public ParticleSystem Explosion;
+    private Rigidbody _rigidbody;
     private AudioSource[] _audioSources;
+    private float _timeToExplode = 10f;
+    private float _timeCount = 0;
 
     private void Awake()
     {
@@ -22,11 +24,21 @@ public class MeteorBehaviour : MonoBehaviour {
         //gravity = gameObject.AddComponent<ConstantForce>();
         //gravity.force = new Vector3(0.0f, -100000f, 0.0f);
     }
-	
-	public void Init(Vector3 dir)
+
+    private void Update()
+    {
+        _timeCount += Time.deltaTime;
+        if(_timeCount >= _timeToExplode)
+        {
+            _timeCount = 0;
+            DisableObject();
+        }
+    }
+    public void Init(Vector3 dir)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Rigidbody>().AddForce(dir * 100, ForceMode.Force);
+        GetComponent<Rigidbody>().velocity = dir;
         GetComponent<Rigidbody>().angularVelocity = new Vector3(5,5,5);
     }
 
@@ -34,27 +46,33 @@ public class MeteorBehaviour : MonoBehaviour {
     {
         if (Utils.CompareLayer(ExplosionLayer, collision.gameObject.layer))
         {
-            var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            PlayExplosionSound();
-            explosion.Explode(transform.position);
+            //var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
+            //PlayExplosionSound();
+            //explosion.Explode(transform.position);
 
-            var components = GetComponentsInChildren<MeshRenderer>();
-            foreach (var component in components)
-            {
-                component.enabled = false;
-            }
-
+            //var components = GetComponentsInChildren<MeshRenderer>();
+            //foreach (var component in components)
+            //{
+            //    component.enabled = false;
+            //}
             var hit = collision.gameObject;
             var health = hit.GetComponent<Health>();
+            
             if (health != null)
             {
                 health.TakeDamage(100);
             }
 
-            Destroy(gameObject, 2f);
+            DisableObject();
         }
     }
 
+    private void DisableObject()
+    {
+        gameObject.SetActive(false);
+        Explosion.Play();
+        transform.position = new Vector3(847f, 181f, -192f);
+    }
     public void PlayExplosionSound()
     {
         var audioSource = _audioSources.Where(a => a.clip == ExplosionSound).FirstOrDefault();
