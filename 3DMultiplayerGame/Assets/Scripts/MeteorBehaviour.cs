@@ -70,7 +70,7 @@ public class MeteorBehaviour : MonoBehaviour {
     private void DisableObject()
     {
         gameObject.SetActive(false);
-        Explosion.Play();
+        //Explosion.Play();
         transform.position = new Vector3(847f, 181f, -192f);
     }
     public void PlayExplosionSound()

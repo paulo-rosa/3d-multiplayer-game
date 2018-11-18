@@ -7,7 +7,6 @@ using System.Linq;
 
 public class CarController : NetworkBehaviour
 {
-    public WC wheels;
     public float velocity = 10;
     public GameObject bulletPrefab;
     public Transform bulletRightSpawn;
@@ -15,7 +14,6 @@ public class CarController : NetworkBehaviour
     public Transform bulletCenterSpawn;
     public AudioClip ShotSound;
     public AudioClip EngineSound;
-    public List<AxleInfo> axleInfoList; // the information about each individual axle
     public float maxMotorTorque; // maximum torque the motor can apply to wheel
     public float handBrakeTorque = 500f;//hand brake value
     public float maxSteeringAngle; // maximum steer angle the wheel can have
@@ -30,6 +28,7 @@ public class CarController : NetworkBehaviour
     private AudioSource[] _audioSources;
     private bool reversing;//read only
     private CarBehaviour _carBehaviour;
+    private Rigidbody rb;
 
     public override void OnStartLocalPlayer()
     {
@@ -44,7 +43,8 @@ public class CarController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        transform.GetComponent<Rigidbody>().centerOfMass += centerOfGravity;
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass += centerOfGravity;
         _carBehaviour = GetComponent<CarBehaviour>();
     }
     
@@ -55,34 +55,35 @@ public class CarController : NetworkBehaviour
 
         if (_carBehaviour.GetState() != PlayerStates.ALIVE)
             return;
+
         //Move
         DoMovement();
 
         //Jump
         if (Input.GetKeyDown(KeyCode.F) && IsGrounded())
         {
-            transform.GetComponent<Rigidbody>().AddForce(new Vector3(0, 8500, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 8500, 0), ForceMode.Impulse);
         }
 
         PlayEngineSound();
 
-        currentSpeed = GetComponent<Rigidbody>().velocity.magnitude * 2.23693629f;//convert currentspeed into MPH
+        currentSpeed = rb.velocity.magnitude * 2.23693629f;//convert currentspeed into MPH
 
-        localCurrentSpeed = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity);
+        localCurrentSpeed = transform.InverseTransformDirection(rb.velocity);
     }
 
     private bool IsGrounded()
     {
-        if (wheels == null || wheels.wheelFL == null || wheels.wheelFR == null || wheels.wheelRL == null || wheels.wheelRR == null)
-        {
-            return false;
-        }
-        else if(wheels.wheelFL.isGrounded || wheels.wheelFR.isGrounded || wheels.wheelRL.isGrounded || wheels.wheelRR.isGrounded)
-        {
-            return true;
-        }
+        //if (wheels == null || wheels.wheelFL == null || wheels.wheelFR == null || wheels.wheelRL == null || wheels.wheelRR == null)
+        //{
+        //    return false;
+        //}
+        //else if(wheels.wheelFL.isGrounded || wheels.wheelFR.isGrounded || wheels.wheelRL.isGrounded || wheels.wheelRR.isGrounded)
+        //{
+        //    return true;
+        //}
 
-        return false;
+        return true;
     }
 
     private void DoMovement()
@@ -105,35 +106,20 @@ public class CarController : NetworkBehaviour
                 gasMultiplier = 0f;
         }
 
-        wheels.wheelRR.motorTorque = maxMotorTorque * Input.GetAxis("Vertical") * gasMultiplier;
-        wheels.wheelRL.motorTorque = maxMotorTorque * Input.GetAxis("Vertical") * gasMultiplier;
+        float x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        float z = Input.GetAxis("Vertical") * Time.deltaTime * 50.0f;
 
-        if (localCurrentSpeed.z < -0.1f && wheels.wheelRL.rpm < 10)
-        {//in local space, if the car is travelling in the direction of the -z axis, (or in reverse), reversing will be true
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
+
+        //in local space, if the car is travelling in the direction of the -z axis, (or in reverse), reversing will be true
+        if (localCurrentSpeed.z < -0.1f)
+        {
             reversing = true;
         }
         else
         {
             reversing = false;
-        }
-
-        wheels.wheelFL.steerAngle = maxSteeringAngle * Input.GetAxis("Horizontal");
-        wheels.wheelFR.steerAngle = maxSteeringAngle * Input.GetAxis("Horizontal");
-
-        //pressing space triggers the car's handbrake
-        if (Input.GetButton("Jump"))
-        {
-            wheels.wheelFL.brakeTorque = handBrakeTorque;
-            wheels.wheelFR.brakeTorque = handBrakeTorque;
-            wheels.wheelRL.brakeTorque = handBrakeTorque;
-            wheels.wheelRR.brakeTorque = handBrakeTorque;
-        }
-        else//letting go of space disables the handbrake
-        {
-            wheels.wheelFL.brakeTorque = 0f;
-            wheels.wheelFR.brakeTorque = 0f;
-            wheels.wheelRL.brakeTorque = 0f;
-            wheels.wheelRR.brakeTorque = 0f;
         }
     }
 
@@ -199,13 +185,4 @@ public class CarController : NetworkBehaviour
         if (reversing)//if the car is going backwards display the gear as R
             GUI.Box(new Rect(10, 70, 70, 30), "Gear: R");
     }
-}
-
-[System.Serializable]
-public class WC
-{
-    public WheelCollider wheelFL;
-    public WheelCollider wheelFR;
-    public WheelCollider wheelRL;
-    public WheelCollider wheelRR;
 }
