@@ -5,6 +5,7 @@ using UnityEngine;
 public class MyCarController : MonoBehaviour {
 
     public LayerMask Layer;
+    public float colliderSize;
 
     [SerializeField]
     private float _speed;
@@ -22,23 +23,31 @@ public class MyCarController : MonoBehaviour {
     {
         _rigidbody = GetComponent<Rigidbody>();
 	}
-	
-	private void FixedUpdate ()
+
+    private void Update()
+    {
+        IsGrounded();
+        FrontCollider();
+        BackCollider();
+    }
+
+    private void FixedUpdate ()
     {
         Accelerate();
         Turn();
-        Debug.Log("Angular velocity: " + _rigidbody.angularVelocity);
+        Jump();
     }
 
     private void Accelerate()
     {
-        if (Input.GetKey(KeyCode.W)) 
+
+        if (Input.GetKey(KeyCode.W) && !FrontCollider()) 
         {
             transform.position += transform.forward * _speed * Time.deltaTime;
             return;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && !BackCollider())
         {
             transform.position += transform.forward * -_speed * Time.deltaTime;
         }
@@ -46,30 +55,84 @@ public class MyCarController : MonoBehaviour {
 
     private void Turn()
     {
-        float turn = Input.GetAxis("Horizontal");
-        var torque = Vector3.up * _turn * turn;
-        torque.y = Mathf.Clamp(torque.y, -_maxTorque, _maxTorque);
-        Debug.Log(torque);
+        if (!_isGrounded)
+            return;
+        var torque = Vector3.zero;
+        //Debug.Log(torque);
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            torque = Vector3.up * -_turn;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            torque = Vector3.up * _turn;
+
+        }
         _rigidbody.AddRelativeTorque(torque);
+        
 
     }
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && IsGrounded())
+        if (Input.GetKey(KeyCode.F) && _isGrounded)
         {
             _rigidbody.AddForce(_jumpForce);
+            Debug.Log("trying junml");
         }
     }
 
-    private bool IsGrounded()
+    private void IsGrounded()
     {
-        Debug.DrawRay(transform.position, Vector3.down * (.52f), Color.red, 1f);
-        
-        if(Physics.Raycast(transform.position, Vector3.down, .52f, Layer))
+        var down = transform.TransformDirection(Vector3.down) * colliderSize;
+        Debug.DrawRay(transform.position,down , Color.red, .1f);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, down, colliderSize, Layer))
         {
-            return false;
+            _isGrounded = true;
         }
-        return true;
+        else
+        {
+            _isGrounded = false;
+        }
+
+        Debug.Log(_isGrounded);
+    }
+
+    private bool FrontCollider()
+    {
+        Debug.DrawRay(transform.position + new Vector3(2.5f, 0, 5), Vector3.forward, Color.red, 1f);
+        Debug.DrawRay(transform.position + new Vector3(-2.5f, 0, 5), Vector3.forward, Color.red, 1f);
+
+        if (Physics.Raycast(transform.position + new Vector3(2.5f, 0, 5), Vector3.forward, colliderSize, Layer))
+        {
+            return true;
+        }
+        if (Physics.Raycast(transform.position + new Vector3(-2.5f, 0, 5), Vector3.forward, colliderSize, Layer))
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    private bool BackCollider()
+    {
+        Debug.DrawRay(transform.position + new Vector3(2.5f, 0, -5), Vector3.forward * -1, Color.red, 1f);
+        Debug.DrawRay(transform.position + new Vector3(-2.5f, 0, -5), Vector3.forward * -1, Color.red, 1f);
+
+        if (Physics.Raycast(transform.position + new Vector3(2.5f, 0, -5), Vector3.forward, colliderSize, Layer))
+        {
+            return true;
+        }
+        if (Physics.Raycast(transform.position + new Vector3(-2.5f, 0, -5), Vector3.forward, colliderSize, Layer))
+        {
+            return true;
+        }
+
+
+        return false;
     }
 }

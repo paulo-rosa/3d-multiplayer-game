@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4173662151352288}
   - component: {fileID: 218762499820084376}
   - component: {fileID: 154257232382238274}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
