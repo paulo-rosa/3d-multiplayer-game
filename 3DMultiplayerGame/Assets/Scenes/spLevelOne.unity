@@ -3099,6 +3099,8 @@ GameObject:
   - component: {fileID: 1534777854}
   - component: {fileID: 1534777855}
   - component: {fileID: 1534777856}
+  - component: {fileID: 1534777858}
+  - component: {fileID: 1534777857}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3154,6 +3156,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1534777857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1534777853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d667bffe9490e8e4ba8cfd35a86671b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Layer:
+    serializedVersion: 2
+    m_Bits: 4096
+  _collider: {fileID: 2100385830}
+--- !u!114 &1534777858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1534777853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edce10c6b611d414abfe46e29319faa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CarGraphics: {fileID: 0}
+  PivotPoint: {fileID: 0}
 --- !u!1 &1540548844
 GameObject:
   m_ObjectHideFlags: 0

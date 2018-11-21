@@ -82,19 +82,19 @@ public class CameraFollow : MonoBehaviour
         _carBehaviour = _target.GetComponent<CarBehaviour>();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(target.position, target.position + target.forward * 10);
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(target.position, target.position + target.forward * 10);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(target.position, target.position + target.right * 10);
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawLine(target.position, target.position + target.right * 10);
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(target.position, target.position + target.forward * -10);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawLine(target.position, target.position + target.forward * -10);
 
         
-    }
+    //}
 
     //private bool Collision()
     //{
