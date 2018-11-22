@@ -8,7 +8,11 @@ public class MyCarController : MonoBehaviour {
     public float colliderSize;
 
     [SerializeField]
-    private float _speed;
+    private float _maxSpeed;
+    [SerializeField]
+    private float _maxReverseSpeed;
+    [SerializeField]
+    private float _acceleration = 50;
     [SerializeField]
     private float _turn;
     [SerializeField]
@@ -18,8 +22,9 @@ public class MyCarController : MonoBehaviour {
     private Rigidbody _rigidbody;
     private bool _isGrounded;
     private CarCollision _carCollision;
-
-	private void Start ()
+    private float _speed = 0;
+    
+    private void Start ()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _carCollision = GetComponent<CarCollision>();
@@ -42,14 +47,23 @@ public class MyCarController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W) && !_carCollision.FrontCollision()) 
         {
-            transform.position += transform.forward * _speed * Time.deltaTime;
-            return;
+            if (_speed >= _maxSpeed)
+                _speed = _maxSpeed;
+            else
+                _speed += _acceleration * Time.deltaTime;
+        }else if (Input.GetKey(KeyCode.S) && !_carCollision.BackCollision())
+        {
+            if (_speed <= _maxReverseSpeed)
+                _speed = _maxReverseSpeed;
+            else
+                _speed -= _acceleration * Time.deltaTime;
+        }
+        else
+        {
+            _speed = Mathf.MoveTowards(_speed, 0, 5f);
         }
 
-        if (Input.GetKey(KeyCode.S) && !_carCollision.BackCollision())
-        {
-            transform.position += transform.forward * -_speed * Time.deltaTime;
-        }
+        transform.position += transform.forward * _speed * Time.deltaTime;
     }
 
     private void Turn()
@@ -77,7 +91,7 @@ public class MyCarController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.F) && _carCollision.GroundCollision())
         {
-            _rigidbody.AddForce(_jumpForce);
+            _rigidbody.AddForce(_jumpForce, ForceMode.Impulse);
             Debug.Log("trying junml");
         }
     }

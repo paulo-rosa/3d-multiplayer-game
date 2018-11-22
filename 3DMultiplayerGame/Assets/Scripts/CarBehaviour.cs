@@ -58,7 +58,7 @@ public class CarBehaviour : MonoBehaviour {
         transform.position = _gameManager._spawnPosition.position;
         transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
-        _health.ResetHealth();
+        //_health.ResetHealth();
         ChangeState(PlayerStates.ALIVE);
     }
     #region
