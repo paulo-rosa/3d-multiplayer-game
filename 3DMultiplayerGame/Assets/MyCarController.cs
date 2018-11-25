@@ -63,12 +63,12 @@ public class MyCarController : MonoBehaviour {
         {
             _speed = Mathf.MoveTowards(_speed, 0, 2f);
         }
-        else if(!_carCollision.BackCollision())
+        else if(_carCollision.BackCollision())
         {
             if (_speed < 0)
                 _speed = 0;
         }
-        else if (!_carCollision.FrontCollision())
+        else if (_carCollision.FrontCollision())
         {
             if (_speed > 0)
                 _speed = 0;

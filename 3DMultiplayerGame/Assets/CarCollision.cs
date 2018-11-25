@@ -37,12 +37,14 @@ public class CarCollision : MonoBehaviour {
 
     private void GetPositions()
     {
-        frontLeft = _collider.transform.localPosition +_collider.transform.TransformPoint(-_collider.size.x * .49f, 0, 0);
-        frontRight = _collider.transform.localPosition + _collider.transform.TransformPoint(_collider.size.x / 2, 0, 0);
-        backLeft = _collider.transform.localPosition + _collider.transform.TransformPoint(-_collider.size.x * .49f, 0, 0);
-        backRight = _collider.transform.localPosition + _collider.transform.TransformPoint(_collider.size.x * .49f, 0, 0);
+        var xMargin = _collider.size.x * .47f;
+        var zMargin = _collider.size.z * .47f;
+        frontLeft = _collider.transform.localPosition +_collider.transform.TransformPoint(-xMargin, 0, 0);
+        frontRight = _collider.transform.localPosition + _collider.transform.TransformPoint(xMargin, 0, 0);
+        backLeft = _collider.transform.localPosition + _collider.transform.TransformPoint(-xMargin, 0, 0);
+        backRight = _collider.transform.localPosition + _collider.transform.TransformPoint(xMargin, 0, 0);
         downMiddle = _collider.transform.localPosition + _collider.transform.TransformPoint(0, 0, 0);
-        downBack = _collider.transform.localPosition + _collider.transform.TransformDirection(0, 0, _collider.size.z * .49f);
+        downBack = _collider.transform.localPosition + _collider.transform.TransformDirection(0, 0, -zMargin);
     }
     public bool GroundCollision()
     {
