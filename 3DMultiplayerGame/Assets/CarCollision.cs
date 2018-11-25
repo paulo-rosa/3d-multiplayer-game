@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class CarCollision : MonoBehaviour {
     private Vector3 backLeft;
     private Vector3 backRight;
     private Vector3 downMiddle;
+    private Vector3 downBack;
 
     #endregion
     // Use this for initialization
@@ -28,15 +30,19 @@ public class CarCollision : MonoBehaviour {
         GroundCollision();
         FrontCollision();
         BackCollision();
+        HoleCollision();
     }
+
+
 
     private void GetPositions()
     {
         frontLeft = _collider.transform.localPosition +_collider.transform.TransformPoint(-_collider.size.x * .49f, 0, 0);
-        frontRight = _collider.transform.localPosition + _collider.transform.TransformPoint(_collider.size.x * .49f, 0, 0);
+        frontRight = _collider.transform.localPosition + _collider.transform.TransformPoint(_collider.size.x / 2, 0, 0);
         backLeft = _collider.transform.localPosition + _collider.transform.TransformPoint(-_collider.size.x * .49f, 0, 0);
         backRight = _collider.transform.localPosition + _collider.transform.TransformPoint(_collider.size.x * .49f, 0, 0);
         downMiddle = _collider.transform.localPosition + _collider.transform.TransformPoint(0, 0, 0);
+        downBack = _collider.transform.localPosition + _collider.transform.TransformDirection(0, 0, _collider.size.z * .49f);
     }
     public bool GroundCollision()
     {
@@ -86,6 +92,11 @@ public class CarCollision : MonoBehaviour {
         }
 
         return false;
+    }
+
+    private void HoleCollision()
+    {
+        Debug.DrawRay(downBack, transform.TransformDirection(Vector3.down),Color.red, .2f);
     }
 
 }

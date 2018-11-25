@@ -127,7 +127,6 @@ public class CameraFollow : MonoBehaviour
         if (Physics.Linecast(target.position, transform.position, out hitInfo, layer))
         {
             transform.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-            Debug.Log(hitInfo.distance);
         }
     }
 

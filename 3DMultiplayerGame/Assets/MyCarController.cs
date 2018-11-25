@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MyCarController : MonoBehaviour {
 
     public LayerMask Layer;
-    public float colliderSize;
 
     [SerializeField]
     private float _maxSpeed;
@@ -14,16 +14,16 @@ public class MyCarController : MonoBehaviour {
     [SerializeField]
     private float _acceleration = 50;
     [SerializeField]
-    private float _turn;
-    [SerializeField]
-    private float _maxTorque;
+    private float _maxTurn;
     [SerializeField]
     private Vector3 _jumpForce;
     private Rigidbody _rigidbody;
     private bool _isGrounded;
     private CarCollision _carCollision;
-    private float _speed = 0;
-    
+    public float _speed;
+    private bool _isFalling = false;
+    public float _turn;
+
     private void Start ()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -42,49 +42,78 @@ public class MyCarController : MonoBehaviour {
         Jump();
     }
 
+
     private void Accelerate()
     {
-
         if (Input.GetKey(KeyCode.W) && !_carCollision.FrontCollision()) 
         {
             if (_speed >= _maxSpeed)
                 _speed = _maxSpeed;
             else
                 _speed += _acceleration * Time.deltaTime;
-        }else if (Input.GetKey(KeyCode.S) && !_carCollision.BackCollision())
+        }
+        else if (Input.GetKey(KeyCode.S) && !_carCollision.BackCollision())
         {
             if (_speed <= _maxReverseSpeed)
                 _speed = _maxReverseSpeed;
             else
                 _speed -= _acceleration * Time.deltaTime;
         }
+        else if(!_carCollision.BackCollision() && !_carCollision.FrontCollision())
+        {
+            _speed = Mathf.MoveTowards(_speed, 0, 2f);
+        }
+        else if(!_carCollision.BackCollision())
+        {
+            if (_speed < 0)
+                _speed = 0;
+        }
+        else if (!_carCollision.FrontCollision())
+        {
+            if (_speed > 0)
+                _speed = 0;
+        }
         else
         {
-            _speed = Mathf.MoveTowards(_speed, 0, 5f);
+            _speed = 0;
         }
-
         transform.position += transform.forward * _speed * Time.deltaTime;
     }
 
     private void Turn()
     {
-        if (!_carCollision.GroundCollision())
-            return;
         var torque = Vector3.zero;
-        //Debug.Log(torque);
 
-        if (Input.GetKey(KeyCode.A))
+        if (torque != Vector3.zero)
+            torque = -torque;
+
+        _turn = CalculateTurn();
+
+        if (Input.GetKey(KeyCode.A) && _speed != 0)
         {
             torque = Vector3.up * -_turn;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && _speed != 0)
         {
             torque = Vector3.up * _turn;
 
         }
-        _rigidbody.AddRelativeTorque(torque);
-        
+        //_rigidbody.AddRelativeTorque(torque);
+        transform.Rotate(torque * Utils.Sign(_speed) *  Time.deltaTime);
 
+    }
+
+    private float CalculateTurn()
+    {
+        float turn = 0;
+        if (_speed >= 0)
+            turn = _maxTurn * (_speed * 2.5f / _maxSpeed);
+        else
+            turn = _maxTurn * (_speed * 2.5f / _maxReverseSpeed);
+
+        _turn = Mathf.Clamp(_turn, _turn, _maxTurn);
+
+        return turn;
     }
 
     private void Jump()
@@ -96,9 +125,8 @@ public class MyCarController : MonoBehaviour {
         }
     }
 
-
-
-
-
-
+    private void SetIsFalling(bool value)
+    {
+        _isFalling = value;
+    }
 }

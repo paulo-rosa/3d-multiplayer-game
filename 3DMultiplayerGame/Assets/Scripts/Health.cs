@@ -49,7 +49,7 @@ public class Health : NetworkBehaviour
         {
             _isAlive = false;
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            PlayExplosionSound();
+            //PlayExplosionSound();
             explosion.Explode(transform.position);
 
             if (destroyOnDeath)
