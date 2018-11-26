@@ -41,15 +41,6 @@ public class CarBehaviour : MonoBehaviour {
 
     {
         ChangeState(PlayerStates.DEAD);
-        if (_gameManager.Die())
-        {
-            ChangeState(PlayerStates.RESPAWN);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-         
     }
 
     IEnumerator TimeToSpawn()
@@ -87,6 +78,14 @@ public class CarBehaviour : MonoBehaviour {
     private void OnDeadEnter()
     {
         CarGraphics.SetActive(false);
+        if (_gameManager.Die())
+        {
+            ChangeState(PlayerStates.RESPAWN);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnRespawnEnter()
