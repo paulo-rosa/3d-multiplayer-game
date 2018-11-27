@@ -9,6 +9,7 @@ public class CarBehaviour : MonoBehaviour {
     public GameObject CarGraphics;
     public Transform PivotPoint;
 
+
     private Health _health;
     private GameManager _gameManager;
     private Rigidbody _rigidBody;
@@ -90,6 +91,7 @@ public class CarBehaviour : MonoBehaviour {
 
     private void OnRespawnEnter()
     {
+        _health.ResetHealth();
         StartCoroutine(TimeToSpawn());
     }
 
@@ -105,8 +107,16 @@ public class CarBehaviour : MonoBehaviour {
         {
             _health.TakeDamage(20);
         }
+        Pause();
     }
 
+    private void Pause()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            _gameManager.Pause();
+        }
+    }
     public Transform GetPivotPoint()
     {
         return PivotPoint;

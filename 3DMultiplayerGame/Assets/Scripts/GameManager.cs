@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private int _lifes;
-    private int _score;
+    private int _score = 0;
     private UserInterfaceManager _userInterfaceManager;
     private GameState _currentState;
 
@@ -29,13 +29,12 @@ public class GameManager : MonoBehaviour {
     public GameObject _playerPrefab;
     public Transform _spawnPosition;
     public Transform _player;
-
     public event Action<GameState> onStateChange;
 
 	private void Start ()
     {
         _userInterfaceManager = UserInterfaceManager.Instance;
-        ChangeState(GameState.MENU);
+        ChangeState(GameState.GAME);
 
 	}
 	
@@ -61,6 +60,11 @@ public class GameManager : MonoBehaviour {
             return false;
         }
         return true;
+    }
+
+    public void Pause()
+    {
+        ChangeState(GameState.PAUSE);
     }
 
     private void PlayerRespawn()
@@ -91,6 +95,7 @@ public class GameManager : MonoBehaviour {
 
     private void ChangeState(GameState state)
     {
+        var previousState = _currentState;
         _currentState = state;
         if(onStateChange != null)
         {
@@ -100,7 +105,10 @@ public class GameManager : MonoBehaviour {
         switch (state)
         {
             case GameState.GAME:
-                OnStartGame();
+                OnStartGame(previousState);
+                break;
+            case GameState.PAUSE:
+                OnPauseGame();
                 break;
             case GameState.GAME_OVER:
                 OnGameOver();
@@ -136,16 +144,32 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region STATES
-    private void OnStartGame()
+    private void OnStartGame(GameState previousState)
     {
-        _lifes = 3;
-        _score = 0;
-        UpdateUI();
+        if(previousState == GameState.MENU || previousState == GameState.GAME_OVER)
+        {
+            _lifes = 3;
+            _score = 0;
+            UpdateUI();
+            return;
+        }
+        
+        if(previousState == GameState.PAUSE)
+        {
+
+        }
+
+
     }
 
     private void OnGameOver()
     {
         
+    }
+
+    private void OnPauseGame()
+    {
+        Time.timeScale = 0;
     }
     #endregion
 }
@@ -154,6 +178,7 @@ public enum GameState
 {
     MENU,
     GAME,
+    PAUSE,
     END_LEVEL,
     GAME_OVER
 }

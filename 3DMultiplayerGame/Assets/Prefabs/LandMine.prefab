@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExplosionLayer:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 17920
   Explosion: {fileID: 114583190466784104}
 --- !u!114 &114583190466784104
 MonoBehaviour:
