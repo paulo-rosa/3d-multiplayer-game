@@ -34,9 +34,10 @@ public class GameManager : MonoBehaviour {
 	private void Start ()
     {
         _userInterfaceManager = UserInterfaceManager.Instance;
-        ChangeState(GameState.GAME);
+        StartGame();
 
-	}
+
+    }
 	
 	private void Update ()
     {
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour {
     public void StartGame()
     {
         NetworkManager.singleton.StartHost();
-
+        Instantiate(_playerPrefab, _spawnPosition.position, _spawnPosition.rotation);
         ChangeState(GameState.GAME);
     }
 
@@ -95,7 +96,6 @@ public class GameManager : MonoBehaviour {
 
     private void ChangeState(GameState state)
     {
-        var previousState = _currentState;
         _currentState = state;
         if(onStateChange != null)
         {
@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour {
         switch (state)
         {
             case GameState.GAME:
-                OnStartGame(previousState);
+                OnStartGame();
                 break;
             case GameState.PAUSE:
                 OnPauseGame();
@@ -144,22 +144,11 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region STATES
-    private void OnStartGame(GameState previousState)
+    private void OnStartGame( )
     {
-        if(previousState == GameState.MENU || previousState == GameState.GAME_OVER)
-        {
-            _lifes = 3;
-            _score = 0;
-            UpdateUI();
-            return;
-        }
-        
-        if(previousState == GameState.PAUSE)
-        {
-
-        }
-
-
+        _lifes = 3;
+        _score = 0;
+        UpdateUI();
     }
 
     private void OnGameOver()
@@ -176,7 +165,7 @@ public class GameManager : MonoBehaviour {
 
 public enum GameState
 {
-    MENU,
+    FREEZE,
     GAME,
     PAUSE,
     END_LEVEL,

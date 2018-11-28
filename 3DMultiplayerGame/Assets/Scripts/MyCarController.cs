@@ -32,14 +32,14 @@ public class MyCarController : MonoBehaviour {
 
     private void Update()
     {
-
+        Accelerate();
+        Turn();
+        Jump();
     }
 
     private void FixedUpdate ()
     {
-        Accelerate();
-        Turn();
-        Jump();
+
     }
 
 

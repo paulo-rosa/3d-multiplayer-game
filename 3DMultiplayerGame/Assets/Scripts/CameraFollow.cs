@@ -14,28 +14,30 @@ public class CameraFollow : MonoBehaviour
     public float lookRotation;
     public LayerMask layer;
 
-    
+    private float _originalDamping = 5f;
+    private float _originalRotationDampig = 10f;
     private Camera _camera;
     private Transform target;
     private float minHeight = 17f;
     private CarBehaviour _carBehaviour;
-
+    public bool _hasTarget;
 
     private void Start()
     {
         _camera = GetComponent<Camera>();
+        _hasTarget = false;
+        CameraTransition();
     }
 
     private void Update()
     {
-        if (_target == null)
+        if (!_hasTarget)
             return;
 
         if (_carBehaviour.GetState() != PlayerStates.ALIVE)
         {
             return;
         }
-
 
         Vector3 wantedPosition;
 
@@ -82,42 +84,19 @@ public class CameraFollow : MonoBehaviour
         _carBehaviour = _target.GetComponent<CarBehaviour>();
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawLine(target.position, target.position + target.forward * 10);
+    private void CameraTransition()
+    {
+        Debug.Log("Chamada");
+        StartCoroutine(CameraTransitionCoroutine());
+    }
 
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawLine(target.position, target.position + target.right * 10);
-
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawLine(target.position, target.position + target.forward * -10);
-
-        
-    //}
-
-    //private bool Collision()
-    //{
-    //    Vector3 screenPos = _camera.WorldToScreenPoint(target.transform.position);
-    //    Ray ray = _camera.ScreenPointToRay(screenPos);
-    //    Debug.DrawLine(ray.origin, ray.direction);
-
-    //    RaycastHit hitInfo;
-    //    if(Physics.Raycast(ray, out hitInfo))
-    //    {
-    //        if(Utils.CompareLayer(layer, hitInfo.collider.gameObject.layer))
-    //        {
-    //            var pos = hitInfo.point;
-    //            Debug.Log(pos);
-    //            transform.Translate(pos);
-    //            Debug.Log(hitInfo.collider.gameObject);
-    //            return true;
-    //        }
-    //    }
-
-    //    return false;
-
-    //}
+    private IEnumerator CameraTransitionCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Contou?");
+        damping = _originalDamping;
+        rotationDamping = _originalRotationDampig;
+    }
 
     private void Collision()
     {
@@ -130,13 +109,14 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    public void SetPosition(Vector3 pos)
-    {
-        transform.position = pos;
-    }
+    //public void SetPosition(Vector3 pos)
+    //{
+    //    transform.position = pos;
+    //}
 
     public void SetTarget(Transform tar)
     {
         target = tar;
+        _hasTarget = true;
     }
 }

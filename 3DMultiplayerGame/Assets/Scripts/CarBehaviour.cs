@@ -18,7 +18,7 @@ public class CarBehaviour : MonoBehaviour {
     private void Awake()
     {
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
-        Camera.main.GetComponent<CameraFollow>().SetPosition(transform.position);
+        //Camera.main.GetComponent<CameraFollow>().SetPosition(transform.position);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
 
@@ -46,14 +46,14 @@ public class CarBehaviour : MonoBehaviour {
 
     IEnumerator TimeToSpawn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         transform.position = _gameManager._spawnPosition.position;
         transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
         //_health.ResetHealth();
         ChangeState(PlayerStates.ALIVE);
     }
-    #region
+    #region States
     public void ChangeState(PlayerStates state)
     {
         _currentState = state;
