@@ -20,12 +20,11 @@ public class CameraFollow : MonoBehaviour
     private Transform target;
     private float minHeight = 17f;
     private CarBehaviour _carBehaviour;
-    public bool _hasTarget;
+    public bool _hasTarget = false;
 
     private void Start()
     {
         _camera = GetComponent<Camera>();
-        _hasTarget = false;
         CameraTransition();
     }
 

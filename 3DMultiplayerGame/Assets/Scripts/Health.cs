@@ -39,8 +39,8 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (!isServer)
-            return;
+        //if (!isServer)
+        //    return;
         if (!_isAlive)
             return;
 

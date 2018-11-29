@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour {
         
     }
 
-
     #region States Change
     public void StartGame()
     {
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour {
         ChangeState(GameState.GAME_OVER);
     }
 
-    private void EndLevel()
+    public void EndLevel()
     {
         ChangeState(GameState.END_LEVEL);
 
@@ -109,6 +108,9 @@ public class GameManager : MonoBehaviour {
                 break;
             case GameState.PAUSE:
                 OnPauseGame();
+                break;
+            case GameState.END_LEVEL:
+                OnEndLevel();
                 break;
             case GameState.GAME_OVER:
                 OnGameOver();
@@ -159,6 +161,16 @@ public class GameManager : MonoBehaviour {
     private void OnPauseGame()
     {
         Time.timeScale = 0;
+    }
+
+    private void OnResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    private void OnEndLevel()
+    {
+        //_userInterfaceManager
     }
     #endregion
 }
