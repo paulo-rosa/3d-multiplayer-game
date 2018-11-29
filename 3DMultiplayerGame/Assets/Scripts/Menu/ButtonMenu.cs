@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ButtonMenu : MonoBehaviour {
 
-    public SCREENS DestinyScreen;
+    public Screens DestinyScreen;
 
 
     public void SwitchScreen()

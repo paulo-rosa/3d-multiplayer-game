@@ -28,7 +28,7 @@ public class UserInterfaceManager : MonoBehaviour
     public GameObject PausePanel;
     public GameObject GameOverPanel;
     public GameObject EndLevelPanel;
-
+    
     private GameObject _currentPanel;
     private GameManager _gameManager;
     private Image[] _lifes = new Image[3];
@@ -49,6 +49,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         _gameManager.onStateChange += StateChanged;
     }
+
 
     private void StateChanged(GameState state)
     {

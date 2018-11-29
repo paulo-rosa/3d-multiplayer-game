@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public string GetScore()
+    {
+        return _score.ToString();
+    }
+
     private int _lifes;
     private int _score = 0;
     private UserInterfaceManager _userInterfaceManager;
@@ -93,6 +98,11 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
+    public GameState GetState()
+    {
+        return _currentState;
+    }
+
     private void ChangeState(GameState state)
     {
         _currentState = state;
@@ -136,6 +146,11 @@ public class GameManager : MonoBehaviour {
     {
         _userInterfaceManager.UpdateLifes(_lifes);
         _userInterfaceManager.UpdateScore(_score);
+    }
+
+    public void RestartLevel()
+    {
+        MenuManager.Instance.SwitchScreen(Screens.SINGLEPLAYER);
     }
 
     #region 

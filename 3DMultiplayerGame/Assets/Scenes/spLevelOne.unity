@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 634329151}
   - component: {fileID: 634329150}
   m_Layer: 5
-  m_Name: Text
+  m_Name: txtCongratulations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,7 +1696,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 90
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -1707,7 +1707,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Moon Patrol
+  m_Text: Congratulations
 --- !u!222 &634329151
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2307,6 +2307,39 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 716666679}
   m_CullTransparentMesh: 0
+--- !u!1 &723636698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 723636699}
+  m_Layer: 5
+  m_Name: PausePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &723636699
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 723636698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 936794053}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &727439150
 Prefab:
   m_ObjectHideFlags: 0
@@ -2899,6 +2932,7 @@ RectTransform:
   - {fileID: 884747955}
   - {fileID: 1368658303}
   - {fileID: 2098478654}
+  - {fileID: 723636699}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3189,6 +3223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1079960184}
   - component: {fileID: 1079960185}
+  - component: {fileID: 1079960186}
   m_Layer: 0
   m_Name: EndLine
   m_TagString: Untagged
@@ -3203,7 +3238,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079960183}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 318, y: -12.099457, z: 39.6}
+  m_LocalPosition: {x: 248.8, y: -12.099457, z: -265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1346254707}
@@ -3216,11 +3251,25 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079960183}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 62.750328, z: 69.2323}
-  m_Center: {x: 0, y: 0.65592575, z: 20.73108}
+  m_Size: {x: 1, y: 62.750328, z: 60}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1079960186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079960183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1645ae2187dc494489fc7abd18fb4509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Layer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &1094541084
 Prefab:
   m_ObjectHideFlags: 0
@@ -3614,7 +3663,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Start '
+  m_Text: Restart
 --- !u!222 &1300036128
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4435,9 +4484,9 @@ MonoBehaviour:
   _lifeHeart: {fileID: 21300000, guid: f588d850485d0ae479d73cf3bd0b7b00, type: 3}
   _noLifeHeart: {fileID: 21300000, guid: 827c9cd4a3943534f909ac6473e17288, type: 3}
   GamePanel: {fileID: 884747954}
-  PausePanel: {fileID: 0}
+  PausePanel: {fileID: 723636698}
   GameOverPanel: {fileID: 1368658302}
-  EndLevelPanel: {fileID: 0}
+  EndLevelPanel: {fileID: 2098478653}
 --- !u!4 &1775929940
 Transform:
   m_ObjectHideFlags: 0
@@ -4547,11 +4596,11 @@ RectTransform:
   m_Children:
   - {fileID: 1300036126}
   m_Father: {fileID: 2098478654}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -102.6}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820518655
@@ -4594,7 +4643,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 377773037}
-        m_MethodName: StartGame
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4876,6 +4925,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 40, y: 1, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1968646798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1968646799}
+  - component: {fileID: 1968646801}
+  - component: {fileID: 1968646800}
+  m_Layer: 5
+  m_Name: txtScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1968646799
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1968646798}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2098478654}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1968646800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1968646798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 90
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Score:'
+--- !u!222 &1968646801
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1968646798}
+  m_CullTransparentMesh: 0
 --- !u!1001 &2017012316
 Prefab:
   m_ObjectHideFlags: 0
@@ -5023,8 +5147,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2098478654}
+  - component: {fileID: 2098478655}
   m_Layer: 5
-  m_Name: MenuPanel
+  m_Name: EndLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5042,6 +5167,7 @@ RectTransform:
   m_Children:
   - {fileID: 671006884}
   - {fileID: 634329149}
+  - {fileID: 1968646799}
   - {fileID: 1820518654}
   m_Father: {fileID: 936794053}
   m_RootOrder: 2
@@ -5051,6 +5177,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2098478655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2098478653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d651660f1ef316746a68bfe07abb89f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtScore: {fileID: 0}
 --- !u!4 &2098568861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4854797929324608, guid: dcd81a485c1799f4da5d85253948db2a,

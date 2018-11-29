@@ -20,35 +20,35 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    private SCREENS _currentScreen;
+    private Screens _currentScreen;
 
 	private void Start ()
     {
-        _currentScreen = SCREENS.MAIN_MENU;
+        _currentScreen = Screens.MAIN_MENU;
 	}
     
-    public void SwitchScreen(SCREENS screen)
+    public void SwitchScreen(Screens screen)
     {
         ChangeScreen(screen);
         Debug.Log(screen);
     }
 
-    private void ChangeScreen(SCREENS screen)
+    private void ChangeScreen(Screens screen)
     {
         _currentScreen = screen;
 
         switch (_currentScreen)
         {
-            case SCREENS.MAIN_MENU:
+            case Screens.MAIN_MENU:
                 MainMenu();
                 break;
-            case SCREENS.SINGLEPLAYER:
+            case Screens.SINGLEPLAYER:
                 SinglePlayer();
                 break;
-            case SCREENS.MULTIPLAYER_MENU:
+            case Screens.MULTIPLAYER_MENU:
                 MultiPlayerMenu();
                 break;
-            case SCREENS.MULTIPLAYER:
+            case Screens.MULTIPLAYER:
                 Multiplayer();
                 break;
             default:
@@ -89,7 +89,7 @@ public class MenuManager : MonoBehaviour {
     }
 }
 
-public enum SCREENS
+public enum Screens
 {
     MAIN_MENU,
     SINGLEPLAYER,
