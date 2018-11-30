@@ -23,6 +23,7 @@ public class MeteorManager : MonoBehaviour {
     public float _timeToSpawn = 10;
     public Transform SpawnPointsHolder;
 
+    private int _spawnPointsCount;
     private float _timeCounter = 0;
     private bool _isActive;
     private List<GameObject> _spawnPoints = new List<GameObject>();
@@ -30,13 +31,15 @@ public class MeteorManager : MonoBehaviour {
     private MeteorPool _meteorPool;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         FillTheList();
         _meteorPool = GetComponent<MeteorPool>();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         _timeCounter += Time.deltaTime;
         if (_timeCounter > _timeToSpawn)
         {
@@ -48,19 +51,19 @@ public class MeteorManager : MonoBehaviour {
             var go = _meteorPool.GetObject();
             go.transform.position = new Vector3(UnityEngine.Random.Range(pos.x - 3, pos.x + 3), pos.y, UnityEngine.Random.Range(pos.z - 3, pos.z + 3));
             go.GetComponent<MeteorBehaviour>().Init(_spawnPoints[_currentId].GetComponent<MeteorSpawner>().Direction);
-
-
         }
     }
 
     public void OnChangeSpawner()
     {
-        _currentId++;
+        if(_currentId < _spawnPointsCount)
+            _currentId++;
     }
 
     private void FillTheList()
     {
-        for(int i = 0; i < SpawnPointsHolder.childCount; i++)
+        _spawnPointsCount = SpawnPointsHolder.childCount;
+        for (int i = 0; i < _spawnPointsCount; i++)
         {
             var go = SpawnPointsHolder.GetChild(i).gameObject;
             _spawnPoints.Add(go);

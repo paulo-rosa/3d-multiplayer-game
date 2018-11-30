@@ -92,7 +92,6 @@ public class CameraFollow : MonoBehaviour
     private IEnumerator CameraTransitionCoroutine()
     {
         yield return new WaitForSeconds(3f);
-        Debug.Log("Contou?");
         damping = _originalDamping;
         rotationDamping = _originalRotationDampig;
     }

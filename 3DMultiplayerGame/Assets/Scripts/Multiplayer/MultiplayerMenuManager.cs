@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PausePanel : MonoBehaviour {
+public class MultiplayerMenuManager : MonoBehaviour {
 
-
-    
+	// Use this for initialization
 	void Start () {
 		
 	}
@@ -15,4 +13,10 @@ public class PausePanel : MonoBehaviour {
 	void Update () {
 		
 	}
+}
+
+public enum MenuStates
+{
+    LOBBY,
+    ROOM
 }
