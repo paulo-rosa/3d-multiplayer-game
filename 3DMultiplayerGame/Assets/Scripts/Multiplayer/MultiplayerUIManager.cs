@@ -7,22 +7,30 @@ public class MultiplayerUIManager : MonoBehaviour {
     public GameObject LobbyPanel;
     public GameObject RoomPanel;
 
-    private GameObject _currentPanel; 
-
+    private GameObject _currentPanel;
+    private MultiplayerMenuManager _multiplayerMenuManager;
 
 	private void Start ()
     {
-	
-	}
-	
-    private void ChangePanel(MenuStates state)
+        _multiplayerMenuManager = GetComponent<MultiplayerMenuManager>();
+        DisableAll();
+        _multiplayerMenuManager.onChangeState += ChangePanel;
+    }
+
+
+    private void OnDisable()
+    {
+        _multiplayerMenuManager.onChangeState -= ChangePanel;
+    }
+
+    private void ChangePanel(MenuState state)
     {
         switch (state)
         {
-            case MenuStates.LOBBY:
+            case MenuState.LOBBY:
                 ChangePanel(LobbyPanel);
                 break;
-            case MenuStates.ROOM:
+            case MenuState.ROOM:
                 ChangePanel(RoomPanel);
                 break;
         }
@@ -30,10 +38,17 @@ public class MultiplayerUIManager : MonoBehaviour {
 
     private void ChangePanel(GameObject panel)
     {
-        _currentPanel.SetActive(false);
+        if(_currentPanel!= null)
+            _currentPanel.SetActive(false);
 
         _currentPanel = panel;
 
         _currentPanel.SetActive(true);
+    }
+
+    private void DisableAll()
+    {
+        LobbyPanel.SetActive(false);
+        RoomPanel.SetActive(false);
     }
 }

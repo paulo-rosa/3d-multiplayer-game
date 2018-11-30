@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2750fd21e236de4b920dea8332b60be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestinyScreen: 0
+  DestinyScreen: 2
 --- !u!114 &813686509
 MonoBehaviour:
   m_ObjectHideFlags: 0
