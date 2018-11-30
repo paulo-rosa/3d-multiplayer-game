@@ -107,16 +107,9 @@ public class CarBehaviour : MonoBehaviour {
         {
             _health.TakeDamage(20);
         }
-        Pause();
     }
 
-    private void Pause()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            _gameManager.Pause();
-        }
-    }
+
     public Transform GetPivotPoint()
     {
         return PivotPoint;

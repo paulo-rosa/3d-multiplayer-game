@@ -24,6 +24,7 @@ public class MenuManager : MonoBehaviour {
 
 	private void Start ()
     {
+        DontDestroyOnLoad(this);
         _currentScreen = Screens.MAIN_MENU;
 	}
     

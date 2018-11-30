@@ -7,15 +7,8 @@ public class EndLevelPanel : MonoBehaviour {
 
     public Text txtScore;
 
-    private GameManager _gameManager;
-
-	private void Start ()
-    {
-        _gameManager = GameManager.Instance;
-	}
-
     private void OnEnable()
     {
-        txtScore.text = "Score: " + _gameManager.GetScore();
+        txtScore.text = "Score: " + GameManager.Instance.GetScore();
     }
 }

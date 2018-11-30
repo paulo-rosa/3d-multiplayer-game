@@ -46,9 +46,18 @@ public class GameManager : MonoBehaviour {
 	
 	private void Update ()
     {
-		
+        PauseGame();
 	}
-
+    private void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (_currentState == GameState.GAME)
+                Pause();
+            else
+                Resume();
+        }
+    }
     public void GiveScore(int score)
     {
         _score += score;
@@ -57,7 +66,6 @@ public class GameManager : MonoBehaviour {
 
     public bool Die()
     {
-        Debug.Log("MOrreu");
         DeacreaseLife();
         if(_lifes == 0)
         {
@@ -71,6 +79,11 @@ public class GameManager : MonoBehaviour {
     public void Pause()
     {
         ChangeState(GameState.PAUSE);
+    }
+
+    public void Resume()
+    {
+        ChangeState(GameState.GAME);
     }
 
     private void PlayerRespawn()
@@ -105,6 +118,7 @@ public class GameManager : MonoBehaviour {
 
     private void ChangeState(GameState state)
     {
+        var previousState = _currentState;
         _currentState = state;
         if(onStateChange != null)
         {
@@ -114,7 +128,7 @@ public class GameManager : MonoBehaviour {
         switch (state)
         {
             case GameState.GAME:
-                OnStartGame();
+                OnStartGame(previousState);
                 break;
             case GameState.PAUSE:
                 OnPauseGame();
@@ -152,7 +166,11 @@ public class GameManager : MonoBehaviour {
     {
         MenuManager.Instance.SwitchScreen(Screens.SINGLEPLAYER);
     }
-
+    
+    public void ExitToMenu()
+    {
+        MenuManager.Instance.SwitchScreen(Screens.MAIN_MENU);
+    }
     #region 
     public void SetSpawnPosition(Transform position)
     {
@@ -161,8 +179,14 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region STATES
-    private void OnStartGame( )
+    private void OnStartGame(GameState previousState)
     {
+        if (previousState == GameState.PAUSE)
+        {
+            OnResumeGame();
+            return;
+        }
+
         _lifes = 3;
         _score = 0;
         UpdateUI();

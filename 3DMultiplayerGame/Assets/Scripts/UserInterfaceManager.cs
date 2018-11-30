@@ -20,6 +20,7 @@ public class UserInterfaceManager : MonoBehaviour
             return _instance;
         }
     }
+
     public Text _scoreTxt;
     public GameObject _lifesHolder;
     public Sprite _lifeHeart;
