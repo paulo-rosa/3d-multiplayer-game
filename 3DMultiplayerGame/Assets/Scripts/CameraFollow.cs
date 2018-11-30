@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     public bool followBehind = true;
     public float rotationDamping = 10.0f;
     public float lookRotation;
+    //public Texture2D cursor;
 
     private Transform target;
     private float minHeight;
@@ -18,7 +19,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        
+        //Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
