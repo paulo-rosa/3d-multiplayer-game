@@ -5,11 +5,15 @@ using UnityEngine.Networking;
 
 public class HoleTrapTrigger : NetworkBehaviour
 {
+    public LayerMask Layer;
     bool triggerEnabled = true;
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Player") && triggerEnabled)
+        if (triggerEnabled == false)
+            return;
+
+        if (Utils.CompareLayer(Layer, collision.gameObject.layer))
         {
             triggerEnabled = false;
             DestroyCar(collision);      
@@ -18,14 +22,14 @@ public class HoleTrapTrigger : NetworkBehaviour
 
     IEnumerator EnableTrigger()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         triggerEnabled = true;
     }
 
     private void DestroyCar(Collider collision)
     {
         var hit = collision.gameObject;
-        var health = hit.GetComponent<Health>();
+        var health = hit.GetComponentInParent<Health>();
         if (health != null)
         {
             health.TakeDamage(100);

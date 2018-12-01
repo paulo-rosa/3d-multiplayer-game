@@ -20,14 +20,16 @@ public class UserInterfaceManager : MonoBehaviour
             return _instance;
         }
     }
+
     public Text _scoreTxt;
     public GameObject _lifesHolder;
     public Sprite _lifeHeart;
     public Sprite _noLifeHeart;
     public GameObject GamePanel;
-    public GameObject MenuPanel;
+    public GameObject PausePanel;
     public GameObject GameOverPanel;
-
+    public GameObject EndLevelPanel;
+    
     private GameObject _currentPanel;
     private GameManager _gameManager;
     private Image[] _lifes = new Image[3];
@@ -49,18 +51,22 @@ public class UserInterfaceManager : MonoBehaviour
         _gameManager.onStateChange += StateChanged;
     }
 
+
     private void StateChanged(GameState state)
     {
         switch (state)
         {
-            case GameState.MENU:
-                ChangePanel(MenuPanel);
-                break;
             case GameState.GAME:
                 ChangePanel(GamePanel);
                 break;
             case GameState.GAME_OVER:
                 ChangePanel(GameOverPanel);
+                break;
+            case GameState.PAUSE:
+                ChangePanel(PausePanel);
+                break;
+            case GameState.END_LEVEL:
+                ChangePanel(EndLevelPanel);
                 break;
         }
     }

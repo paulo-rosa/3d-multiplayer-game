@@ -8,7 +8,7 @@ public class MeteorPool : MonoBehaviour {
     public GameObject MeteorObj;
 
     private int _currentIndex;
-    private int _poolSize = 20;
+    private int _poolSize = 30;
 
     void Start()
     {

@@ -5,6 +5,8 @@ public class CarBehaviour : MonoBehaviour {
 
 
     public GameObject CarGraphics;
+    public Transform PivotPoint;
+
 
     private Health _health;
     private GameManager _gameManager;
@@ -14,6 +16,10 @@ public class CarBehaviour : MonoBehaviour {
     private void Awake()
     {
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
+        //Camera.main.GetComponent<CameraFollow>().SetPosition(transform.position);
+        Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
+
+
     }
     private void Start()
     {
@@ -23,7 +29,7 @@ public class CarBehaviour : MonoBehaviour {
         _health.onDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
         _gameManager._player = transform;
-        _currentState = PlayerStates.ALIVE;
+        ChangeState(PlayerStates.RESPAWN);
     }
     private void OnDestroy()
     {
@@ -31,29 +37,21 @@ public class CarBehaviour : MonoBehaviour {
     }
 
     private void PlayerDie()
+
     {
         ChangeState(PlayerStates.DEAD);
-        if (_gameManager.Die())
-        {
-            StartCoroutine(TimeToSpawn());
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-         
     }
 
     IEnumerator TimeToSpawn()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         transform.position = _gameManager._spawnPosition.position;
         transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
-        _health.ResetHealth();
+        //_health.ResetHealth();
         ChangeState(PlayerStates.ALIVE);
     }
-    #region
+    #region States
     public void ChangeState(PlayerStates state)
     {
         _currentState = state;
@@ -79,10 +77,20 @@ public class CarBehaviour : MonoBehaviour {
     private void OnDeadEnter()
     {
         CarGraphics.SetActive(false);
+        if (_gameManager.Die())
+        {
+            ChangeState(PlayerStates.RESPAWN);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnRespawnEnter()
     {
+        _health.ResetHealth();
+        StartCoroutine(TimeToSpawn());
     }
 
     public PlayerStates GetState()
@@ -97,6 +105,12 @@ public class CarBehaviour : MonoBehaviour {
         {
             _health.TakeDamage(20);
         }
+    }
+
+
+    public Transform GetPivotPoint()
+    {
+        return PivotPoint;
     }
 }
 

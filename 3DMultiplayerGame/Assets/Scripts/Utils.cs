@@ -12,4 +12,14 @@ public static class Utils  {
         }
         return false;
     }
+    
+    public static int Sign(int value)
+    {
+        return value >= 0 ? 1 : -1;
+    }
+
+    public static int Sign(float value)
+    {
+        return value >= 0 ? 1 : -1;
+    }
 }

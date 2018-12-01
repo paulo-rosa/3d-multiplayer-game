@@ -39,8 +39,8 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (!isServer)
-            return;
+        //if (!isServer)
+        //    return;
         if (!_isAlive)
             return;
 
@@ -49,7 +49,7 @@ public class Health : NetworkBehaviour
         {
             _isAlive = false;
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            PlayExplosionSound();
+            //PlayExplosionSound();
             explosion.Explode(transform.position);
 
             if (destroyOnDeath)
