@@ -209,6 +209,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114071589647610640, guid: d45b76866c2a36f47b6eb756c38314ed,
+        type: 2}
+      propertyPath: Layer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d45b76866c2a36f47b6eb756c38314ed, type: 2}
   m_IsPrefabAsset: 0
@@ -1719,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2aad4e2eb2778348a5c407c8a38f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 1755043492970426, guid: dc52ea029764fe04588acd3fda058c6d,
+  _playerPrefab: {fileID: 1217042645839024, guid: 44d6b7879d0c52b43a00b60f9f6d6c3a,
     type: 2}
   _spawnPosition: {fileID: 1467212819}
   _player: {fileID: 0}

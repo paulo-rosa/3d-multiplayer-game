@@ -28,7 +28,8 @@ public class MyCarController : MonoBehaviour {
     {
         _rigidbody = GetComponent<Rigidbody>();
         _carCollision = GetComponent<CarCollision>();
-	}
+        Car.transform = GetComponent<Transform>();
+    }
 
     private void Update()
     {

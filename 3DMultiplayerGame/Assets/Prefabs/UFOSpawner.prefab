@@ -66,6 +66,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UFOPrefab: {fileID: 1173645057396578, guid: b33a962e5c464aa46be6ce6db79d0f1b, type: 2}
+  Layer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114332123793229436
 MonoBehaviour:
   m_ObjectHideFlags: 1

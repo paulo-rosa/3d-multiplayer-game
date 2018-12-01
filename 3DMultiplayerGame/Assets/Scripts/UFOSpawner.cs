@@ -4,11 +4,13 @@ using UnityEngine.Networking;
 public class UFOSpawner : NetworkBehaviour
 {
     public GameObject UFOPrefab;
+    public LayerMask Layer;
+
     private bool triggerEntered;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !triggerEntered)
+        if (Utils.CompareLayer(Layer, other.gameObject.layer) && !triggerEntered)
         {
             triggerEntered = true;
             SpawnUFO();            
