@@ -6,14 +6,14 @@ using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour
 {
-    public const int maxHealth = 100;
+    public int maxHealth;
     public bool destroyOnDeath;
     public AudioClip ExplosionSound;
     public AudioClip GotShotSound;
     private AudioSource[] _audioSources;
 
     [SyncVar(hook = "OnChangeHealth")]
-    public int currentHealth = maxHealth;
+    public int currentHealth;
 
     public RectTransform healthBar;
 
@@ -34,7 +34,7 @@ public class Health : NetworkBehaviour
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
         _gameManager = GameManager.Instance;
-        
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int amount)
@@ -52,6 +52,11 @@ public class Health : NetworkBehaviour
             //PlayExplosionSound();
             explosion.Explode(transform.position);
 
+            if (onDie != null)
+            {
+                onDie();
+            }
+
             if (destroyOnDeath)
             {
                 GetComponentInChildren<Canvas>().enabled = false;
@@ -65,15 +70,6 @@ public class Health : NetworkBehaviour
             }
             else
             {
-                // called on the Server, invoked on the Clients
-                //RpcRespawn();
-
-                //
-                if(onDie != null)
-                {
-                    onDie();
-                }
-                //
             }
         }
         else
@@ -84,6 +80,9 @@ public class Health : NetworkBehaviour
 
     private void OnChangeHealth(int currentHealth)
     {
+        if (healthBar == null)
+            return;
+
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
     }
 
@@ -130,5 +129,14 @@ public class Health : NetworkBehaviour
         audioSource.clip = GotShotSound;
         audioSource.loop = false;
         audioSource.Play();
+    }
+
+    public void SetAlive(bool value)
+    {
+        if (value == true)
+        {
+            _isAlive = value;
+            currentHealth = maxHealth;
+        }
     }
 }

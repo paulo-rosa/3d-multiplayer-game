@@ -835,7 +835,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217042645839024}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -853,8 +853,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.56, y: 1.79, z: 3.08}
-  m_Center: {x: 0.02, y: -0.29, z: -0.42}
+  m_Size: {x: 1.56, y: 2, z: 3.08}
+  m_Center: {x: 0.02, y: 0, z: -0.42}
 --- !u!65 &65928051382709958
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1161,7 +1161,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217042645839024}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
@@ -1256,7 +1256,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217042645839024}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b1a47994155313488bb20d2a9ad64df, type: 3}
@@ -1351,7 +1351,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217042645839024}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fde3635a814919e459d377d0a3a1b8fb, type: 3}
@@ -1446,7 +1446,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217042645839024}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}
@@ -1773,6 +1773,9 @@ MonoBehaviour:
   range: 100
   cannonType: 1
   faceLight: {fileID: 108079371841782066}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 26624
 --- !u!114 &114135120609717916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1925,6 +1928,9 @@ MonoBehaviour:
   range: 100
   cannonType: 0
   faceLight: {fileID: 108882142043572710}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114734353528956960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1988,6 +1994,9 @@ MonoBehaviour:
   range: 100
   cannonType: 0
   faceLight: {fileID: 108156602830419480}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114822443834777522
 MonoBehaviour:
   m_ObjectHideFlags: 1

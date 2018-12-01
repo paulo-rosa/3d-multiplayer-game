@@ -51,6 +51,7 @@ public class CarCollision : MonoBehaviour {
         Debug.DrawRay(downMiddle, transform.TransformDirection(Vector3.down), Color.red, 1f);
         if (Physics.Raycast(downMiddle, transform.TransformDirection(Vector3.down), (_objectScale.y * .6f) * _collider.size.y, Layer))
         {
+            Debug.Log("OnGround");
             return true;
         }
 

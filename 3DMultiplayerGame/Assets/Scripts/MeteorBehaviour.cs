@@ -13,17 +13,35 @@ public class MeteorBehaviour : MonoBehaviour {
     private AudioSource[] _audioSources;
     private float _timeToExplode = 10f;
     private float _timeCount = 0;
+    private Health _health;
+    private ScoreGiver _scoreGiver;
 
     private void Awake()
     {
         _audioSources = GetComponents<AudioSource>();
+        _health = GetComponent<Health>();
+        _scoreGiver = GetComponent<ScoreGiver>();
     }
 
-    private void Start ()
+
+    private void OnEnable()
     {
-        //gravity = gameObject.AddComponent<ConstantForce>();
-        //gravity.force = new Vector3(0.0f, -100000f, 0.0f);
+         _health.onDie += OnMeteorDie;
     }
+    //private void OnDisable()
+    //{
+    //    _health.onDie -= OnMeteorDie;
+    //}
+
+    private void OnMeteorDie()
+    {
+        Debug.Log("morreu");
+        DisableObject();
+        _health.SetAlive(true);
+        _scoreGiver.GiveScore();
+    }
+
+
 
     private void Update()
     {
@@ -46,15 +64,7 @@ public class MeteorBehaviour : MonoBehaviour {
     {
         if (Utils.CompareLayer(ExplosionLayer, collision.gameObject.layer))
         {
-            //var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            //PlayExplosionSound();
-            //explosion.Explode(transform.position);
 
-            //var components = GetComponentsInChildren<MeshRenderer>();
-            //foreach (var component in components)
-            //{
-            //    component.enabled = false;
-            //}
             var hit = collision.gameObject;
             var health = hit.GetComponent<Health>();
             

@@ -15,6 +15,8 @@ public class UFOController : NetworkBehaviour {
     public Transform bulletSpawn;
     public AudioClip UFOEngine;
 
+    private Health _health;
+    private ScoreGiver _scoreGiver; 
     private float timeToShoot = 2;
     private float shootCounter = 0;
     private AudioSource[] _audioSources;
@@ -28,6 +30,18 @@ public class UFOController : NetworkBehaviour {
         audioSource.clip = UFOEngine;
         audioSource.loop = false;
         audioSource.Play();
+        _scoreGiver = GetComponent<ScoreGiver>();
+        _health = GetComponent<Health>();
+    }
+
+    private void Start()
+    {
+        _health.onDie += OnDie;
+    }
+
+    private void OnDie()
+    {
+        _scoreGiver.GiveScore();
     }
 
     // Update is called once per frame

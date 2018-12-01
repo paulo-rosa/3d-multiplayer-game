@@ -11,24 +11,23 @@ public class CannonShooting: MonoBehaviour
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
     public float range = 100f;                      // The distance the gun can fire.
     public Cannontype cannonType = Cannontype.staticCannon;
-
-
-    float timer;                                    // A timer to determine when to fire.
-    Ray shootRay = new Ray();                       // A ray from the gun end forwards.
-    RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
-    int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
-    ParticleSystem gunParticles;                    // Reference to the particle system.
-    LineRenderer gunLine;                           // Reference to the line renderer.
-    AudioSource gunAudio;                           // Reference to the audio source.
-    Light gunLight;                                 // Reference to the light component.
-    public Light faceLight;                             // Duh
-    float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
+    public Light faceLight;
+    public LayerMask shootableMask;
+    private float timer;                                    // A timer to determine when to fire.
+    private Ray shootRay = new Ray();                       // A ray from the gun end forwards.
+    private RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
+                             // A layer mask so the raycast only hits things on the shootable layer.
+    private ParticleSystem gunParticles;                    // Reference to the particle system.
+    private LineRenderer gunLine;                           // Reference to the line renderer.
+    private AudioSource gunAudio;                           // Reference to the audio source.
+    private Light gunLight;                                 // Reference to the light component.
+                                 // Duh
+    private float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
 
 
     void Awake()
     {
         // Create a layer mask for the Shootable layer.
-        shootableMask = LayerMask.GetMask("Shootable");
 
         // Set up the references.
         gunParticles = GetComponent<ParticleSystem>();

@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public LayerMask layerMask;
     public LayerMask layerOrigin;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (layerOrigin == collision.gameObject.layer)
         {

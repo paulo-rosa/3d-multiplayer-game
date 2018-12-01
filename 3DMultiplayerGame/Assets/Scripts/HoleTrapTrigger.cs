@@ -16,13 +16,14 @@ public class HoleTrapTrigger : NetworkBehaviour
         if (Utils.CompareLayer(Layer, collision.gameObject.layer))
         {
             triggerEnabled = false;
-            DestroyCar(collision);      
+            DestroyCar(collision);
+            StartCoroutine(EnableTrigger());
         }
     }
 
     IEnumerator EnableTrigger()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         triggerEnabled = true;
     }
 
