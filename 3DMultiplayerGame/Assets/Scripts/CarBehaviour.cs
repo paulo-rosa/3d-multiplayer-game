@@ -16,7 +16,6 @@ public class CarBehaviour : MonoBehaviour {
     private void Awake()
     {
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
-        //Camera.main.GetComponent<CameraFollow>().SetPosition(transform.position);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
 
