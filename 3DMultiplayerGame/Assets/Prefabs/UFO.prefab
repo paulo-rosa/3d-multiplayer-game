@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224500513523650466}
   - component: {fileID: 222965681369876362}
   - component: {fileID: 114201777873201618}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: 'Foreground '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4941318013900900}
   - component: {fileID: 33332444361186334}
   - component: {fileID: 23593545352946426}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: UFO_cockpi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,8 @@ GameObject:
   - component: {fileID: 82612306677303732}
   - component: {fileID: 82066361876541822}
   - component: {fileID: 82812646498802968}
-  m_Layer: 15
+  - component: {fileID: 114508400813179750}
+  m_Layer: 11
   m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4585781075000078}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: mr Area S0.target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +95,7 @@ GameObject:
   - component: {fileID: 224834971897964390}
   - component: {fileID: 222937367102641944}
   - component: {fileID: 114574307988499596}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +113,7 @@ GameObject:
   - component: {fileID: 33713626115433436}
   - component: {fileID: 23131033325962990}
   - component: {fileID: 136712419866147516}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4074665850089154}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +145,7 @@ GameObject:
   - component: {fileID: 4434146008387100}
   - component: {fileID: 33178743746601918}
   - component: {fileID: 23440863412358246}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: UFO_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4866057286397378}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: mr Area Sp.target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +179,7 @@ GameObject:
   - component: {fileID: 114273653505990336}
   - component: {fileID: 114347902813967018}
   - component: {fileID: 114067752222817108}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: HealthBar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,11 +813,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   destroyOnDeath: 1
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
   GotShotSound: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}
   currentHealth: 100
   healthBar: {fileID: 224500513523650466}
+--- !u!114 &114508400813179750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173645057396578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a317c37d691884a9bbc668ec06ca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreAmount: 500
 --- !u!114 &114541711685919152
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -139,6 +139,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 6656
+  layerOrigin:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114706813099713550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +181,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937935283903610}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

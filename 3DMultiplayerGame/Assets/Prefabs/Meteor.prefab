@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 82743327583141572}
   - component: {fileID: 199763976439029004}
   - component: {fileID: 198323762970440726}
+  - component: {fileID: 114768705115188230}
   m_Layer: 14
   m_Name: Meteor
   m_TagString: Untagged
@@ -228,11 +229,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyOnDeath: 1
+  maxHealth: 20
+  destroyOnDeath: 0
   ExplosionSound: {fileID: 0}
   GotShotSound: {fileID: 0}
   currentHealth: 20
   healthBar: {fileID: 0}
+--- !u!114 &114768705115188230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544430360714292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a317c37d691884a9bbc668ec06ca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreAmount: 100
 --- !u!114 &114808402522305408
 MonoBehaviour:
   m_ObjectHideFlags: 1
