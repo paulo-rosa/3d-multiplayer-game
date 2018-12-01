@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MyCarController : MonoBehaviour {
+public class MyCarController : NetworkBehaviour {
 
     public LayerMask Layer;
 
@@ -33,6 +34,11 @@ public class MyCarController : MonoBehaviour {
 
     private void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         Accelerate();
         Turn();
         Jump();

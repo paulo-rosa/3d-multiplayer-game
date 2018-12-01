@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2aad4e2eb2778348a5c407c8a38f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 1217042645839024, guid: 44d6b7879d0c52b43a00b60f9f6d6c3a,
+  _playerPrefab: {fileID: 1971999286124218, guid: eab0cda2fb8185c4ebd43e8d9961e0ac,
     type: 2}
   _spawnPosition: {fileID: 1467212819}
   _player: {fileID: 0}

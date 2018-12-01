@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : NetworkBehaviour
 {
     public GameObject _target;
     public float distance = 12.0f;
@@ -30,8 +30,15 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (!_hasTarget)
+        if (!isLocalPlayer)
+        {
             return;
+        }
+
+        if (!_hasTarget)
+        {
+            return;
+        }
 
         if (_carBehaviour.GetState() != PlayerStates.ALIVE)
         {

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CarBehaviour : MonoBehaviour {
+public class CarBehaviour : NetworkBehaviour {
 
 
     public GameObject CarGraphics;
@@ -21,6 +22,7 @@ public class CarBehaviour : MonoBehaviour {
 
 
     }
+
     private void Start()
     {
         _rigidBody = GetComponentInChildren<Rigidbody>();
