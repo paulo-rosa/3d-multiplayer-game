@@ -29,7 +29,7 @@ public class MultiplayerMenuManager : MonoBehaviour {
         ChangeState(MenuState.LOBBY);
 	}
 	
-    private void ChangeState(MenuState state)
+    public void ChangeState(MenuState state)
     {
         _currentState = state;
         if(onChangeState != null)

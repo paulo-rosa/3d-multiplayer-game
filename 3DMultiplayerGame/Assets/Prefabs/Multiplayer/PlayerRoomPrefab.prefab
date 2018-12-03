@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 224913809501433950}
   - component: {fileID: 222821437964028456}
   - component: {fileID: 114621757903543970}
+  - component: {fileID: 114186848711553130}
+  - component: {fileID: 114771955569266502}
   m_Layer: 0
   m_Name: PlayerRoomPrefab
   m_TagString: Untagged
@@ -95,6 +97,38 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Player Name
+--- !u!114 &114186848711553130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1908706454451884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 27
+    i1: 23
+    i2: 125
+    i3: 35
+    i4: 251
+    i5: 42
+    i6: 127
+    i7: 20
+    i8: 73
+    i9: 103
+    i10: 123
+    i11: 83
+    i12: 244
+    i13: 177
+    i14: 80
+    i15: 239
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114603391875536746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +189,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114771955569266502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1908706454451884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa47b811b71edcc4084c43f05bd83f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222046658135805342
 CanvasRenderer:
   m_ObjectHideFlags: 1
