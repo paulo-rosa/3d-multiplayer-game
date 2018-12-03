@@ -10,11 +10,17 @@ public class NetworkPlayer : NetworkBehaviour
 
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
+    private string _playerName;
 
-	// Use this for initialization
 	private void Start ()
     {
         _myNetworkManager = MyNetworkManager.Instance;
+
+        if (hasAuthority)
+        {
+            _playerName = PlayerData.PlayerName;
+            CmdSetPlayerName(_playerName);
+        }
 	}
 	
 	// Update is called once per frame
@@ -51,7 +57,18 @@ public class NetworkPlayer : NetworkBehaviour
     private void CreateLobbyObject()
     {
         Debug.Log("CreateLobbyObject:" + hasAuthority);
-        _lobbyObject = Instantiate(m_LobbyPrefab).GetComponent<LobbyPlayer>();
+        var go = Instantiate(m_LobbyPrefab, PlayersHolder.Instance.GetPlayersHolder());
+        _lobbyObject = go.GetComponent<LobbyPlayer>();
         _lobbyObject.Init();
     }
+
+    #region RPC CALLS
+    
+    [Command]
+    private void CmdSetPlayerName(string name)
+    {
+        _playerName = name;
+    }
+
+    #endregion
 }

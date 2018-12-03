@@ -13,6 +13,9 @@ public class CreateRoomButton : MonoBehaviour {
         if (string.IsNullOrEmpty(gameName))
             return;
 
+
+        CheckPlayername();
+
         MyNetworkManager.Instance.CreateInternetMatch(gameName, (success, matchName) => {
 
             if (success)
@@ -20,5 +23,13 @@ public class CreateRoomButton : MonoBehaviour {
                 Debug.Log("Sala Criada");
             }
         });
+    }
+
+    private void CheckPlayername()
+    {
+        if (string.IsNullOrEmpty(PlayerData.PlayerName))
+        {
+            PlayerData.PlayerName = PlayerData.RandomName();
+        }
     }
 }

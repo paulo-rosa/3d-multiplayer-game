@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LobbyPlayer : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +17,7 @@ public class LobbyPlayer : MonoBehaviour {
 
     public void Init()
     {
+
         Debug.Log("init the lobby plaeyr");
     }
 }

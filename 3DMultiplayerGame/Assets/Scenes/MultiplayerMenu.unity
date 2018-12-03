@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1008,7 +1008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 115.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471529557
@@ -1652,6 +1652,7 @@ GameObject:
   - component: {fileID: 809879325}
   - component: {fileID: 809879324}
   - component: {fileID: 809879323}
+  - component: {fileID: 809879326}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1727,7 +1728,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809879326}
+        m_MethodName: SetPlayerName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
@@ -1776,6 +1788,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 809879321}
   m_CullTransparentMesh: 0
+--- !u!114 &809879326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809879321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bddf14c944bf9d45adc77463ff0de4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerName: {fileID: 1539915143}
 --- !u!1 &927898611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1810,7 @@ GameObject:
   - component: {fileID: 927898612}
   - component: {fileID: 927898614}
   - component: {fileID: 927898613}
+  - component: {fileID: 927898615}
   m_Layer: 5
   m_Name: RoomPanel
   m_TagString: Untagged
@@ -1847,6 +1872,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927898611}
   m_CullTransparentMesh: 0
+--- !u!114 &927898615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927898611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c275940a493ac9243ad3812ca8f41f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtPlayerName: {fileID: 0}
 --- !u!1 &1104848084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1995,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -315, y: 0}
-  m_SizeDelta: {x: 630, y: 100}
+  m_SizeDelta: {x: 640, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1323198011
 GameObject:
@@ -1970,6 +2007,7 @@ GameObject:
   - component: {fileID: 1323198012}
   - component: {fileID: 1323198014}
   - component: {fileID: 1323198013}
+  - component: {fileID: 1323198015}
   m_Layer: 0
   m_Name: txtPlayerName
   m_TagString: Untagged
@@ -2035,6 +2073,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1323198011}
   m_CullTransparentMesh: 0
+--- !u!114 &1323198015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1323198011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23711a4064eadef4bab009766f3e70fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1391569804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,7 +2118,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 315, y: 0}
-  m_SizeDelta: {x: 630, y: 720}
+  m_SizeDelta: {x: 640, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1391569806
 MonoBehaviour:
@@ -2173,6 +2222,7 @@ GameObject:
   - component: {fileID: 1409423579}
   - component: {fileID: 1409423578}
   - component: {fileID: 1409423577}
+  - component: {fileID: 1409423580}
   m_Layer: 0
   m_Name: PlayersHolder
   m_TagString: Untagged
@@ -2249,11 +2299,22 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 1
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
+--- !u!114 &1409423580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1409423575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8444ddb5112e06c4a9f157c3520e55fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1523407768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,7 +2552,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1260, y: 720}
+  m_SizeDelta: {x: 1280, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1838507200
 MonoBehaviour:
