@@ -30,11 +30,6 @@ public class CameraFollow : NetworkBehaviour
 
     private void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
         if (!_hasTarget)
         {
             return;

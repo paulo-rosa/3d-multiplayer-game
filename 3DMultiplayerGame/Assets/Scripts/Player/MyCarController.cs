@@ -34,11 +34,6 @@ public class MyCarController : NetworkBehaviour {
 
     private void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
         Accelerate();
         Turn();
         Jump();
