@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -7,11 +8,18 @@ public class NetworkPlayer : NetworkBehaviour
 {
     [SerializeField]
     protected GameObject m_LobbyPrefab;
+    [SyncVar]
+    private string _playerName;
+    [SyncVar]
+    private bool _isReady = false;
 
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
-    private string _playerName;
-
+    
+    public string GetPlayerName()
+    {
+        return _playerName;
+    }
 	private void Start ()
     {
         _myNetworkManager = MyNetworkManager.Instance;
@@ -22,9 +30,20 @@ public class NetworkPlayer : NetworkBehaviour
             CmdSetPlayerName(_playerName);
         }
 	}
-	
-	// Update is called once per frame
-	private void Update ()
+
+    public bool GetReadyState()
+    {
+        return _isReady;
+    }
+
+    public bool SetReady()
+    {
+        _isReady = !_isReady;
+        return _isReady;
+    }
+
+    // Update is called once per frame
+    private void Update ()
     {
 		
 	}
@@ -59,7 +78,7 @@ public class NetworkPlayer : NetworkBehaviour
         Debug.Log("CreateLobbyObject:" + hasAuthority);
         var go = Instantiate(m_LobbyPrefab, PlayersHolder.Instance.GetPlayersHolder());
         _lobbyObject = go.GetComponent<LobbyPlayer>();
-        _lobbyObject.Init();
+        _lobbyObject.Init(this);
     }
 
     #region RPC CALLS
