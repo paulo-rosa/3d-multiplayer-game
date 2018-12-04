@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour
+{
 
     private static GameManager _instance;
     
@@ -36,12 +37,10 @@ public class GameManager : MonoBehaviour {
     public Transform _player;
     public event Action<GameState> onStateChange;
 
-	private void Start ()
+	protected virtual void Start ()
     {
         _userInterfaceManager = UserInterfaceManager.Instance;
         StartGame();
-
-
     }
 	
 	private void Update ()
@@ -99,7 +98,7 @@ public class GameManager : MonoBehaviour {
         ChangeState(GameState.GAME);
     }
 
-    private void GameOver()
+    protected void GameOver()
     {
         ChangeState(GameState.GAME_OVER);
     }
@@ -107,7 +106,6 @@ public class GameManager : MonoBehaviour {
     public void EndLevel()
     {
         ChangeState(GameState.END_LEVEL);
-
     }
     #endregion
 
@@ -116,7 +114,7 @@ public class GameManager : MonoBehaviour {
         return _currentState;
     }
 
-    private void ChangeState(GameState state)
+    protected void ChangeState(GameState state)
     {
         var previousState = _currentState;
         _currentState = state;

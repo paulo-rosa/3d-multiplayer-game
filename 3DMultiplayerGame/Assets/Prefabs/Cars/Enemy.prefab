@@ -652,11 +652,16 @@ MonoBehaviour:
     type: 2}
   bulletRightSpawn: {fileID: 4495905524135234}
   bulletLeftSpawn: {fileID: 4790467675456676}
-  CarSound: {fileID: 8300000, guid: abcb608db0a16134aa1ab81932c6d220, type: 3}
+  bulletCenterSpawn: {fileID: 0}
   ShotSound: {fileID: 8300000, guid: 8b1a47994155313488bb20d2a9ad64df, type: 3}
-  axleInfoList: []
+  EngineSound: {fileID: 0}
   maxMotorTorque: 400
+  handBrakeTorque: 500
   maxSteeringAngle: 30
+  GearRatio: []
+  centerOfGravity: {x: 0, y: 0, z: 0}
+  maxReverseSpeed: 50
+  maxSpeed: 150
 --- !u!114 &114633101718379828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   destroyOnDeath: 1
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
   GotShotSound: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}

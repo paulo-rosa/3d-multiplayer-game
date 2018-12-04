@@ -332,7 +332,11 @@ MonoBehaviour:
   damagePerShot: 20
   timeBetweenBullets: 0.15
   range: 100
+  cannonType: 0
   faceLight: {fileID: 108056035702638170}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!120 &120947592377649958
 LineRenderer:
   m_ObjectHideFlags: 1

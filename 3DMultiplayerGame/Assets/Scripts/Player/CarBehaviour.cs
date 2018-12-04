@@ -2,9 +2,8 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CarBehaviour : NetworkBehaviour {
-
-
+public class CarBehaviour : NetworkBehaviour
+{
     public GameObject CarGraphics;
     public Transform PivotPoint;
 
@@ -44,7 +43,7 @@ public class CarBehaviour : NetworkBehaviour {
         ChangeState(PlayerStates.DEAD);
     }
 
-    IEnumerator TimeToSpawn()
+    protected virtual IEnumerator TimeToSpawn()
     {
         yield return new WaitForSeconds(1f);
         transform.position = _gameManager._spawnPosition.position;
@@ -71,12 +70,12 @@ public class CarBehaviour : NetworkBehaviour {
         }
     }
 
-    private void OnAliveEnter()
+    protected void OnAliveEnter()
     {
         CarGraphics.SetActive(true);
     }
 
-    private void OnDeadEnter()
+    protected void OnDeadEnter()
     {
         CarGraphics.SetActive(false);
         if (_gameManager.Die())
@@ -89,7 +88,7 @@ public class CarBehaviour : NetworkBehaviour {
         }
     }
 
-    private void OnRespawnEnter()
+    protected void OnRespawnEnter()
     {
         _health.ResetHealth();
         StartCoroutine(TimeToSpawn());

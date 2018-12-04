@@ -1691,7 +1691,11 @@ MonoBehaviour:
   damagePerShot: 20
   timeBetweenBullets: 0.15
   range: 100
+  cannonType: 0
   faceLight: {fileID: 108572597293376516}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114450202698088692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1741,6 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   destroyOnDeath: 0
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
   GotShotSound: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}
@@ -1760,7 +1765,11 @@ MonoBehaviour:
   damagePerShot: 20
   timeBetweenBullets: 0.15
   range: 100
+  cannonType: 0
   faceLight: {fileID: 108290021502067376}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114684753942823700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1773,6 +1782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CarGraphics: {fileID: 1642194220909332}
+  PivotPoint: {fileID: 0}
 --- !u!114 &114736215552973468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1819,7 +1829,11 @@ MonoBehaviour:
   damagePerShot: 20
   timeBetweenBullets: 0.15
   range: 100
+  cannonType: 0
   faceLight: {fileID: 108052874114320650}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114984491487353610
 MonoBehaviour:
   m_ObjectHideFlags: 1

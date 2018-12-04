@@ -32,7 +32,7 @@ public class MyCarController : NetworkBehaviour {
         Car.transform = GetComponent<Transform>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Accelerate();
         Turn();
@@ -44,8 +44,7 @@ public class MyCarController : NetworkBehaviour {
 
     }
 
-
-    private void Accelerate()
+    protected void Accelerate()
     {
         if (Input.GetKey(KeyCode.W) && !_carCollision.FrontCollision()) 
         {
@@ -82,7 +81,7 @@ public class MyCarController : NetworkBehaviour {
         transform.position += transform.forward * _speed * Time.deltaTime;
     }
 
-    private void Turn()
+    protected void Turn()
     {
         var torque = Vector3.zero;
 
@@ -105,7 +104,7 @@ public class MyCarController : NetworkBehaviour {
 
     }
 
-    private float CalculateTurn()
+    protected float CalculateTurn()
     {
         float turn = 0;
         if (_speed >= 0)
@@ -118,12 +117,11 @@ public class MyCarController : NetworkBehaviour {
         return turn;
     }
 
-    private void Jump()
+    protected void Jump()
     {
         if (Input.GetKey(KeyCode.F) && _carCollision.GroundCollision())
         {
             _rigidbody.AddForce(_jumpForce, ForceMode.Impulse);
-            Debug.Log("trying junml");
         }
     }
 
