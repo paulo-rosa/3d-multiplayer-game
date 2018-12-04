@@ -103,6 +103,7 @@ public class MyNetworkManager : NetworkManager
 
         connectedPlayers.Add(newPlayer);
         newPlayer.OnEnterLobbyScene();
+
         //newPlayer.becameReady += OnPlayerSetReady;
 
         //if (s_IsServer)

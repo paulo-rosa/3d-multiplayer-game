@@ -29,7 +29,8 @@ public class NetworkPlayer : NetworkBehaviour
             _playerName = PlayerData.PlayerName;
             CmdSetPlayerName(_playerName);
         }
-	}
+        _myNetworkManager.RegisterNetworkPlayer(this);
+    }
 
     public bool GetReadyState()
     {
@@ -60,18 +61,23 @@ public class NetworkPlayer : NetworkBehaviour
         {
             _myNetworkManager = MyNetworkManager.Instance;
         }
-        _myNetworkManager.RegisterNetworkPlayer(this);
+       
     }
+
+
 
     [Client]
     public void OnEnterLobbyScene()
     {
+
         Debug.Log("OnEnterLobbyScene:" + hasAuthority);
         if (_lobbyObject == null)
         {
             CreateLobbyObject();
         }
     }
+
+  
 
     private void CreateLobbyObject()
     {

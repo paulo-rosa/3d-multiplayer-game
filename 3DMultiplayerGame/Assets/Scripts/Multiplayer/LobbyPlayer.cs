@@ -33,7 +33,7 @@ public class LobbyPlayer : MonoBehaviour {
 
     private void ChangeButtonState(bool value)
     {
-        if(_networkPlayer.hasAuthority)
+        if(_networkPlayer.isLocalPlayer)
         {
             if (value)
             {
@@ -49,8 +49,7 @@ public class LobbyPlayer : MonoBehaviour {
         else
         {
             btnReady.GetComponent<Image>().color = Color.red;
-            btnReady.interactable = true;
+            btnReady.interactable = false;
         }
-        
     }
 }
