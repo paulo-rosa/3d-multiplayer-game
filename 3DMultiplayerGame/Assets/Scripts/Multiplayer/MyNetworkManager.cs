@@ -103,7 +103,7 @@ public class MyNetworkManager : NetworkManager
 
         connectedPlayers.Add(newPlayer);
         newPlayer.OnEnterLobbyScene();
-
+        newPlayer.onReadyChange += PlayerSetReady;
         //newPlayer.becameReady += OnPlayerSetReady;
 
         //if (s_IsServer)
@@ -111,5 +111,20 @@ public class MyNetworkManager : NetworkManager
         //    UpdatePlayerIDs();
         //}
 
+    }
+
+    private void PlayerSetReady(bool value)
+    {
+        
+        foreach (var player in connectedPlayers)
+        {
+            if (!player.GetReadyState())
+            {
+                break;
+            }
+        }
+
+        //Start game;
+    
     }
 }

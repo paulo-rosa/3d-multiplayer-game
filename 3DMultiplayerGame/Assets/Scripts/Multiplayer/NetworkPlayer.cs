@@ -10,12 +10,14 @@ public class NetworkPlayer : NetworkBehaviour
     protected GameObject m_LobbyPrefab;
     [SyncVar]
     private string _playerName;
-    [SyncVar]
+    [SyncVar(hook = "OnReadyChange")]
     private bool _isReady = false;
 
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
-    
+
+    public event Action<bool> onReadyChange;
+
     public string GetPlayerName()
     {
         return _playerName;
@@ -43,12 +45,6 @@ public class NetworkPlayer : NetworkBehaviour
         return _isReady;
     }
 
-    // Update is called once per frame
-    private void Update ()
-    {
-		
-	}
-
     [Client]
     public override void OnStartClient()
     {
@@ -61,10 +57,7 @@ public class NetworkPlayer : NetworkBehaviour
         {
             _myNetworkManager = MyNetworkManager.Instance;
         }
-       
     }
-
-
 
     [Client]
     public void OnEnterLobbyScene()
@@ -87,8 +80,27 @@ public class NetworkPlayer : NetworkBehaviour
         _lobbyObject.Init(this);
     }
 
-    #region RPC CALLS
-    
+    #region Hooks
+
+    private void OnReadyChange(bool value)
+    {
+        _isReady = value;
+        CmdSetPlayerReady(value);
+    }
+
+    #endregion
+
+    #region COMMAND CALLS
+
+    [Command]
+    private void CmdSetPlayerReady(bool value)
+    {
+        if (onReadyChange != null)
+        {
+            onReadyChange(value);
+        }
+    }
+
     [Command]
     private void CmdSetPlayerName(string name)
     {
