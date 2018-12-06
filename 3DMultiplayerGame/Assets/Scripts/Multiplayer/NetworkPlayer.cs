@@ -95,6 +95,9 @@ public class NetworkPlayer : NetworkBehaviour
     [Command]
     private void CmdSetPlayerReady(bool value)
     {
+        if (isServer)
+            Debug.Log("Player ready");
+
         if (onReadyChange != null)
         {
             onReadyChange(value);

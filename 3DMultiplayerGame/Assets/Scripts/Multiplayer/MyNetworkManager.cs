@@ -115,16 +115,23 @@ public class MyNetworkManager : NetworkManager
 
     private void PlayerSetReady(bool value)
     {
-        
+
+        var shouldStart = true;
         foreach (var player in connectedPlayers)
         {
             if (!player.GetReadyState())
             {
+                Debug.Log("not ready");
+                shouldStart = false;
                 break;
             }
         }
+        if (shouldStart)
+        {
+            //Start game;
+            Debug.Log("start game");
+        }
 
-        //Start game;
-    
+
     }
 }
