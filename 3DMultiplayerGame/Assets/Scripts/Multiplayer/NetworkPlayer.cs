@@ -16,7 +16,7 @@ public class NetworkPlayer : NetworkBehaviour
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
 
-    public event Action<bool> onReadyChange;
+    public event Action onReadyChange;
 
     public string GetPlayerName()
     {
@@ -42,6 +42,7 @@ public class NetworkPlayer : NetworkBehaviour
     public bool SetReady()
     {
         _isReady = !_isReady;
+        CmdSetPlayerReady(_isReady);
         return _isReady;
     }
 
@@ -85,7 +86,7 @@ public class NetworkPlayer : NetworkBehaviour
     private void OnReadyChange(bool value)
     {
         _isReady = value;
-        CmdSetPlayerReady(value);
+
     }
 
     #endregion
@@ -97,10 +98,10 @@ public class NetworkPlayer : NetworkBehaviour
     {
         if (isServer)
             Debug.Log("Player ready");
-
+        _isReady = value;
         if (onReadyChange != null)
         {
-            onReadyChange(value);
+            onReadyChange();
         }
     }
 

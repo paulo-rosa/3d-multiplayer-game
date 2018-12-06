@@ -26,6 +26,7 @@ public class MyNetworkManager : NetworkManager
     private NetworkManager networkManager;
     public NetworkPlayer _networkPlayerPrefab;
 
+    private int _minPlayers = 2;
     private Action<bool, MatchInfo> _nextMatchCreatedCallback;
     private Action<bool, MatchInfo> _nextMatchJoinedCallback;
 
@@ -113,12 +114,19 @@ public class MyNetworkManager : NetworkManager
 
     }
 
-    private void PlayerSetReady(bool value)
+    private void PlayerSetReady()
     {
+        if (connectedPlayers.Count < _minPlayers)
+        {
+            Debug.LogWarning("Insuficcient number of players.");
+            return;
+        }
 
         var shouldStart = true;
+
         foreach (var player in connectedPlayers)
         {
+            Debug.Log("player is ready:" + player.GetReadyState());
             if (!player.GetReadyState())
             {
                 Debug.Log("not ready");
@@ -126,12 +134,17 @@ public class MyNetworkManager : NetworkManager
                 break;
             }
         }
+
         if (shouldStart)
         {
-            //Start game;
-            Debug.Log("start game");
+            StartGameScene();
         }
 
 
+    }
+
+    private void StartGameScene()
+    {
+        this.ServerChangeScene("Multiplayer");
     }
 }
