@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour, IGameManager
+{
     private static GameManager _instance;
-    
+
     public static GameManager Instance
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = FindObjectOfType<GameManager>();
             }
@@ -30,24 +30,22 @@ public class GameManager : MonoBehaviour {
     private UserInterfaceManager _userInterfaceManager;
     private GameState _currentState;
 
-    
     public GameObject _playerPrefab;
     public Transform _spawnPosition;
     public Transform _player;
     public event Action<GameState> onStateChange;
 
-	private void Start ()
+    private void Start()
     {
         _userInterfaceManager = UserInterfaceManager.Instance;
         StartGame();
-
-
     }
-	
-	private void Update ()
+
+    private void Update()
     {
         PauseGame();
-	}
+    }
+
     private void PauseGame()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -58,6 +56,7 @@ public class GameManager : MonoBehaviour {
                 Resume();
         }
     }
+
     public void GiveScore(int score)
     {
         _score += score;
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour {
     public bool Die()
     {
         DeacreaseLife();
-        if(_lifes == 0)
+        if (_lifes == 0)
         {
             //GAME OVER;
             ChangeState(GameState.GAME_OVER);
@@ -86,9 +85,9 @@ public class GameManager : MonoBehaviour {
         ChangeState(GameState.GAME);
     }
 
-    private void PlayerRespawn()
+    public void PlayerRespawn()
     {
-        
+
     }
 
     #region States Change
@@ -99,7 +98,7 @@ public class GameManager : MonoBehaviour {
         ChangeState(GameState.GAME);
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         ChangeState(GameState.GAME_OVER);
     }
@@ -116,11 +115,11 @@ public class GameManager : MonoBehaviour {
         return _currentState;
     }
 
-    private void ChangeState(GameState state)
+    public void ChangeState(GameState state)
     {
         var previousState = _currentState;
         _currentState = state;
-        if(onStateChange != null)
+        if (onStateChange != null)
         {
             onStateChange(_currentState);
         }
@@ -142,13 +141,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void DeacreaseLife()
+    public void DeacreaseLife()
     {
         _lifes--;
         UpdateUI();
     }
 
-    private void IncreaseLife()
+    public void IncreaseLife()
     {
         if (_lifes >= 3) return;
 
@@ -156,7 +155,7 @@ public class GameManager : MonoBehaviour {
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         _userInterfaceManager.UpdateLifes(_lifes);
         _userInterfaceManager.UpdateScore(_score);
@@ -166,7 +165,7 @@ public class GameManager : MonoBehaviour {
     {
         MenuManager.Instance.SwitchScreen(Screens.SINGLEPLAYER);
     }
-    
+
     public void ExitToMenu()
     {
         MenuManager.Instance.SwitchScreen(Screens.MAIN_MENU);
@@ -179,7 +178,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region STATES
-    private void OnStartGame(GameState previousState)
+    public void OnStartGame(GameState previousState)
     {
         if (previousState == GameState.PAUSE)
         {
@@ -192,22 +191,22 @@ public class GameManager : MonoBehaviour {
         UpdateUI();
     }
 
-    private void OnGameOver()
+    public void OnGameOver()
     {
-        
+
     }
 
-    private void OnPauseGame()
+    public void OnPauseGame()
     {
         Time.timeScale = 0;
     }
 
-    private void OnResumeGame()
+    public void OnResumeGame()
     {
         Time.timeScale = 1;
     }
 
-    private void OnEndLevel()
+    public void OnEndLevel()
     {
         //_userInterfaceManager
     }

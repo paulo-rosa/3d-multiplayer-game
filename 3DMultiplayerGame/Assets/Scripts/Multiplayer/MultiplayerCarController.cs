@@ -1,47 +1,45 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MyCarController : MonoBehaviour, ICarController
+public class MultiplayerCarController : NetworkBehaviour, ICarController
 {
-
-    public LayerMask Layer;
-
     [SerializeField]
-    private float _maxSpeed;
+    private float _maxSpeed = 70;
     [SerializeField]
-    private float _maxReverseSpeed;
+    private float _maxReverseSpeed = -30;
     [SerializeField]
     private float _acceleration = 50;
     [SerializeField]
-    private float _maxTurn;
+    private float _maxTurn = 30;
     [SerializeField]
-    private Vector3 _jumpForce;
+    private Vector3 _jumpForce = new Vector3(0, 3, 0);
     private Rigidbody _rigidbody;
-    private bool _isGrounded;
-    private CarCollision _carCollision;
     public float _speed;
-    private bool _isFalling = false;
     public float _turn;
+    private CarCollision _carCollision;
+    private bool _isFalling = false;
 
-    public void Start()
+    // Use this for initialization
+    void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _carCollision = GetComponent<CarCollision>();
         Car.transform = GetComponent<Transform>();
     }
 
-    public void Update()
+    // Update is called once per frame
+    void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         Accelerate();
         Turn();
         Jump();
-    }
-
-    public void FixedUpdate()
-    {
-
     }
 
     public void Accelerate()
@@ -81,29 +79,6 @@ public class MyCarController : MonoBehaviour, ICarController
         transform.position += transform.forward * _speed * Time.deltaTime;
     }
 
-    public void Turn()
-    {
-        var torque = Vector3.zero;
-
-        if (torque != Vector3.zero)
-            torque = -torque;
-
-        _turn = CalculateTurn();
-
-        if (Input.GetKey(KeyCode.A) && _speed != 0)
-        {
-            torque = Vector3.up * -_turn;
-        }
-        else if (Input.GetKey(KeyCode.D) && _speed != 0)
-        {
-            torque = Vector3.up * _turn;
-
-        }
-        //_rigidbody.AddRelativeTorque(torque);
-        transform.Rotate(torque * Utils.Sign(_speed) * Time.deltaTime);
-
-    }
-
     public float CalculateTurn()
     {
         float turn = 0;
@@ -129,5 +104,27 @@ public class MyCarController : MonoBehaviour, ICarController
     public void SetIsFalling(bool value)
     {
         _isFalling = value;
+    }
+
+    public void Turn()
+    {
+        var torque = Vector3.zero;
+
+        if (torque != Vector3.zero)
+            torque = -torque;
+
+        _turn = CalculateTurn();
+
+        if (Input.GetKey(KeyCode.A) && _speed != 0)
+        {
+            torque = Vector3.up * -_turn;
+        }
+        else if (Input.GetKey(KeyCode.D) && _speed != 0)
+        {
+            torque = Vector3.up * _turn;
+
+        }
+        //_rigidbody.AddRelativeTorque(torque);
+        transform.Rotate(torque * Utils.Sign(_speed) * Time.deltaTime);
     }
 }
