@@ -1,5 +1,6 @@
 ﻿public interface IGameManager
 {
+    IGameManager GetGameManager();
     string GetScore();
     void GiveScore(int score);
     bool Die();
@@ -13,3 +14,4 @@
     void OnStartGame(GameState previousState);
     void OnGameOver();
 }
+
