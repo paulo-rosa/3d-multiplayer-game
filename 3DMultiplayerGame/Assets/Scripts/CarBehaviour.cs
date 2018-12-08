@@ -23,13 +23,9 @@ public class CarBehaviour : NetworkBehaviour
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
-
-    }
-    private void Start()
-    {
         _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
-        _gameManager = GeneralThings.FindGameManager();
+        //_gameManager = GeneralThings.FindGameManager();
         _health = GetComponent<Health>();
         _health.OnDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
