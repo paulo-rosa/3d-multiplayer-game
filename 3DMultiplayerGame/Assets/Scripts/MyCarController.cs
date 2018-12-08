@@ -122,7 +122,6 @@ public class MyCarController : MonoBehaviour, ICarController
         if (Input.GetKey(KeyCode.F) && _carCollision.GroundCollision())
         {
             _rigidbody.AddForce(_jumpForce, ForceMode.Impulse);
-            Debug.Log("trying junml");
         }
     }
 
@@ -130,4 +129,31 @@ public class MyCarController : MonoBehaviour, ICarController
     {
         _isFalling = value;
     }
+
+    public CarDirection GetCarDirection()
+    {
+        return CarDirectionExtesion.SayTheDirection(_speed);
+    }
+}
+
+public enum CarDirection
+{
+    FORWARD,
+    BACKWARD
+}
+
+public static class CarDirectionExtesion
+{
+    public static CarDirection SayTheDirection(float val)
+    {
+        if(val >= 0)
+        {
+            return CarDirection.FORWARD;
+        }
+        else
+        {
+            return CarDirection.BACKWARD;
+        }
+    }
+
 }

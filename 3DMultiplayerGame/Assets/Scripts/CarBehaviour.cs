@@ -6,8 +6,10 @@ public class CarBehaviour : NetworkBehaviour
 {
     public GameObject CarGraphics;
     public Transform PivotPoint;
+
+    private MyCarController _carController;
     private Health _health;
-    private GameManager _gameManager;
+    private IGameManager _gameManager;
     private Rigidbody _rigidBody;
     private PlayerStates _currentState;
 
@@ -21,8 +23,13 @@ public class CarBehaviour : NetworkBehaviour
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
+
+    }
+    private void Start()
+    {
+        _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
-        //_gameManager = GameManager.Instance;
+        _gameManager = GeneralThings.FindGameManager();
         _health = GetComponent<Health>();
         _health.OnDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -103,6 +110,11 @@ public class CarBehaviour : NetworkBehaviour
     {
         return PivotPoint;
     }
+
+    public CarDirection MovingDirection()
+    {
+       return _carController.GetCarDirection();
+    } 
 }
 
 public enum PlayerStates

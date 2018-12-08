@@ -102,6 +102,11 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Multiplayer");
     }
+
+    public Screens GetGameState()
+    {
+        return _currentScreen;
+    }
 }
 
 public enum Screens

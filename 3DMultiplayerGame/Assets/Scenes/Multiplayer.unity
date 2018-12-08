@@ -701,10 +701,11 @@ MonoBehaviour:
   smoothRotation: 1
   followBehind: 1
   rotationDamping: 10
-  lookRotation: 0
   layer:
     serializedVersion: 2
     m_Bits: 0
+  forwardRotation: 15
+  backwardRotation: 25
   _hasTarget: 0
 --- !u!114 &2102690808
 MonoBehaviour:
