@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
 
     private static MenuManager _instance;
 
@@ -14,7 +15,7 @@ public class MenuManager : MonoBehaviour {
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = FindObjectOfType<MenuManager>();
             }
@@ -25,12 +26,12 @@ public class MenuManager : MonoBehaviour {
 
     private Screens _currentScreen;
 
-	private void Start ()
+    private void Start()
     {
         DontDestroyOnLoad(this);
         _currentScreen = Screens.MAIN_MENU;
-	}
-    
+    }
+
     public void SwitchScreen(Screens screen)
     {
         ChangeScreen(screen);
@@ -64,7 +65,7 @@ public class MenuManager : MonoBehaviour {
     private void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        if(onReadyChange != null)
+        if (onReadyChange != null)
         {
             onReadyChange();
         }
@@ -73,7 +74,7 @@ public class MenuManager : MonoBehaviour {
     private void SinglePlayer()
     {
         StartCoroutine(LoadAsyncSinglePlayer());
-       
+
     }
 
     public void ExitToMenu()

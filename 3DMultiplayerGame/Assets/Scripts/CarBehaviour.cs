@@ -24,7 +24,7 @@ public class CarBehaviour : NetworkBehaviour
         _rigidBody = GetComponentInChildren<Rigidbody>();
         //_gameManager = GameManager.Instance;
         _health = GetComponent<Health>();
-        _health.onDie += PlayerDie;
+        _health.OnDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
         //_gameManager._player = transform;
         ChangeState(PlayerStates.RESPAWN);
@@ -32,7 +32,7 @@ public class CarBehaviour : NetworkBehaviour
 
     private void OnDestroy()
     {
-        _health.onDie -= PlayerDie;
+        _health.OnDie -= PlayerDie;
     }
 
     private void PlayerDie()

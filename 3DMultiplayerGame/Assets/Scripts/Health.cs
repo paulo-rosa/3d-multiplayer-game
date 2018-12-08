@@ -21,7 +21,9 @@ public class Health : NetworkBehaviour
     private GameManager _gameManager;
     private GameObject _owner;
     private bool _isAlive = true;
-    public event Action onDie;
+
+    public event Action OnDie;
+    public event Action OnHealthChange;
 
     private void Awake()
     {
@@ -40,72 +42,35 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (!isServer)
+        if (isLocalPlayer || !_isAlive)
+        {
             return;
+        }
 
-        if (!_isAlive)
-            return;
-
-        CmdChangeHealth(amount);
+        if (isServer)
+        {
+            RpcTakeHealth(amount);
+        }
+        else
+        {
+            CmdTakeHealth(amount);
+        }
     }
 
     [Command]
-    private void CmdChangeHealth(int amountToTake)
+    private void CmdTakeHealth(int amount)
     {
-        currentHealth -= amountToTake;
+        RpcTakeHealth(amount);
+    }
+
+    [ClientRpc]
+    private void RpcTakeHealth(int amount)
+    {
+        currentHealth -= amount;
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-        }
-    }
-
-    [ClientRpc]
-    private void RpcUpdateHealth(int health)
-    {
-        if (healthBar == null)
-            return;
-
-        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
-
-        if (currentHealth <= 0)
-        {
-            _isAlive = false;
-            var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            PlayExplosionSound();
-            explosion.Explode(transform.position);
-
-            if (onDie != null)
-            {
-                onDie();
-            }
-
-            if (destroyOnDeath)
-            {
-                var canvas = GetComponentsInChildren<Canvas>();
-
-                foreach (var item in canvas)
-                {
-                    item.enabled = false;
-                }
-
-                var components = GetComponentsInChildren<MeshRenderer>();
-
-                foreach (var component in components)
-                {
-                    component.enabled = false;
-                }
-
-                Destroy(gameObject, ExplosionSound.length);
-            }
-            else
-            {
-
-            }
-        }
-        else
-        {
-            PlayGotShotSound();
         }
     }
 
@@ -115,6 +80,15 @@ public class Health : NetworkBehaviour
             return;
 
         currentHealth = health;
+
+        if (OnHealthChange != null)
+        {
+            OnHealthChange();
+        }
+    }
+
+    public void OnHealthChanged()
+    {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
 
         if (currentHealth <= 0)
@@ -124,9 +98,9 @@ public class Health : NetworkBehaviour
             PlayExplosionSound();
             explosion.Explode(transform.position);
 
-            if (onDie != null)
+            if (OnDie != null)
             {
-                onDie();
+                OnDie();
             }
 
             if (destroyOnDeath)

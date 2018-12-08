@@ -26,7 +26,7 @@ public class MeteorBehaviour : MonoBehaviour {
 
     private void OnEnable()
     {
-         _health.onDie += OnMeteorDie;
+         _health.OnDie += OnMeteorDie;
     }
     //private void OnDisable()
     //{

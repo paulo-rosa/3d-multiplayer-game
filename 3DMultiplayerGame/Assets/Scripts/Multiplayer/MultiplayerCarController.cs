@@ -20,6 +20,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     public float _turn;
     private CarCollision _carCollision;
     private bool _isFalling = false;
+    private Health _carHealth;
 
     // Use this for initialization
     void Start()
@@ -27,6 +28,8 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         _rigidbody = GetComponent<Rigidbody>();
         _carCollision = GetComponent<CarCollision>();
         Car.transform = GetComponent<Transform>();
+        _carHealth = GetComponent<Health>();
+        _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
     }
 
     // Update is called once per frame

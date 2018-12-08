@@ -36,7 +36,7 @@ public class UFOController : NetworkBehaviour {
 
     private void Start()
     {
-        _health.onDie += OnDie;
+        _health.OnDie += OnDie;
     }
 
     private void OnDie()
