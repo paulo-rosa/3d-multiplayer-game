@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MenuManager : MonoBehaviour {
 
     private static MenuManager _instance;
+
+    public event Action onReadyChange;
 
     public static MenuManager Instance
     {
@@ -61,12 +64,22 @@ public class MenuManager : MonoBehaviour {
     private void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        if(onReadyChange != null)
+        {
+            onReadyChange();
+        }
     }
 
     private void SinglePlayer()
     {
         StartCoroutine(LoadAsyncSinglePlayer());
        
+    }
+
+    public void ExitToMenu()
+    {
+        SwitchScreen(Screens.MAIN_MENU);
+
     }
 
     private IEnumerator LoadAsyncSinglePlayer()

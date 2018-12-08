@@ -7,6 +7,9 @@ public class MultiplayerMenuManager : MonoBehaviour {
 
     private static MultiplayerMenuManager _instance;
 
+
+    private MenuManager _menuManager;
+
     public static MultiplayerMenuManager Instance
     {
         get
@@ -26,9 +29,13 @@ public class MultiplayerMenuManager : MonoBehaviour {
 
     private void Start ()
     {
+        _menuManager = MenuManager.Instance;
         ChangeState(MenuState.LOBBY);
 	}
-	
+    public void BackToMainMenu()
+    {
+        _menuManager.SwitchScreen(Screens.MAIN_MENU);
+    }
     public void ChangeState(MenuState state)
     {
         _currentState = state;

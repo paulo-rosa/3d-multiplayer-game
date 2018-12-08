@@ -26,6 +26,8 @@ public class MyNetworkManager : NetworkManager
     private NetworkManager networkManager;
     public NetworkPlayer _networkPlayerPrefab;
 
+    private ulong _netId;
+    private MenuManager _menuManager;
     private int _minPlayers = 2;
     private Action<bool, MatchInfo> _nextMatchCreatedCallback;
     private Action<bool, MatchInfo> _nextMatchJoinedCallback;
@@ -34,12 +36,21 @@ public class MyNetworkManager : NetworkManager
     // carregar salas
     // entrar na sala
     // 
+    public static bool _IsServer
+    {
+        get
+        {
+            return NetworkServer.active;
+        }
+    }
 
     private void Start()
     {
         networkManager = NetworkManager.singleton;
         _multiPlayerMenuManager = MultiplayerMenuManager.Instance;
+        _menuManager = MenuManager.Instance;
         networkManager.StartMatchMaker();
+        _menuManager.onReadyChange += CloseConnection;
     }
 
     public void CreateInternetMatch(string matchName, Action<bool, MatchInfo> onCreate)
@@ -76,6 +87,7 @@ public class MyNetworkManager : NetworkManager
         base.OnMatchJoined(success, extendedInfo, matchInfo);
         if (success)
         {
+            _netId = (ulong)matchInfo.networkId;
             _nextMatchJoinedCallback(success, matchInfo);
         }
     }
@@ -104,14 +116,7 @@ public class MyNetworkManager : NetworkManager
 
         connectedPlayers.Add(newPlayer);
         newPlayer.OnEnterLobbyScene();
-        newPlayer.onReadyChange += PlayerSetReady;
-        //newPlayer.becameReady += OnPlayerSetReady;
-
-        //if (s_IsServer)
-        //{
-        //    UpdatePlayerIDs();
-        //}
-
+        newPlayer.OnReadyChange += PlayerSetReady;
     }
 
     private void PlayerSetReady()
@@ -139,8 +144,32 @@ public class MyNetworkManager : NetworkManager
         {
             StartGameScene();
         }
+    }
 
+    public void CloseConnection()
+    {
+        if (_IsServer)
+        {
+            networkManager.matchMaker.DestroyMatch((NetworkID)_netId, 0, OnMatchDestroyed);
 
+        }
+        networkManager.matchMaker.DropConnection((NetworkID)_netId, NodeID.Invalid, 0, OnMatchDropConnection);
+    }
+
+    private void OnMatchDestroyed(bool success, string extendedInfo)
+    {
+        if (success)
+        {
+            _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
+        }
+    }
+
+    private void OnMatchDropConnection(bool success, string extendedInfo)
+    {
+        if (success)
+        {
+             _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
+        }
     }
 
     private void StartGameScene()

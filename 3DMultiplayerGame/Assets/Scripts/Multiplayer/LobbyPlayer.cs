@@ -10,20 +10,35 @@ public class LobbyPlayer : MonoBehaviour {
 
     private NetworkPlayer _networkPlayer;
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
 
     public void Init(NetworkPlayer player)
     {
+        NetworkPlayer.OnNameUpdated += OnNameUpdated;
+        player.OnReadyChange += OnReadyChange;                                         
         _networkPlayer = player;
         txtPlayerName.text = _networkPlayer.GetPlayerName();
         Debug.Log("init the lobby plaeyr");
         ChangeButtonState(_networkPlayer.GetReadyState());
+    }
+
+    public void OnReadyChange()
+    {
+        if (_networkPlayer.GetReadyState())
+        {
+            ButtonGreen();
+        }
+        else
+        {
+            ButtonRed();
+        }
+    }
+
+    private void OnNameUpdated(NetworkPlayer player, string name)
+    {
+        if (player != _networkPlayer) return;
+
+        txtPlayerName.text = _networkPlayer.GetPlayerName();
+        //
     }
 
     public void SetReady()
@@ -37,19 +52,29 @@ public class LobbyPlayer : MonoBehaviour {
         {
             if (value)
             {
-                btnReady.GetComponent<Image>().color = Color.green;
+                ButtonGreen();
                 btnReady.interactable = false;
             }
             else
             {
-                btnReady.GetComponent<Image>().color = Color.red;
+                ButtonRed();
                 btnReady.interactable = true;
             }
         }
         else
         {
-            btnReady.GetComponent<Image>().color = Color.red;
+            ButtonRed();
             btnReady.interactable = false;
         }
+    }
+
+    private void ButtonGreen()
+    {
+        btnReady.GetComponent<Image>().color = Color.green;
+    }
+
+    private void ButtonRed()
+    {
+        btnReady.GetComponent<Image>().color = Color.red;
     }
 }
