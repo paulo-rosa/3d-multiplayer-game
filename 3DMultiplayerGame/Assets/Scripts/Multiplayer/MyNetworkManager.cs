@@ -140,10 +140,10 @@ public class MyNetworkManager : NetworkManager
             }
         }
 
-        //if (shouldStart)
-        //{
-        //    StartGameScene();
-        //}
+        if (shouldStart)
+        {
+            StartGameScene();
+        }
     }
 
     public void CloseConnection()
