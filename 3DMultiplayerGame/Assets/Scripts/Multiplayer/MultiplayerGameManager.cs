@@ -5,9 +5,51 @@ namespace Assets.Scripts.Multiplayer
 {
     public class MultiplayerGameManager : MonoBehaviour, IGameManager
     {
+
+        private static MultiplayerGameManager _instance;
+
+        public static MultiplayerGameManager Instance
+        {
+            get
+            {
+                if(_instance == null)
+                {
+                    _instance = FindObjectOfType<MultiplayerGameManager>();
+                }
+                return _instance;
+            }
+        }
+
         private UserInterfaceManager _userInterfaceManager;
         private GameState _currentState;
 
+
+        Transform IGameManager._player
+        {
+            get
+            {
+                return _player;
+            }
+
+            set
+            {
+                _player = value;
+            }
+        }
+
+        Transform IGameManager._spawnPosition
+        {
+            get
+            {
+                return _spawnPosition;
+            }
+            set
+            {
+                _spawnPosition = value;
+            }
+        }
+        public Transform _player;
+        public Transform _spawnPosition;
         private void Start()
         {
             

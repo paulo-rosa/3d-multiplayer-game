@@ -20,6 +20,32 @@ public class GameManager : MonoBehaviour, IGameManager
         }
     }
 
+
+    Transform IGameManager._player
+    {
+        get
+        {
+            return _player;
+        }
+
+        set
+        {
+            _player = value;
+        }
+    }
+
+    Transform IGameManager._spawnPosition
+    {
+        get
+        {
+            return _spawnPosition;
+        }
+        set
+        {
+            _spawnPosition = value;
+        }
+    }
+
     public string GetScore()
     {
         return _score.ToString();

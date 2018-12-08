@@ -7,9 +7,9 @@ public class CarBehaviour : MonoBehaviour {
     public GameObject CarGraphics;
     public Transform PivotPoint;
 
-
+    private MyCarController _carController;
     private Health _health;
-    private GameManager _gameManager;
+    private IGameManager _gameManager;
     private Rigidbody _rigidBody;
     private PlayerStates _currentState;
 
@@ -22,8 +22,9 @@ public class CarBehaviour : MonoBehaviour {
     }
     private void Start()
     {
+        _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
-        _gameManager = GameManager.Instance;
+        _gameManager = GeneralThings.FindGameManager();
         _health = GetComponent<Health>();
         _health.onDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -111,6 +112,11 @@ public class CarBehaviour : MonoBehaviour {
     {
         return PivotPoint;
     }
+
+    public CarDirection MovingDirection()
+    {
+       return _carController.GetCarDirection();
+    } 
 }
 
 public enum PlayerStates

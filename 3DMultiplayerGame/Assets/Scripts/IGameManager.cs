@@ -1,5 +1,10 @@
-﻿public interface IGameManager
+﻿using UnityEngine;
+using System;
+
+public interface IGameManager
 {
+    Transform _player { get; set; }
+    Transform _spawnPosition { get; set; }
 
     string GetScore();
     void GiveScore(int score);

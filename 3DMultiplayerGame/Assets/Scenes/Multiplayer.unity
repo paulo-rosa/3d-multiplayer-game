@@ -567,14 +567,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  distance: 12
+  distance: 18
   height: 17
   damping: 5
   smoothRotation: 1
   followBehind: 1
   rotationDamping: 10
-  lookRotation: 0
   layer:
     serializedVersion: 2
     m_Bits: 0
+  forwardRotation: 15
+  backwardRotation: 25
   _hasTarget: 0

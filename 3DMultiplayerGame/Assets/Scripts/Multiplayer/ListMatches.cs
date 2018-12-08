@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking.Match;
+using UnityEngine.Networking.Types;
 
 public class ListMatches : MonoBehaviour {
 
     public GameObject MatchPrefab;
-    public Transform RoomsHolder;
+    public RectTransform RoomsHolder;
 
     private MultiplayerMenuManager _multiPlayerManager;
     private MyNetworkManager _myNetworkManager;
@@ -47,10 +48,15 @@ public class ListMatches : MonoBehaviour {
 
     private void OnMatchList(bool flag, string extraInfo, List<MatchInfoSnapshot> response)
     {
+
+        foreach (Transform match in RoomsHolder)
+            Destroy(match.gameObject);
+
         if(response.Count > 0)
         {
             foreach(var match in response)
             {
+
                 var go = Instantiate(MatchPrefab, RoomsHolder);
                 go.GetComponent<ServerInfo>().Initialize(match.name, (ulong)match.networkId);
             }

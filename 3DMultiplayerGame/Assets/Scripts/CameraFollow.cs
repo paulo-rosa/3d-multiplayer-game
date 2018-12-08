@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -11,9 +11,12 @@ public class CameraFollow : MonoBehaviour
     public bool smoothRotation = true;
     public bool followBehind = true;
     public float rotationDamping = 10.0f;
-    public float lookRotation;
     public LayerMask layer;
+    public float forwardRotation = 15f;
+    public float backwardRotation = 25f;
 
+
+    private float _lookRotation;
     private float _originalDamping = 5f;
     private float _originalRotationDampig = 10f;
     private Camera _camera;
@@ -72,9 +75,26 @@ public class CameraFollow : MonoBehaviour
         }
         else transform.LookAt(target, Vector3.up);
 
-        transform.eulerAngles = new Vector3(lookRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+        //DefineLookRotation();
+        _lookRotation = forwardRotation;
+        transform.eulerAngles = new Vector3(_lookRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+        //var look = new Vector3(_lookRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+        //transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, look, 3 * Time.deltaTime); 
+
         Collision();
         
+    }
+
+    private void DefineLookRotation()
+    {
+        if (_carBehaviour.MovingDirection() == CarDirection.FORWARD)
+        {
+            _lookRotation = forwardRotation;
+        }
+        else
+        {
+            _lookRotation = backwardRotation;
+        }
     }
 
     public void SetTheTarget(GameObject obj)
