@@ -6,23 +6,26 @@ using UnityEngine.Networking;
 
 public class NetworkPlayer : NetworkBehaviour
 {
+    public static event Action<NetworkPlayer, string> OnNameUpdated;
+
     [SerializeField]
     protected GameObject m_LobbyPrefab;
-    [SyncVar]
+    [SyncVar(hook ="OnNameChange")]
     private string _playerName;
-    [SyncVar(hook = "OnReadyChange")]
+    [SyncVar(hook = "OnReadyUpdated")]
     private bool _isReady = false;
 
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
 
-    public event Action onReadyChange;
+    public event Action OnReadyChange;
 
     public string GetPlayerName()
     {
         return _playerName;
     }
-	private void Start ()
+
+    private void Start ()
     {
         _myNetworkManager = MyNetworkManager.Instance;
 
@@ -31,6 +34,7 @@ public class NetworkPlayer : NetworkBehaviour
             _playerName = PlayerData.PlayerName;
             CmdSetPlayerName(_playerName);
         }
+
         _myNetworkManager.RegisterNetworkPlayer(this);
     }
 
@@ -38,7 +42,7 @@ public class NetworkPlayer : NetworkBehaviour
     {
         return _isReady;
     }
-
+    
     public bool SetReady()
     {
         _isReady = !_isReady;
@@ -51,7 +55,6 @@ public class NetworkPlayer : NetworkBehaviour
     {
         DontDestroyOnLoad(this);
 
-
         base.OnStartClient();
         Debug.Log("Client Network Player start:" + hasAuthority);
         if (_myNetworkManager == null)
@@ -63,15 +66,12 @@ public class NetworkPlayer : NetworkBehaviour
     [Client]
     public void OnEnterLobbyScene()
     {
-
         Debug.Log("OnEnterLobbyScene:" + hasAuthority);
         if (_lobbyObject == null)
         {
             CreateLobbyObject();
         }
     }
-
-  
 
     private void CreateLobbyObject()
     {
@@ -83,10 +83,19 @@ public class NetworkPlayer : NetworkBehaviour
 
     #region Hooks
 
-    private void OnReadyChange(bool value)
+    private void OnReadyUpdated(bool value)
     {
         _isReady = value;
+        if (OnReadyChange != null)
+        {
+            OnReadyChange();
+        }
+    }
 
+    public void OnNameChange(string name)
+    {
+        _playerName = name;
+        CmdSetPlayerName(_playerName);
     }
 
     #endregion
@@ -99,17 +108,23 @@ public class NetworkPlayer : NetworkBehaviour
         if (isServer)
             Debug.Log("Player ready");
         _isReady = value;
-        if (onReadyChange != null)
-        {
-            onReadyChange();
-        }
+
     }
 
     [Command]
     private void CmdSetPlayerName(string name)
     {
         _playerName = name;
+
+        if(OnNameUpdated != null)
+        {
+            OnNameUpdated(this, name);
+        }
     }
+
+    #endregion
+
+    #region RPC
 
     #endregion
 }

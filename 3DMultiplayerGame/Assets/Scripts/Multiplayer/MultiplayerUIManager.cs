@@ -23,6 +23,8 @@ public class MultiplayerUIManager : MonoBehaviour {
         _multiplayerMenuManager.onChangeState -= ChangePanel;
     }
 
+
+
     private void ChangePanel(MenuState state)
     {
         switch (state)

@@ -85,7 +85,6 @@ public class CameraFollow : MonoBehaviour
 
     private void CameraTransition()
     {
-        Debug.Log("Chamada");
         StartCoroutine(CameraTransitionCoroutine());
     }
 

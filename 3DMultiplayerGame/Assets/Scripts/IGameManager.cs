@@ -1,6 +1,6 @@
 ﻿public interface IGameManager
 {
-    IGameManager GetGameManager();
+
     string GetScore();
     void GiveScore(int score);
     bool Die();
