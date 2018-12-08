@@ -12,7 +12,7 @@ public class Health : NetworkBehaviour
     public AudioClip GotShotSound;
     private AudioSource[] _audioSources;
 
-    [SyncVar(hook = "OnChangeHealth")]
+    [SyncVar(hook = "OnUpdateHealth")]
     public int currentHealth;
 
     public RectTransform healthBar;
@@ -27,6 +27,7 @@ public class Health : NetworkBehaviour
     {
         _audioSources = GetComponents<AudioSource>();
     }
+
     private void Start()
     {
         if (isLocalPlayer)
@@ -39,17 +40,39 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
-        //if (!isServer)
-        //    return;
+        if (!isServer)
+            return;
+
         if (!_isAlive)
             return;
 
-        currentHealth -= amount;
+        CmdChangeHealth(amount);
+    }
+
+    [Command]
+    private void CmdChangeHealth(int amountToTake)
+    {
+        currentHealth -= amountToTake;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+    }
+
+    [ClientRpc]
+    private void RpcUpdateHealth(int health)
+    {
+        if (healthBar == null)
+            return;
+
+        healthBar.sizeDelta = new Vector2(health, healthBar.sizeDelta.y);
+
         if (currentHealth <= 0)
         {
             _isAlive = false;
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
-            //PlayExplosionSound();
+            PlayExplosionSound();
             explosion.Explode(transform.position);
 
             if (onDie != null)
@@ -59,8 +82,15 @@ public class Health : NetworkBehaviour
 
             if (destroyOnDeath)
             {
-                GetComponentInChildren<Canvas>().enabled = false;
+                var canvas = GetComponentsInChildren<Canvas>();
+
+                foreach (var item in canvas)
+                {
+                    item.enabled = false;
+                }
+
                 var components = GetComponentsInChildren<MeshRenderer>();
+
                 foreach (var component in components)
                 {
                     component.enabled = false;
@@ -70,6 +100,7 @@ public class Health : NetworkBehaviour
             }
             else
             {
+
             }
         }
         else
@@ -78,12 +109,53 @@ public class Health : NetworkBehaviour
         }
     }
 
-    private void OnChangeHealth(int currentHealth)
+    private void OnUpdateHealth(int health)
     {
         if (healthBar == null)
             return;
 
+        currentHealth = health;
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+
+        if (currentHealth <= 0)
+        {
+            _isAlive = false;
+            var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
+            PlayExplosionSound();
+            explosion.Explode(transform.position);
+
+            if (onDie != null)
+            {
+                onDie();
+            }
+
+            if (destroyOnDeath)
+            {
+                var canvas = GetComponentsInChildren<Canvas>();
+
+                foreach (var item in canvas)
+                {
+                    item.enabled = false;
+                }
+
+                var components = GetComponentsInChildren<MeshRenderer>();
+
+                foreach (var component in components)
+                {
+                    component.enabled = false;
+                }
+
+                Destroy(gameObject, ExplosionSound.length);
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            PlayGotShotSound();
+        }
     }
 
     public void ResetHealth()
@@ -91,6 +163,7 @@ public class Health : NetworkBehaviour
         currentHealth = maxHealth;
         _isAlive = true;
     }
+
     //Respawn precisa mudar de lugar
     [ClientRpc]
     void RpcRespawn()

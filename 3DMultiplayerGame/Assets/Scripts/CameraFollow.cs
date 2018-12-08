@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.Networking;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
     private float _originalRotationDampig = 10f;
     private Camera _camera;
     private Transform target;
-    private float minHeight = 17f;
+    private float minHeight = 5f;
     private CarBehaviour _carBehaviour;
     public bool _hasTarget = false;
 
@@ -30,6 +30,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
+
         if (!_hasTarget)
             return;
 

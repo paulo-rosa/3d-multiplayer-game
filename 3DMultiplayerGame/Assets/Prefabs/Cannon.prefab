@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 120947592377649958}
   - component: {fileID: 82681482967919942}
   - component: {fileID: 114458632505329956}
+  - component: {fileID: 114900206888945884}
   m_Layer: 9
   m_Name: CannonSpawn
   m_TagString: Untagged
@@ -332,7 +333,43 @@ MonoBehaviour:
   damagePerShot: 20
   timeBetweenBullets: 0.15
   range: 100
+  cannonType: 0
   faceLight: {fileID: 108056035702638170}
+  shootableMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &114900206888945884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1343819758924192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 117
+    i1: 196
+    i2: 111
+    i3: 3
+    i4: 150
+    i5: 213
+    i6: 54
+    i7: 228
+    i8: 88
+    i9: 96
+    i10: 155
+    i11: 106
+    i12: 25
+    i13: 26
+    i14: 247
+    i15: 144
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!120 &120947592377649958
 LineRenderer:
   m_ObjectHideFlags: 1

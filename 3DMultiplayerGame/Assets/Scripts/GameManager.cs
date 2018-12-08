@@ -170,14 +170,13 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         MenuManager.Instance.SwitchScreen(Screens.MAIN_MENU);
     }
-    #region 
+
     public void SetSpawnPosition(Transform position)
     {
         _spawnPosition = position;
     }
-    #endregion
 
-    #region STATES
+    #region states
     public void OnStartGame(GameState previousState)
     {
         if (previousState == GameState.PAUSE)

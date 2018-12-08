@@ -7,22 +7,21 @@ using UnityEngine.Networking;
 
 public class CannonShooting: MonoBehaviour
 {
-    public int damagePerShot = 20;                  // The damage inflicted by each bullet.
-    public float timeBetweenBullets = 0.15f;        // The time between each shot.
-    public float range = 100f;                      // The distance the gun can fire.
+    public int damagePerShot = 20;                          // The damage inflicted by each bullet.
+    public float timeBetweenBullets = 0.15f;                // The time between each shot.
+    public float range = 100f;                              // The distance the gun can fire.
     public Cannontype cannonType = Cannontype.staticCannon;
     public Light faceLight;
     public LayerMask shootableMask;
     private float timer;                                    // A timer to determine when to fire.
     private Ray shootRay = new Ray();                       // A ray from the gun end forwards.
     private RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
-                             // A layer mask so the raycast only hits things on the shootable layer.
     private ParticleSystem gunParticles;                    // Reference to the particle system.
     private LineRenderer gunLine;                           // Reference to the line renderer.
     private AudioSource gunAudio;                           // Reference to the audio source.
     private Light gunLight;                                 // Reference to the light component.
-                                 // Duh
     private float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
+    private NetworkBehaviour _parentBehaviour;
 
 
     void Awake()
@@ -34,17 +33,19 @@ public class CannonShooting: MonoBehaviour
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
+        _parentBehaviour = transform.root.GetComponent<NetworkBehaviour>();
         //faceLight = GetComponentInChildren<Light> ();
     }
 
 
     void Update()
     {
-        //if (!isLocalPlayer)
-        //{
-        //    return;
-        //}
-        
+        //on singleplayer the parentbehaviour is null
+        if (_parentBehaviour != null && !_parentBehaviour.isLocalPlayer)
+        {
+            return;
+        }
+
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
 
@@ -107,7 +108,7 @@ public class CannonShooting: MonoBehaviour
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
             // Try and find an EnemyHealth script on the gameobject hit.
-            Health enemyHealth = shootHit.collider.GetComponent<Health>();
+            Health enemyHealth = shootHit.collider.GetComponentInParent<Health>();
 
             // If the EnemyHealth component exist...
             if (enemyHealth != null)

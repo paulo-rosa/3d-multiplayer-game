@@ -1,35 +1,35 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CarBehaviour : MonoBehaviour {
-
-
+public class CarBehaviour : NetworkBehaviour
+{
     public GameObject CarGraphics;
     public Transform PivotPoint;
-
-
     private Health _health;
     private GameManager _gameManager;
     private Rigidbody _rigidBody;
     private PlayerStates _currentState;
 
-    private void Awake()
+    private void Start()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
-
-    }
-    private void Start()
-    {
         _rigidBody = GetComponentInChildren<Rigidbody>();
-        _gameManager = GameManager.Instance;
+        //_gameManager = GameManager.Instance;
         _health = GetComponent<Health>();
         _health.onDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
-        _gameManager._player = transform;
+        //_gameManager._player = transform;
         ChangeState(PlayerStates.RESPAWN);
     }
+
     private void OnDestroy()
     {
         _health.onDie -= PlayerDie;
@@ -44,12 +44,13 @@ public class CarBehaviour : MonoBehaviour {
     IEnumerator TimeToSpawn()
     {
         yield return new WaitForSeconds(1f);
-        transform.position = _gameManager._spawnPosition.position;
-        transform.rotation = _gameManager._spawnPosition.rotation;
+        //transform.position = _gameManager._spawnPosition.position;
+        //transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
         //_health.ResetHealth();
         ChangeState(PlayerStates.ALIVE);
     }
+
     #region States
     public void ChangeState(PlayerStates state)
     {
@@ -76,14 +77,14 @@ public class CarBehaviour : MonoBehaviour {
     private void OnDeadEnter()
     {
         CarGraphics.SetActive(false);
-        if (_gameManager.Die())
-        {
+        //if (_gameManager.Die())
+        //{
             ChangeState(PlayerStates.RESPAWN);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        //}
+        //else
+        //{
+            //gameObject.SetActive(false);
+        //}
     }
 
     private void OnRespawnEnter()
@@ -97,15 +98,6 @@ public class CarBehaviour : MonoBehaviour {
         return _currentState;
     }
     #endregion
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            _health.TakeDamage(20);
-        }
-    }
-
 
     public Transform GetPivotPoint()
     {
