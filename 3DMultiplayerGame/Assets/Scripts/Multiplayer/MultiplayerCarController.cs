@@ -50,6 +50,12 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Turn();
         Jump();
         Fire();
+        FixRotation();
+    }
+
+    private void FixRotation()
+    {
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
         
     }
 

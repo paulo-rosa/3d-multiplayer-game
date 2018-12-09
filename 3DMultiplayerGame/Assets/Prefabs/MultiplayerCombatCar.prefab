@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2736d843171d9204eb384a2c2a25ee9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 70
+  _maxSpeed: 50
   _maxReverseSpeed: -30
   _acceleration: 50
   _maxTurn: 30
@@ -2025,9 +2025,9 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
+  m_TransformSyncMode: 1
   m_SendInterval: 0.05263158
-  m_SyncRotationAxis: 7
+  m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001

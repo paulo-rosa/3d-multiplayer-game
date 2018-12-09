@@ -32,7 +32,7 @@ public class Health : NetworkBehaviour
 
     private void Start()
     {
-        if (isLocalPlayer)
+        if (hasAuthority)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         }
@@ -42,6 +42,12 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (hasAuthority)
+        {
+            CmdTakeHealth(amount);
+        }
+        return;
+
         if (isLocalPlayer || !_isAlive)
         {
             return;
@@ -144,7 +150,7 @@ public class Health : NetworkBehaviour
     {
         currentHealth = maxHealth;
 
-        if (isLocalPlayer)
+        if (hasAuthority)
         {
             // Set the spawn point to origin as a default value
             Vector3 spawnPoint = Vector3.zero;

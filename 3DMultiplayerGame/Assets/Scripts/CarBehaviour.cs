@@ -12,25 +12,50 @@ public class CarBehaviour : NetworkBehaviour
     private IGameManager _gameManager;
     private Rigidbody _rigidBody;
     private PlayerStates _currentState;
+    private bool _assigned = false;
 
     private void Start()
     {
-        if (!isLocalPlayer)
+        if (!hasAuthority)
         {
             return;
         }
 
+        //Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
+        //Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
+
+        //_carController = GetComponent<MyCarController>();
+        //_rigidBody = GetComponentInChildren<Rigidbody>();
+        //_gameManager = GeneralThings.FindGameManager();
+        //_health = GetComponent<Health>();
+        //_health.OnDie += PlayerDie;
+        //transform.rotation = Quaternion.Euler(0, 90, 0);
+        //_gameManager._player = transform;
+        //ChangeState(PlayerStates.RESPAWN);
+    }
+
+    private void Assign()
+    {
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
 
         _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
-        //_gameManager = GeneralThings.FindGameManager();
+        _gameManager = GeneralThings.FindGameManager();
         _health = GetComponent<Health>();
         _health.OnDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
-        //_gameManager._player = transform;
+        _gameManager._player = transform;
         ChangeState(PlayerStates.RESPAWN);
+        _assigned = true;
+    }
+
+    private void Update()
+    {
+        if(!_assigned && hasAuthority)
+        {
+            Assign();
+        }
     }
 
     private void OnDestroy()

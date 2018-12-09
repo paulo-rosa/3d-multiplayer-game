@@ -139,9 +139,14 @@ public class MyNetworkManager : NetworkManager
                 break;
             }
         }
-
+        
         if (shouldStart)
         {
+            foreach(var player in connectedPlayers)
+            {
+                player.RpcUpdateScene(Screens.MULTIPLAYER);
+            }
+            
             StartGameScene();
         }
     }
@@ -168,7 +173,24 @@ public class MyNetworkManager : NetworkManager
     {
         if (success)
         {
+            
              _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
+        }
+    }
+    public override void OnClientSceneChanged (NetworkConnection conn)
+    {
+        base.OnClientSceneChanged(conn);
+        var scene = _menuManager.GetGameState();
+
+
+        if (scene == Screens.MULTIPLAYER)
+        {
+            for (int i = 0; i < connectedPlayers.Count; ++i)
+            {
+                NetworkPlayer player = connectedPlayers[i];
+
+                player.OnEnterGameScene();
+            }
         }
     }
 

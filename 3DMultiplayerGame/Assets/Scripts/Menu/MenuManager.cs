@@ -100,7 +100,7 @@ public class MenuManager : MonoBehaviour
 
     private void Multiplayer()
     {
-        SceneManager.LoadScene("Multiplayer");
+        
     }
 
     public Screens GetGameState()
