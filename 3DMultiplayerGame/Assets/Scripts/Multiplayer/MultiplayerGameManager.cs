@@ -52,22 +52,56 @@ namespace Assets.Scripts.Multiplayer
         public Transform _player;
         public Transform _spawnPosition;
 
+        private MyNetworkManager _myNetworkManager;
+        private const float ROUND_TIME = 180;
+        private MultiplayerInterface _multiplayerInterface;
+        private float _timerCounter;
+        private bool _isTimerEnabled = false;
         #region multiplayer variables
         //Equipes
         //
-        private TEAMS _playerTeam;
+        private Teams _playerTeam;
         #endregion
         private void Start()
         {
-
+            _multiplayerInterface = MultiplayerInterface.Instance;
+            StartTimer();
         }
 
         private void Update()
         {
-            
+            CountTime();
         }
 
+        private void CountTime()
+        {
+            if (_isTimerEnabled)
+            {
+                _timerCounter -= Time.deltaTime * 1;
+                _multiplayerInterface.UpdateTime(_timerCounter);
+            }
+        }
 
+        private void StartTimer()
+        {
+            if (isServer)
+            {
+                _timerCounter = ROUND_TIME;
+                _isTimerEnabled = true;
+                RpcStartTimer();
+            }
+        }
+
+        private void CmdStartTimer()
+        {
+
+        }
+
+        private void RpcStartTimer()
+        {
+            _timerCounter = ROUND_TIME;
+            _isTimerEnabled = true;
+        }
 
         #region Interface implementation
         public void ChangeState(GameState state)
@@ -136,8 +170,16 @@ namespace Assets.Scripts.Multiplayer
     }
 }
 
-public enum TEAMS
+public enum Teams
 {
     ONE,
     TWO
+}
+
+public enum GAME_STATES
+{
+   PreGame,
+   Game,
+   Freeze,
+   EndRound
 }

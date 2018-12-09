@@ -15,7 +15,7 @@ public class EndLevel : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(_gameManager.GetState() == GameState.GAME)
+        if(_gameManager.GetState() == GameState.Game)
         if(Utils.CompareLayer(Layer, other.gameObject.layer))
         {
             _gameManager.EndLevel();

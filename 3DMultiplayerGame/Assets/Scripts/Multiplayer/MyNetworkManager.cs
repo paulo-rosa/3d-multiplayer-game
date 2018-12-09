@@ -50,7 +50,7 @@ public class MyNetworkManager : NetworkManager
         _multiPlayerMenuManager = MultiplayerMenuManager.Instance;
         _menuManager = MenuManager.Instance;
         networkManager.StartMatchMaker();
-        _menuManager.onReadyChange += CloseConnection;
+        //_menuManager.onReadyChange += CloseConnection;
     }
 
     public void CreateInternetMatch(string matchName, Action<bool, MatchInfo> onCreate)
@@ -151,14 +151,31 @@ public class MyNetworkManager : NetworkManager
         }
     }
 
-    public void CloseConnection()
+    public void Disconnect()
     {
         if (_IsServer)
         {
-            networkManager.matchMaker.DestroyMatch((NetworkID)_netId, 0, OnMatchDestroyed);
-
+            StopMatchMaker();
+            StopHost();
         }
-        networkManager.matchMaker.DropConnection((NetworkID)_netId, NodeID.Invalid, 0, OnMatchDropConnection);
+        else
+        {
+            StopMatchMaker();
+            StopClient();
+        }
+    }
+
+
+    public void CloseConnection()
+    {
+        //if (_IsServer)
+        //{
+        //    networkManager.matchMaker.DestroyMatch((NetworkID)_netId, 0, OnMatchDestroyed);
+
+        //}
+        //networkManager.matchMaker.DropConnection((NetworkID)_netId, NodeID.Invalid, 0, OnMatchDropConnection);
+
+        Disconnect();
     }
 
     private void OnMatchDestroyed(bool success, string extendedInfo)
