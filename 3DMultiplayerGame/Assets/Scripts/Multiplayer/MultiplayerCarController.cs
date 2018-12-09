@@ -123,39 +123,28 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         foreach (var cannonShooting in _cannonsShooting)
         {
             // Add the time since Update was last called to the timer.
-            cannonShooting.timer += Time.deltaTime;
+            cannonShooting.Timer += Time.deltaTime;
 
             Vector3 temp = Input.mousePosition;
-            temp.z = 10f;
-            // Set this to be the distance you want the object to be placed in front of the camera.
-            var position = Camera.main.ScreenToWorldPoint(temp);
 
-            if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
+            if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.Timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
             {
-                CmdFire(cannonShooting.tag, temp, position);
+                CmdFire(cannonShooting.tag, temp);
             }
         }
     }
 
     [Command]
-    private void CmdFire(string objTag, Vector3 mousePosition, Vector3 position)
+    private void CmdFire(string objTag, Vector3 mousePosition)
     {
-        RpcFire(objTag, mousePosition, position);
+        RpcFire(objTag, mousePosition);
     }
 
     [ClientRpc]
-    private void RpcFire(string objTag, Vector3 mousePosition, Vector3 position)
+    private void RpcFire(string objTag, Vector3 mousePosition)
     {
-        var cannons = GetComponentsInChildren<CannonShooting>();
-
-        if (objTag == "cannonCenter")
-        {
-            cannons.Where(c => c.tag == objTag).FirstOrDefault().ShootCenter(mousePosition, position);
-        }
-        else
-        {
-            cannons.Where(c => c.tag == objTag).FirstOrDefault().Shoot();
-        }
+        var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
+        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition);
     }
 
     public void SetIsFalling(bool value)
