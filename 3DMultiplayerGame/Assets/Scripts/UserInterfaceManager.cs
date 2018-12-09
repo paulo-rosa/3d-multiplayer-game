@@ -56,16 +56,16 @@ public class UserInterfaceManager : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.GAME:
+            case GameState.Game:
                 ChangePanel(GamePanel);
                 break;
-            case GameState.GAME_OVER:
+            case GameState.GameOver:
                 ChangePanel(GameOverPanel);
                 break;
-            case GameState.PAUSE:
+            case GameState.Pause:
                 ChangePanel(PausePanel);
                 break;
-            case GameState.END_LEVEL:
+            case GameState.EndLevel:
                 ChangePanel(EndLevelPanel);
                 break;
         }

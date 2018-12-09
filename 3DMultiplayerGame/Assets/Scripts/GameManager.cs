@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (_currentState == GameState.GAME)
+            if (_currentState == GameState.Game)
                 Pause();
             else
                 Resume();
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour, IGameManager
         if (_lifes == 0)
         {
             //GAME OVER;
-            ChangeState(GameState.GAME_OVER);
+            ChangeState(GameState.GameOver);
             return false;
         }
         return true;
@@ -103,12 +103,12 @@ public class GameManager : MonoBehaviour, IGameManager
 
     public void Pause()
     {
-        ChangeState(GameState.PAUSE);
+        ChangeState(GameState.Pause);
     }
 
     public void Resume()
     {
-        ChangeState(GameState.GAME);
+        ChangeState(GameState.Game);
     }
 
     public void PlayerRespawn()
@@ -121,17 +121,17 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         NetworkManager.singleton.StartHost();
         Instantiate(_playerPrefab, _spawnPosition.position, _spawnPosition.rotation);
-        ChangeState(GameState.GAME);
+        ChangeState(GameState.Game);
     }
 
     public void GameOver()
     {
-        ChangeState(GameState.GAME_OVER);
+        ChangeState(GameState.GameOver);
     }
 
     public void EndLevel()
     {
-        ChangeState(GameState.END_LEVEL);
+        ChangeState(GameState.EndLevel);
 
     }
     #endregion
@@ -152,16 +152,16 @@ public class GameManager : MonoBehaviour, IGameManager
 
         switch (state)
         {
-            case GameState.GAME:
+            case GameState.Game:
                 OnStartGame(previousState);
                 break;
-            case GameState.PAUSE:
+            case GameState.Pause:
                 OnPauseGame();
                 break;
-            case GameState.END_LEVEL:
+            case GameState.EndLevel:
                 OnEndLevel();
                 break;
-            case GameState.GAME_OVER:
+            case GameState.GameOver:
                 OnGameOver();
                 break;
         }
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour, IGameManager
     #region states
     public void OnStartGame(GameState previousState)
     {
-        if (previousState == GameState.PAUSE)
+        if (previousState == GameState.Pause)
         {
             OnResumeGame();
             return;
@@ -240,9 +240,9 @@ public class GameManager : MonoBehaviour, IGameManager
 
 public enum GameState
 {
-    FREEZE,
-    GAME,
-    PAUSE,
-    END_LEVEL,
-    GAME_OVER
+    Freeze,
+    Game,
+    Pause,
+    EndLevel,
+    GameOver
 }
