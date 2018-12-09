@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 114553424349602812}
   m_Layer: 9
   m_Name: CannonSpawn
-  m_TagString: Untagged
+  m_TagString: CannonCenter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 114700341245481484}
   m_Layer: 9
   m_Name: CannonSpawn
-  m_TagString: Untagged
+  m_TagString: CannonRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 114903674376944684}
   m_Layer: 9
   m_Name: CannonSpawn
-  m_TagString: Untagged
+  m_TagString: CannonLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1821,6 +1821,7 @@ MonoBehaviour:
   shootableMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  effectsDisplayTime: 0.2
 --- !u!114 &114553578708879900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1897,6 +1898,7 @@ MonoBehaviour:
   shootableMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  effectsDisplayTime: 0.2
 --- !u!114 &114885054599425334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1979,6 +1981,7 @@ MonoBehaviour:
   shootableMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  effectsDisplayTime: 0.2
 --- !u!114 &114928308979455490
 MonoBehaviour:
   m_ObjectHideFlags: 1

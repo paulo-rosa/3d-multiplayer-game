@@ -13,14 +13,14 @@ public class CannonShooting: MonoBehaviour
     public Cannontype cannonType = Cannontype.staticCannon;
     public Light faceLight;
     public LayerMask shootableMask;
-    private float timer;                                    // A timer to determine when to fire.
+    public float timer { get; set; }                        // A timer to determine when to fire.
     private Ray shootRay = new Ray();                       // A ray from the gun end forwards.
     private RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
     private ParticleSystem gunParticles;                    // Reference to the particle system.
     private LineRenderer gunLine;                           // Reference to the line renderer.
     private AudioSource gunAudio;                           // Reference to the audio source.
     private Light gunLight;                                 // Reference to the light component.
-    private float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
+    public float effectsDisplayTime = 0.2f;                 // The proportion of the timeBetweenBullets that the effects will display for.
     private NetworkBehaviour _parentBehaviour;
 
 
@@ -37,40 +37,6 @@ public class CannonShooting: MonoBehaviour
         //faceLight = GetComponentInChildren<Light> ();
     }
 
-
-    void Update()
-    {
-        //on singleplayer the parentbehaviour is null
-        if (_parentBehaviour != null && !_parentBehaviour.isLocalPlayer)
-        {
-            return;
-        }
-
-        // Add the time since Update was last called to the timer.
-        timer += Time.deltaTime;
-
-        // If the Fire1 button is being press and it's time to fire...
-        if (Input.GetKeyDown(KeyCode.Space) && timer >= timeBetweenBullets && Time.timeScale != 0)
-        {
-            // ... shoot the gun.
-            if (cannonType == Cannontype.mobileCannon)
-            {
-                ShootCenter();
-            }
-            else
-            {
-                Shoot();
-            }
-        }
-
-        // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
-        if (timer >= timeBetweenBullets * effectsDisplayTime)
-        {
-            // ... disable the effects.
-            DisableEffects();
-        }
-    }
-
     public void DisableEffects()
     {
         // Disable the line renderer and the light.
@@ -78,9 +44,8 @@ public class CannonShooting: MonoBehaviour
         faceLight.enabled = false;
         gunLight.enabled = false;
     }
-
     
-    void Shoot()
+    public void Shoot()
     {
         // Reset the timer.
         timer = 0f;
@@ -127,17 +92,20 @@ public class CannonShooting: MonoBehaviour
             // ... set the second position of the line renderer to the fullest extent of the gun's range.
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+
+        // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
+        if (timer >= timeBetweenBullets * effectsDisplayTime)
+        {
+            // ... disable the effects.
+            DisableEffects();
+        }
     }
 
-    void ShootCenter()
+    public void ShootCenter(Vector3 mousePosition, Vector3 position)
     {
-        Vector3 temp = Input.mousePosition;
-        temp.z = 10f;
-        // Set this to be the distance you want the object to be placed in front of the camera.
-        var position = Camera.main.ScreenToWorldPoint(temp);
-
         // Reset the timer.
         timer = 0f;
+        timer += Time.deltaTime;
 
         // Play the gun shot audioclip.
         gunAudio.Play();
@@ -152,11 +120,10 @@ public class CannonShooting: MonoBehaviour
 
         // Enable the line renderer and set it's first position to be the end of the gun.
         gunLine.enabled = true;
-        //gunLine.SetPosition(0, transform.position);
         gunLine.SetPosition(0, transform.position);
 
         // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-        shootRay = Camera.main.ScreenPointToRay(temp);
+        shootRay = Camera.main.ScreenPointToRay(position);
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
@@ -179,6 +146,14 @@ public class CannonShooting: MonoBehaviour
         {
             // ... set the second position of the line renderer to the fullest extent of the gun's range.
             gunLine.SetPosition(1, position);
+        }
+
+
+        // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
+        if (timer >= timeBetweenBullets * effectsDisplayTime)
+        {
+            // ... disable the effects.
+            DisableEffects();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,6 +23,9 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     private CarCollision _carCollision;
     private bool _isFalling = false;
     private Health _carHealth;
+    private CannonShooting[] _cannonsShooting;
+
+    public event Action OnHealthChange;
 
     // Use this for initialization
     void Start()
@@ -30,12 +35,13 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Car.transform = GetComponent<Transform>();
         _carHealth = GetComponent<Health>();
         _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
+        _cannonsShooting = GetComponentsInChildren<CannonShooting>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
+        if (!hasAuthority)
         {
             return;
         }
@@ -43,6 +49,8 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Accelerate();
         Turn();
         Jump();
+        Fire();
+        
     }
 
     public void Accelerate()
@@ -101,6 +109,46 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         {
             _rigidbody.AddForce(_jumpForce, ForceMode.Impulse);
             Debug.Log("trying junml");
+        }
+    }
+
+    public void Fire()
+    {
+        foreach (var cannonShooting in _cannonsShooting)
+        {
+            // Add the time since Update was last called to the timer.
+            cannonShooting.timer += Time.deltaTime;
+
+            Vector3 temp = Input.mousePosition;
+            temp.z = 10f;
+            // Set this to be the distance you want the object to be placed in front of the camera.
+            var position = Camera.main.ScreenToWorldPoint(temp);
+
+            if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
+            {
+                CmdFire(cannonShooting.tag, temp, position);
+            }
+        }
+    }
+
+    [Command]
+    private void CmdFire(string objTag, Vector3 mousePosition, Vector3 position)
+    {
+        RpcFire(objTag, mousePosition, position);
+    }
+
+    [ClientRpc]
+    private void RpcFire(string objTag, Vector3 mousePosition, Vector3 position)
+    {
+        var cannons = GetComponentsInChildren<CannonShooting>();
+
+        if (objTag == "cannonCenter")
+        {
+            cannons.Where(c => c.tag == objTag).FirstOrDefault().ShootCenter(mousePosition, position);
+        }
+        else
+        {
+            cannons.Where(c => c.tag == objTag).FirstOrDefault().Shoot();
         }
     }
 
