@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Assets.Scripts.Multiplayer
 {
-    public class MultiplayerGameManager : MonoBehaviour, IGameManager
+    public class MultiplayerGameManager : NetworkBehaviour, IGameManager
     {
 
         private static MultiplayerGameManager _instance;
@@ -36,7 +37,6 @@ namespace Assets.Scripts.Multiplayer
                 _player = value;
             }
         }
-
         Transform IGameManager._spawnPosition
         {
             get
@@ -48,11 +48,18 @@ namespace Assets.Scripts.Multiplayer
                 _spawnPosition = value;
             }
         }
+
         public Transform _player;
         public Transform _spawnPosition;
+
+        #region multiplayer variables
+        //Equipes
+        //
+        private TEAMS _playerTeam;
+        #endregion
         private void Start()
         {
-            
+
         }
 
         private void Update()
@@ -60,6 +67,9 @@ namespace Assets.Scripts.Multiplayer
             
         }
 
+
+
+        #region Interface implementation
         public void ChangeState(GameState state)
         {
             throw new NotImplementedException();
@@ -121,5 +131,13 @@ namespace Assets.Scripts.Multiplayer
         {
             throw new NotImplementedException();
         }
+
+    #endregion 
     }
+}
+
+public enum TEAMS
+{
+    ONE,
+    TWO
 }

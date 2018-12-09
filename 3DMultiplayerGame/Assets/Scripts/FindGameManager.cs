@@ -8,14 +8,16 @@ public class GeneralThings : MonoBehaviour
     
     public static IGameManager FindGameManager()
     {
-        if(MenuManager.Instance.GetGameState() == Screens.SINGLEPLAYER)
-        {
-            return GameManager.Instance;
-        }
-        else if (MenuManager.Instance.GetGameState() == Screens.MULTIPLAYER)
-        {
-            return MultiplayerGameManager.Instance;
-        }
-        return null;
+        return MultiplayerGameManager.Instance;
+
+        //if (MenuManager.Instance.GetGameState() == Screens.SINGLEPLAYER)
+        //{
+        //    return GameManager.Instance;
+        //}
+        //else if (MenuManager.Instance.GetGameState() == Screens.MULTIPLAYER)
+        //{
+        //    return MultiplayerGameManager.Instance;
+        //}
+        //return null;
     }
 }

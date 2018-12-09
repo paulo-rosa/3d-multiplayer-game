@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 public class NetworkPlayer : NetworkBehaviour
 {
+    #region Lobby
     public static event Action<NetworkPlayer, string> OnNameUpdated;
 
     [SerializeField]
@@ -17,6 +18,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
+    private MenuManager _menuManager;
 
     public event Action OnReadyChange;
 
@@ -28,6 +30,7 @@ public class NetworkPlayer : NetworkBehaviour
     private void Start ()
     {
         _myNetworkManager = MyNetworkManager.Instance;
+        _menuManager = MenuManager.Instance;
 
         if (hasAuthority)
         {
@@ -81,6 +84,11 @@ public class NetworkPlayer : NetworkBehaviour
         _lobbyObject.Init(this);
     }
 
+    [ClientRpc]
+    public void RpcUpdateScene(Screens gameState)
+    {
+        _menuManager.SwitchScreen(gameState);
+    }
     #region Hooks
 
     private void OnReadyUpdated(bool value)
@@ -126,5 +134,31 @@ public class NetworkPlayer : NetworkBehaviour
 
     #region RPC
 
+    #endregion
+    #endregion
+
+    #region GamePlay
+
+    public GameObject playerPrefab;
+    [Client]
+    public void OnEnterGameScene()
+    {
+        if (hasAuthority)
+        {
+            CmdClientReadyInGameScene();
+        }
+    }
+
+    [Command]
+    private void CmdClientReadyInGameScene()
+    {
+        AddClientToServer();
+    }
+    protected void AddClientToServer()
+    {
+        Debug.Log("CmdClientReadyInScene");
+        GameObject playerObject = Instantiate(playerPrefab);
+        NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
+    }
     #endregion
 }

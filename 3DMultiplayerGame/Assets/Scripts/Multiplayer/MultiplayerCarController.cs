@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,7 +36,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
+        if (!hasAuthority)
         {
             return;
         }
@@ -43,6 +44,12 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Accelerate();
         Turn();
         Jump();
+        FixRotation();
+    }
+
+    private void FixRotation()
+    {
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
     }
 
     public void Accelerate()

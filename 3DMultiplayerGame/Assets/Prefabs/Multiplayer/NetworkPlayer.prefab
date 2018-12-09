@@ -55,6 +55,8 @@ MonoBehaviour:
   m_LobbyPrefab: {fileID: 1908706454451884, guid: 1b177d23fb2a7f1449677b53f4b150ef,
     type: 2}
   _lobbyObject: {fileID: 0}
+  playerPrefab: {fileID: 1000666976618354, guid: a3eabea103c8f71458b94741fcafb655,
+    type: 2}
 --- !u!114 &114530326205846662
 MonoBehaviour:
   m_ObjectHideFlags: 1

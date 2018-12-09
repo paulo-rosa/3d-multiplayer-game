@@ -48,7 +48,7 @@ public class LobbyPlayer : MonoBehaviour {
 
     private void ChangeButtonState(bool value)
     {
-        if(_networkPlayer.isLocalPlayer)
+        if(_networkPlayer.hasAuthority)
         {
             if (value)
             {
