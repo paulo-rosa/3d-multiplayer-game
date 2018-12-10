@@ -125,7 +125,6 @@ PlayerSettings:
   m_HolographicPauseOnTrackingLoss: 1
   xboxOneDisableKinectGpuReservation: 0
   xboxOneEnable7thCore: 0
-  isWsaHolographicRemotingEnabled: 0
   vrSettings:
     cardboard:
       depthFormat: 0
@@ -653,9 +652,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 021b61c5-a03d-4583-b6c1-6012ed7b176f
+  cloudProjectId: 65a15ef8-68f6-4f9c-8a10-a7cd0e4bbd91
   projectName: 3DMultiplayerGame (1)
-  organizationId: renan-nunes
+  organizationId: pdouglasrs
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
