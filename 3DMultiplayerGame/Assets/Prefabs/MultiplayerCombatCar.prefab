@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114892895190923548}
   - component: {fileID: 114683006418357454}
   - component: {fileID: 114619493253848368}
+  - component: {fileID: 114310427882905892}
   m_Layer: 9
   m_Name: MultiplayerCombatCar
   m_TagString: Player
@@ -1775,6 +1776,17 @@ MonoBehaviour:
   _jumpForce: {x: 0, y: 3, z: 0}
   _speed: 0
   _turn: 0
+--- !u!114 &114310427882905892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000666976618354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c629231022c09034fb6c9186bd9be3dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369046052620488
 MonoBehaviour:
   m_ObjectHideFlags: 1

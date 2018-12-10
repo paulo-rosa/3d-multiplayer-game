@@ -230,5 +230,9 @@ public class MyNetworkManager : NetworkManager
     {
         this.ServerChangeScene("Multiplayer");
     }
-
+    
+    public int ConnectedPlayerCount()
+    {
+        return connectedPlayers.Count;
+    }
 }

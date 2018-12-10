@@ -59,16 +59,44 @@ namespace Assets.Scripts.Multiplayer
         private float _timerCounter;
         [SyncVar]
         private bool _isTimerEnabled = false;
-        private int teste = 0;
+        [SyncVar(hook = "OnPlayersInSceneChanged")]
+        private int _playerInScene;
+        private bool _isServer;
+
         #region multiplayer variables
         //Equipes
         //
         private Teams _playerTeam;
         #endregion
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            OnSceneEnter();
+        }
+
         private void Start()
         {
             _multiplayerInterface = MultiplayerInterface.Instance;
-            StartTimer();
+            _myNetworkManager = MyNetworkManager.Instance;
+            _multiplayerInterface = MultiplayerInterface.Instance;
+            _isServer = MyNetworkManager._IsServer;
+
+
+        }
+
+        private void OnSceneEnter()
+        {
+            CmdPlayerInScene();
+        } 
+
+        private void OnPlayersInSceneChanged(int value)
+        {
+            _playerInScene = value;
+            if (_isServer)
+            {
+                StartTimer();
+            }
         }
 
         private void Update()
@@ -84,7 +112,7 @@ namespace Assets.Scripts.Multiplayer
                 _multiplayerInterface.UpdateTime(_timerCounter);
             }
 
-            if(isServer && _timerCounter <= 0)
+            if(isServer && _timerCounter <= 0 && _isTimerEnabled)
             {
                 RpcEndRoud();
             }
@@ -92,7 +120,10 @@ namespace Assets.Scripts.Multiplayer
 
         private void StartTimer()
         {
-            if (isServer)
+            if (_playerInScene < _myNetworkManager.ConnectedPlayerCount())
+                return;
+
+            if (MyNetworkManager._IsServer)
             {
                 _timerCounter = ROUND_TIME;
                 _isTimerEnabled = true;
@@ -100,9 +131,18 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        private void CmdStartTimer()
+        [Command]
+        private void CmdPlayerInScene()
         {
+            _playerInScene++;
+            RpcPlayersInScene(_playerInScene);
+            StartTimer();
+        }
 
+        [ClientRpc]
+        private void RpcPlayersInScene(int value)
+        {
+            _playerInScene = value;
         }
 
         [ClientRpc]
@@ -118,7 +158,6 @@ namespace Assets.Scripts.Multiplayer
         private void RpcStartTimer(float time, bool isTimer)
         {
             StartTimerClient(time, isTimer);
-            teste = 20;
         }
 
         private void StartTimerClient(float roundTime, bool isTimerEnable)
