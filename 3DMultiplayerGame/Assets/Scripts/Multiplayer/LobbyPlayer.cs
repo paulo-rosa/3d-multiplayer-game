@@ -43,7 +43,7 @@ public class LobbyPlayer : MonoBehaviour {
 
     public void SetReady()
     {
-        ChangeButtonState(_networkPlayer.SetReady());
+        ChangeButtonState(_networkPlayer.SetReady(!_networkPlayer.GetReadyState()));
     }
 
     private void ChangeButtonState(bool value)

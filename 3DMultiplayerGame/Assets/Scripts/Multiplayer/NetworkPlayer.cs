@@ -46,9 +46,9 @@ public class NetworkPlayer : NetworkBehaviour
         return _isReady;
     }
     
-    public bool SetReady()
+    public bool SetReady(bool val)
     {
-        _isReady = !_isReady;
+        _isReady = val;
         CmdSetPlayerReady(_isReady);
         return _isReady;
     }

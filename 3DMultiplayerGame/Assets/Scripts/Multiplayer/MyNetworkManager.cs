@@ -151,6 +151,11 @@ public class MyNetworkManager : NetworkManager
         }
     }
 
+    private void EndRound()
+    {
+        
+    }
+
     public void Disconnect()
     {
         if (_IsServer)
@@ -211,8 +216,19 @@ public class MyNetworkManager : NetworkManager
         }
     }
 
+    public void DisableAllReady()
+    {
+        for (int i = 0; i < connectedPlayers.Count; ++i)
+        {
+            NetworkPlayer player = connectedPlayers[i];
+
+            player.SetReady(false);
+        }
+    }
+
     private void StartGameScene()
     {
         this.ServerChangeScene("Multiplayer");
     }
+
 }

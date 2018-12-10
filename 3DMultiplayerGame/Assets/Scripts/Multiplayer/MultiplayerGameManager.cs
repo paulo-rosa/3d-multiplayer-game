@@ -21,6 +21,7 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
+        public event Action<GameState> OnStateChange; 
         private UserInterfaceManager _userInterfaceManager;
         private GameState _currentState;
 
@@ -56,7 +57,9 @@ namespace Assets.Scripts.Multiplayer
         private const float ROUND_TIME = 180;
         private MultiplayerInterface _multiplayerInterface;
         private float _timerCounter;
+        [SyncVar]
         private bool _isTimerEnabled = false;
+        private int teste = 0;
         #region multiplayer variables
         //Equipes
         //
@@ -77,8 +80,13 @@ namespace Assets.Scripts.Multiplayer
         {
             if (_isTimerEnabled)
             {
-                _timerCounter -= Time.deltaTime * 1;
+                _timerCounter -= Time.deltaTime;
                 _multiplayerInterface.UpdateTime(_timerCounter);
+            }
+
+            if(isServer && _timerCounter <= 0)
+            {
+                RpcEndRoud();
             }
         }
 
@@ -88,7 +96,7 @@ namespace Assets.Scripts.Multiplayer
             {
                 _timerCounter = ROUND_TIME;
                 _isTimerEnabled = true;
-                RpcStartTimer();
+                RpcStartTimer(_timerCounter, _isTimerEnabled);
             }
         }
 
@@ -97,17 +105,66 @@ namespace Assets.Scripts.Multiplayer
 
         }
 
-        private void RpcStartTimer()
+        [ClientRpc]
+        private void RpcEndRoud()
         {
-            _timerCounter = ROUND_TIME;
-            _isTimerEnabled = true;
+            _isTimerEnabled = false;
+            _timerCounter = 0;
+            _multiplayerInterface.UpdateTime(_timerCounter);
+            ChangeState(GameState.EndLevel);
         }
+
+        [ClientRpc]
+        private void RpcStartTimer(float time, bool isTimer)
+        {
+            StartTimerClient(time, isTimer);
+            teste = 20;
+        }
+
+        private void StartTimerClient(float roundTime, bool isTimerEnable)
+        {
+            _timerCounter = roundTime;
+            _isTimerEnabled = isTimerEnable;
+        }
+
+        private void Teste()
+        {
+            Debug.Log("tete");
+        }
+
+        #region States
+        private void OnEndLevel()
+        {
+
+        }
+        #endregion
 
         #region Interface implementation
         public void ChangeState(GameState state)
         {
-            throw new NotImplementedException();
+            var previousState = _currentState;
+            _currentState = state;
+            if (OnStateChange != null)
+            {
+                OnStateChange(_currentState);
+            }
+
+            switch (state)
+            {
+                case GameState.Game:
+                    OnStartGame(previousState);
+                    break;
+
+                case GameState.EndLevel:
+                    OnEndLevel();
+                    break;
+                case GameState.GameOver:
+                    OnGameOver();
+                    break;
+            }
         }
+
+
 
         public bool Die()
         {

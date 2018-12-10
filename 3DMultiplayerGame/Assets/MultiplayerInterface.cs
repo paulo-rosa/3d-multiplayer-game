@@ -34,7 +34,7 @@ public class MultiplayerInterface : MonoBehaviour
 
     internal void UpdateTime(float timerCounter)
     {
-        var time = timerCounter % 60;
+        var time = (int)timerCounter;
         _txtTimer.text = time.ToString();
     }
 }
