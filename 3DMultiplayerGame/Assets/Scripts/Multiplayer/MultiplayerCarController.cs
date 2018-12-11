@@ -129,6 +129,9 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
 
             if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.Timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
             {
+                var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == cannonShooting.tag).FirstOrDefault();
+                cannon.Shoot(cannon.tag == "CannonCenter", temp);
+
                 CmdFire(cannonShooting.tag, temp);
             }
         }
@@ -143,6 +146,11 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     [ClientRpc]
     private void RpcFire(string objTag, Vector3 mousePosition)
     {
+        if (hasAuthority)
+        {
+            return;
+        }
+
         var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
         cannon.Shoot(cannon.tag == "CannonCenter", mousePosition);
     }
