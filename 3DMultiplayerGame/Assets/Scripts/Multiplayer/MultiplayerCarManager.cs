@@ -7,18 +7,18 @@ namespace Assets.Scripts.Multiplayer
 {
     public class MultiplayerCarManager : NetworkBehaviour
     {
-        private static MultiplayerCarManager _instance;
-        public static MultiplayerCarManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<MultiplayerCarManager>();
-                }
-                return _instance;
-            }
-        }
+        //private static MultiplayerCarManager _instance;
+        //public static MultiplayerCarManager Instance
+        //{
+        //    get
+        //    {
+        //        if (_instance == null)
+        //        {
+        //            _instance = FindObjectOfType<MultiplayerCarManager>();
+        //        }
+        //        return _instance;
+        //    }
+        //}
 
 
 
@@ -30,7 +30,7 @@ namespace Assets.Scripts.Multiplayer
         private int _death = 0;
 
         [SyncVar]
-        private int _victms = 0;
+        private int _victims = 0;
 
         public override void OnStartAuthority()
         {

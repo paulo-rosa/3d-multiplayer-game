@@ -56,13 +56,15 @@ public class CarBehaviour : NetworkBehaviour
 
     private void PlayerDie()
     {
-        if(OnPlayerDied != null)
+        ChangeState(PlayerStates.DEAD);
+
+        if (OnPlayerDied != null)
         {
             OnPlayerDied();
         }
 
-        ChangeState(PlayerStates.DEAD);
     }
+
 
     IEnumerator TimeToSpawn()
     {

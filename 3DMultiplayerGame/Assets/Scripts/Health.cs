@@ -81,7 +81,7 @@ public class Health : NetworkBehaviour
 
     public void OnHealthChanged()
     {
-        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+        UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
@@ -124,9 +124,15 @@ public class Health : NetworkBehaviour
         }
     }
 
+    private void UpdateHealthUI()
+    {
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+    }
+
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        UpdateHealthUI();
         _isAlive = true;
     }
 
