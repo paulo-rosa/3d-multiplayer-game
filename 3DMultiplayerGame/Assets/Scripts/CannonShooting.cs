@@ -86,7 +86,8 @@ public class CannonShooting: MonoBehaviour
             if (enemyHealth != null)
             {
                 // ... the enemy should take damage.
-                enemyHealth.TakeDamage(damagePerShot);
+                if(enemyHealth.currentHealth > 0)
+                    enemyHealth.TakeDamage(damagePerShot);
             }
 
             // Set the second position of the line renderer to the point the raycast hit.

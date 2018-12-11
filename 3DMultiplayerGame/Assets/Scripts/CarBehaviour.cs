@@ -68,13 +68,14 @@ public class CarBehaviour : NetworkBehaviour
 
     IEnumerator TimeToSpawn()
     {
+        ChangeState(PlayerStates.RESPAWN);
         yield return new WaitForSeconds(1f);
         //transform.position = _gameManager._spawnPosition.position;
         //transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
         
         //_health.ResetHealth();
-        ChangeState(PlayerStates.RESPAWN);
+
     }
 
     #region States

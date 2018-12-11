@@ -7,21 +7,6 @@ namespace Assets.Scripts.Multiplayer
 {
     public class MultiplayerCarManager : NetworkBehaviour
     {
-        //private static MultiplayerCarManager _instance;
-        //public static MultiplayerCarManager Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //        {
-        //            _instance = FindObjectOfType<MultiplayerCarManager>();
-        //        }
-        //        return _instance;
-        //    }
-        //}
-
-
-
         private MultiplayerGameManager _gameManager;
 
         private CarBehaviour _carBehaviour;
@@ -31,6 +16,8 @@ namespace Assets.Scripts.Multiplayer
 
         [SyncVar]
         private int _victims = 0;
+
+        private int _playerId;
 
         public override void OnStartAuthority()
         {
@@ -49,6 +36,7 @@ namespace Assets.Scripts.Multiplayer
         {
             _gameManager.CmdPlayerConnected();
             _carBehaviour.OnPlayerDied += OnPlayerDie;
+
             if (hasAuthority)
             {
                 _gameManager.SetCarManager(this);

@@ -42,6 +42,9 @@ public class Health : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
+        if (!_isAlive)
+            return;
+
         if (hasAuthority)
         {
             CmdTakeHealth(amount);

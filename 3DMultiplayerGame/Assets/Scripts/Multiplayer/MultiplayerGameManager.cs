@@ -95,7 +95,6 @@ namespace Assets.Scripts.Multiplayer
         {
             _multiplayerInterface = MultiplayerInterface.Instance;
             _myNetworkManager = MyNetworkManager.Instance;
-            _multiplayerInterface = MultiplayerInterface.Instance;
             _isServer = MyNetworkManager._IsServer;
 
 
