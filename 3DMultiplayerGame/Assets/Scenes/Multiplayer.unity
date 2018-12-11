@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,6 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 255361043}
+  - component: {fileID: 255361044}
   m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
@@ -211,6 +212,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &255361044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 255361042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aff520db8a54c7458be177e6a085f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &295631182
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +373,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 453858011}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.06, y: 5, z: 486.06}
+  m_LocalPosition: {x: 14.06, y: 8, z: 486.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 255361043}
@@ -389,7 +401,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650364287}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 491.21, y: 5, z: 10.23}
+  m_LocalPosition: {x: 491.21, y: 8, z: 10.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 255361043}
@@ -583,7 +595,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 965996049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 494.2, y: 5, z: 490.09}
+  m_LocalPosition: {x: 494.2, y: 8, z: 470.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 255361043}
@@ -611,7 +623,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1358854584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.63, y: 5, z: 13.2}
+  m_LocalPosition: {x: 7.79, y: 8, z: 9.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 255361043}
@@ -645,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870f28fdb2859664fb1522a06491ccbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CarPrefab: {fileID: 0}
   _player: {fileID: 0}
   _spawnPosition: {fileID: 0}
 --- !u!4 &1504388394
@@ -658,7 +671,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1504388395
 MonoBehaviour:
@@ -907,7 +920,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4133866819347892, guid: 8d5e3901c0c8f7d4aae707ac4eca462f, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d5e3901c0c8f7d4aae707ac4eca462f, type: 2}

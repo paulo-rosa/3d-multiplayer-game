@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -14,24 +15,14 @@ public class CarBehaviour : NetworkBehaviour
     private PlayerStates _currentState;
     private bool _assigned = false;
 
+    public event Action OnPlayerDied;
+
     private void Start()
     {
         if (!hasAuthority)
         {
             return;
         }
-
-        //Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
-        //Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
-
-        //_carController = GetComponent<MyCarController>();
-        //_rigidBody = GetComponentInChildren<Rigidbody>();
-        //_gameManager = GeneralThings.FindGameManager();
-        //_health = GetComponent<Health>();
-        //_health.OnDie += PlayerDie;
-        //transform.rotation = Quaternion.Euler(0, 90, 0);
-        //_gameManager._player = transform;
-        //ChangeState(PlayerStates.RESPAWN);
     }
 
     private void Assign()
@@ -64,8 +55,12 @@ public class CarBehaviour : NetworkBehaviour
     }
 
     private void PlayerDie()
-
     {
+        if(OnPlayerDied != null)
+        {
+            OnPlayerDied();
+        }
+
         ChangeState(PlayerStates.DEAD);
     }
 
@@ -75,8 +70,9 @@ public class CarBehaviour : NetworkBehaviour
         //transform.position = _gameManager._spawnPosition.position;
         //transform.rotation = _gameManager._spawnPosition.rotation;
         _rigidBody.velocity = Vector3.zero;
+        
         //_health.ResetHealth();
-        ChangeState(PlayerStates.ALIVE);
+        ChangeState(PlayerStates.RESPAWN);
     }
 
     #region States
@@ -105,20 +101,16 @@ public class CarBehaviour : NetworkBehaviour
     private void OnDeadEnter()
     {
         CarGraphics.SetActive(false);
-        //if (_gameManager.Die())
-        //{
-            ChangeState(PlayerStates.RESPAWN);
-        //}
-        //else
-        //{
-            //gameObject.SetActive(false);
-        //}
+        StartCoroutine(TimeToSpawn());
+
+        //ChangeState(PlayerStates.RESPAWN);
     }
 
     private void OnRespawnEnter()
     {
         _health.ResetHealth();
-        StartCoroutine(TimeToSpawn());
+        //StartCoroutine(TimeToSpawn());
+        ChangeState(PlayerStates.ALIVE);
     }
 
     public PlayerStates GetState()

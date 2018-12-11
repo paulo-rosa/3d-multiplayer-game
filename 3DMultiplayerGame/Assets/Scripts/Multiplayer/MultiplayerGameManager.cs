@@ -21,6 +21,7 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
+        public GameObject CarPrefab;
         public event Action<GameState> OnStateChange; 
         private UserInterfaceManager _userInterfaceManager;
         private GameState _currentState;
@@ -60,19 +61,34 @@ namespace Assets.Scripts.Multiplayer
         [SyncVar]
         private bool _isTimerEnabled = false;
         [SyncVar(hook = "OnPlayersInSceneChanged")]
-        private int _playerInScene;
+        private int _playerInScene = 0;
         private bool _isServer;
 
         #region multiplayer variables
         //Equipes
         //
         private Teams _playerTeam;
+        private MultiplayerCarManager _localPlayer;
+
+        public MultiplayerCarManager localPlayer
+        {
+            get
+            {
+                return _localPlayer;
+            }
+        }
         #endregion
 
-        public override void OnStartClient()
+        public void SetCarManager(MultiplayerCarManager car)
         {
-            base.OnStartClient();
-            OnSceneEnter();
+            _localPlayer = car;
+        }
+
+        [Command]
+        public void CmdPlayerConnected()
+        {
+            _playerInScene++;
+            StartTimer();
         }
 
         private void Start()
@@ -162,7 +178,7 @@ namespace Assets.Scripts.Multiplayer
 
         private void StartTimerClient(float roundTime, bool isTimerEnable)
         {
-            _timerCounter = roundTime;
+            _timerCounter = roundTime - 1;
             _isTimerEnabled = isTimerEnable;
         }
 
@@ -170,6 +186,12 @@ namespace Assets.Scripts.Multiplayer
         {
             Debug.Log("tete");
         }
+
+        public Vector3 GetSpawnPosition()
+        {
+            return new Vector3(0, 5, 0);
+        }
+
 
         #region States
         private void OnEndLevel()

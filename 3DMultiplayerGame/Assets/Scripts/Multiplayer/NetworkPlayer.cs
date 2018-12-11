@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Assets.Scripts.Multiplayer;
 
 public class NetworkPlayer : NetworkBehaviour
 {
@@ -19,7 +20,7 @@ public class NetworkPlayer : NetworkBehaviour
     public LobbyPlayer _lobbyObject;
     private MyNetworkManager _myNetworkManager;
     private MenuManager _menuManager;
-
+    private MultiplayerGameManager _gameManager;
     public event Action OnReadyChange;
 
     public string GetPlayerName()
@@ -31,7 +32,7 @@ public class NetworkPlayer : NetworkBehaviour
     {
         _myNetworkManager = MyNetworkManager.Instance;
         _menuManager = MenuManager.Instance;
-
+        _gameManager = MultiplayerGameManager.Instance;
         if (hasAuthority)
         {
             _playerName = PlayerData.PlayerName;

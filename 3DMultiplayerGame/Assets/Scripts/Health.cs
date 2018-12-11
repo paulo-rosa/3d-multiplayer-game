@@ -47,20 +47,6 @@ public class Health : NetworkBehaviour
             CmdTakeHealth(amount);
         }
         return;
-
-        if (isLocalPlayer || !_isAlive)
-        {
-            return;
-        }
-
-        if (isServer)
-        {
-            RpcTakeHealth(amount);
-        }
-        else
-        {
-            CmdTakeHealth(amount);
-        }
     }
 
     [Command]

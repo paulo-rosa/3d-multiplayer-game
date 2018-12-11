@@ -1787,6 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c629231022c09034fb6c9186bd9be3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CarPrefab: {fileID: 0}
 --- !u!114 &114369046052620488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1886,7 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
   GotShotSound: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}
   currentHealth: 0
