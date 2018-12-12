@@ -208,6 +208,7 @@ namespace Assets.Scripts.Multiplayer
         public void KillSomeone(int playerId)
         {
             _playersList.Find(s => s.PlayerId == playerId).Killed();
+
         }
         #region States
         private void OnEndLevel()

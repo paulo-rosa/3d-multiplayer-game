@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Multiplayer;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -40,7 +41,12 @@ public class Health : NetworkBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    internal void TakeDamage(int v)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TakeDamage(int amount, int shooter)
     {
         if (!_isAlive)
             return;
@@ -49,16 +55,20 @@ public class Health : NetworkBehaviour
         {
             currentHealth -= amount;
             RpcTakeHealth(currentHealth);
+            if(currentHealth <= 0)
+            {
+                MultiplayerGameManager.Instance.KillSomeone(shooter);
+            }
         }
         return;
     }
 
-    [Command]
-    private void CmdTakeHealth(int health)
-    {
-        currentHealth = health;
-        RpcTakeHealth(currentHealth);
-    }
+    //[Command]
+    //private void CmdTakeHealth(int health)
+    //{
+    //    currentHealth = health;
+    //    RpcTakeHealth(currentHealth);
+    //}
 
     [ClientRpc]
     private void RpcTakeHealth(int health)

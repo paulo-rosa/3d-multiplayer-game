@@ -135,24 +135,24 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
             if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.Timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
             {
                 var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == cannonShooting.tag).FirstOrDefault();
-                cannon.Shoot(cannon.tag == "CannonCenter", temp, false);
+                cannon.Shoot(cannon.tag == "CannonCenter", temp, false, _carManager.PlayerId);
 
-                CmdFire(cannonShooting.tag, temp);
+                CmdFire(cannonShooting.tag, temp, _carManager.PlayerId);
             }
         }
     }
 
     [Command]
-    private void CmdFire(string objTag, Vector3 mousePosition)
+    private void CmdFire(string objTag, Vector3 mousePosition, int shooter)
     {
         var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
-        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, true);
+        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, true, shooter);
 
-        RpcFire(objTag, mousePosition);
+        RpcFire(objTag, mousePosition, shooter);
     }
 
     [ClientRpc]
-    private void RpcFire(string objTag, Vector3 mousePosition)
+    private void RpcFire(string objTag, Vector3 mousePosition, int shooter)
     {
         if (hasAuthority)
         {
@@ -160,7 +160,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         }
 
         var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
-        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, false);
+        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, false, shooter);
     }
 
     public void SetIsFalling(bool value)

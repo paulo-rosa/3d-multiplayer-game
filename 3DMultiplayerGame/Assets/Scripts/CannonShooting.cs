@@ -37,7 +37,7 @@ public class CannonShooting: MonoBehaviour
         //faceLight = GetComponentInChildren<Light> ();
     }
     
-    public void Shoot(bool centerCannon, Vector3 mousePosition, bool giveDamage)
+    public void Shoot(bool centerCannon, Vector3 mousePosition, bool giveDamage, int shooter)
     {
         // Set this to be the distance you want the object to be placed in front of the camera.
         var position = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -90,7 +90,7 @@ public class CannonShooting: MonoBehaviour
                 
                 // ... the enemy should take damage.
                 if(enemyHealth.currentHealth > 0)
-                    enemyHealth.TakeDamage(damagePerShot);
+                    enemyHealth.TakeDamage(damagePerShot, shooter);
             }
 
             // Set the second position of the line renderer to the point the raycast hit.
