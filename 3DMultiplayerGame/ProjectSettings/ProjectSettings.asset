@@ -653,9 +653,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 65a15ef8-68f6-4f9c-8a10-a7cd0e4bbd91
-  projectName: 3DMultiplayerGame (1)
-  organizationId: pdouglasrs
+  cloudProjectId: 2bdfa021-9a71-477b-b758-5b15b317a60c
+  projectName: 3DMultiplayerGame (2)
+  organizationId: renan-nunes
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

@@ -37,7 +37,7 @@ public class CannonShooting: MonoBehaviour
         //faceLight = GetComponentInChildren<Light> ();
     }
     
-    public void Shoot(bool centerCannon, Vector3 mousePosition)
+    public void Shoot(bool centerCannon, Vector3 mousePosition, bool giveDamage)
     {
         // Set this to be the distance you want the object to be placed in front of the camera.
         var position = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -66,8 +66,6 @@ public class CannonShooting: MonoBehaviour
 
         if (centerCannon)
         {
-            Debug.Log("Camera Position: " + Camera.main.ScreenPointToRay(position));
-            Debug.Log("Position" + position);
 
             shootRay = Camera.main.ScreenPointToRay(position);
         }
@@ -77,14 +75,19 @@ public class CannonShooting: MonoBehaviour
         }
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
+        
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
+            if (!giveDamage)
+                return;
             // Try and find an EnemyHealth script on the gameobject hit.
             Health enemyHealth = shootHit.collider.GetComponentInParent<Health>();
+
 
             // If the EnemyHealth component exist...
             if (enemyHealth != null)
             {
+                
                 // ... the enemy should take damage.
                 if(enemyHealth.currentHealth > 0)
                     enemyHealth.TakeDamage(damagePerShot);

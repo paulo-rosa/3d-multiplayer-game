@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour
 {
-    public int maxHealth;
+    public const int maxHealth = 100;
     public bool destroyOnDeath;
     public AudioClip ExplosionSound;
     public AudioClip GotShotSound;
@@ -45,23 +45,25 @@ public class Health : NetworkBehaviour
         if (!_isAlive)
             return;
 
-        if (hasAuthority)
+        if (isServer)
         {
-            CmdTakeHealth(amount);
+            currentHealth -= amount;
+            RpcTakeHealth(currentHealth);
         }
         return;
     }
 
     [Command]
-    private void CmdTakeHealth(int amount)
+    private void CmdTakeHealth(int health)
     {
-        RpcTakeHealth(amount);
+        currentHealth = health;
+        RpcTakeHealth(currentHealth);
     }
 
     [ClientRpc]
-    private void RpcTakeHealth(int amount)
+    private void RpcTakeHealth(int health)
     {
-        currentHealth -= amount;
+        currentHealth = health;
 
         if (currentHealth <= 0)
         {
@@ -71,10 +73,10 @@ public class Health : NetworkBehaviour
 
     private void OnUpdateHealth(int health)
     {
+        currentHealth = health;
+
         if (healthBar == null)
             return;
-
-        currentHealth = health;
 
         if (OnHealthChange != null)
         {
@@ -86,7 +88,7 @@ public class Health : NetworkBehaviour
     {
         UpdateHealthUI();
 
-        if (currentHealth <= 0)
+        if (_isAlive && currentHealth <= 0)
         {
             _isAlive = false;
             var explosion = GameObject.FindWithTag("Explosion").GetComponent<ExplosionSpawner>();
@@ -137,6 +139,11 @@ public class Health : NetworkBehaviour
         currentHealth = maxHealth;
         UpdateHealthUI();
         _isAlive = true;
+
+        if (isServer)
+        {
+            RpcTakeHealth(currentHealth);
+        }
     }
 
     //Respawn precisa mudar de lugar

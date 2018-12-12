@@ -17,7 +17,19 @@ namespace Assets.Scripts.Multiplayer
         [SyncVar]
         private int _victims = 0;
 
+        [SyncVar]
         private int _playerId;
+        public int PlayerId
+        {
+            get
+            {
+                return _playerId;
+            }
+            set
+            {
+                _playerId = value;
+            }
+        }
 
         public override void OnStartAuthority()
         {
@@ -25,20 +37,23 @@ namespace Assets.Scripts.Multiplayer
 
         }
 
+        
         void Start()
         {
             _carBehaviour = GetComponent<CarBehaviour>();
+
             _gameManager = MultiplayerGameManager.Instance;
+            _gameManager.AddConnectedPlayer(this);
             Initialize();
         }
 
         private void Initialize()
         {
-            _gameManager.CmdPlayerConnected();
             _carBehaviour.OnPlayerDied += OnPlayerDie;
 
             if (hasAuthority)
             {
+                _gameManager.CmdPlayerConnected();
                 _gameManager.SetCarManager(this);
             }
         }
@@ -65,6 +80,17 @@ namespace Assets.Scripts.Multiplayer
         void Update()
         {
 
+        }
+
+        public void Died()
+        {
+
+        }
+
+        public void Killed()
+        {
+            _victims++;
+            //UpdatePlacar;
         }
     }
 

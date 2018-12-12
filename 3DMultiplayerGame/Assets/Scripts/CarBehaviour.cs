@@ -19,17 +19,6 @@ public class CarBehaviour : NetworkBehaviour
 
     private void Start()
     {
-        if (!hasAuthority)
-        {
-            return;
-        }
-    }
-
-    private void Assign()
-    {
-        Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
-        Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
-
         _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
         _gameManager = GeneralThings.FindGameManager();
@@ -38,7 +27,22 @@ public class CarBehaviour : NetworkBehaviour
         transform.rotation = Quaternion.Euler(0, 90, 0);
         _gameManager._player = transform;
         ChangeState(PlayerStates.RESPAWN);
-        _assigned = true;
+    }
+
+    private void Assign()
+    {
+        Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
+        Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
+
+        //_carController = GetComponent<MyCarController>();
+        //_rigidBody = GetComponentInChildren<Rigidbody>();
+        //_gameManager = GeneralThings.FindGameManager();
+        //_health = GetComponent<Health>();
+        //_health.OnDie += PlayerDie;
+        //transform.rotation = Quaternion.Euler(0, 90, 0);
+        //_gameManager._player = transform;
+        //ChangeState(PlayerStates.RESPAWN);
+        //_assigned = true;
     }
 
     private void Update()
@@ -57,7 +61,7 @@ public class CarBehaviour : NetworkBehaviour
     private void PlayerDie()
     {
         ChangeState(PlayerStates.DEAD);
-
+        Debug.Log("morreu");
         if (OnPlayerDied != null)
         {
             OnPlayerDied();

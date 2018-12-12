@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -69,6 +70,7 @@ namespace Assets.Scripts.Multiplayer
         //
         private Teams _playerTeam;
         private MultiplayerCarManager _localPlayer;
+        private List<MultiplayerCarManager> _playersList = new List<MultiplayerCarManager>();
 
         public MultiplayerCarManager localPlayer
         {
@@ -78,6 +80,17 @@ namespace Assets.Scripts.Multiplayer
             }
         }
         #endregion
+
+        public void AddConnectedPlayer(MultiplayerCarManager player)
+        {
+            if (isServer)
+            {
+                player.PlayerId = _playersList.Count + 1;
+            }
+
+            _playersList.Add(player);
+        }
+
 
         public void SetCarManager(MultiplayerCarManager car)
         {
@@ -191,7 +204,11 @@ namespace Assets.Scripts.Multiplayer
             return new Vector3(0, 5, 0);
         }
 
-
+        [Server]
+        public void KillSomeone(int playerId)
+        {
+            _playersList.Find(s => s.PlayerId == playerId).Killed();
+        }
         #region States
         private void OnEndLevel()
         {

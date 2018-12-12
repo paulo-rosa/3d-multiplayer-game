@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Multiplayer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,10 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     private Health _carHealth;
     private CannonShooting[] _cannonsShooting;
 
+    private MultiplayerCarManager _carManager;
+
     public event Action OnHealthChange;
+
 
     // Use this for initialization
     void Start()
@@ -36,6 +40,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         _carHealth = GetComponent<Health>();
         _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
         _cannonsShooting = GetComponentsInChildren<CannonShooting>();
+        _carManager = GetComponent<MultiplayerCarManager>();
     }
 
     // Update is called once per frame
@@ -130,7 +135,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
             if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.Timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
             {
                 var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == cannonShooting.tag).FirstOrDefault();
-                cannon.Shoot(cannon.tag == "CannonCenter", temp);
+                cannon.Shoot(cannon.tag == "CannonCenter", temp, false);
 
                 CmdFire(cannonShooting.tag, temp);
             }
@@ -140,6 +145,9 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     [Command]
     private void CmdFire(string objTag, Vector3 mousePosition)
     {
+        var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
+        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, true);
+
         RpcFire(objTag, mousePosition);
     }
 
@@ -152,7 +160,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         }
 
         var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
-        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition);
+        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, false);
     }
 
     public void SetIsFalling(bool value)
