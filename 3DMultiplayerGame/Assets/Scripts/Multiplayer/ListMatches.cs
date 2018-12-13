@@ -33,6 +33,10 @@ public class ListMatches : MonoBehaviour {
     private void Update ()
     {
         _timeCount += Time.deltaTime;
+        if(_myNetworkManager.matchMaker == null)
+        {
+            _myNetworkManager.StartMatchMaker();
+        }
 
         if(_timeCount >= _timeToUpdate)
         {

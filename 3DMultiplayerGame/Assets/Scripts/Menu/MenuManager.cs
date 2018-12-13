@@ -28,6 +28,10 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        if(_instance != null)
+        {
+            Destroy(this.gameObject);
+        }
         DontDestroyOnLoad(this);
         _currentScreen = Screens.MAIN_MENU;
     }

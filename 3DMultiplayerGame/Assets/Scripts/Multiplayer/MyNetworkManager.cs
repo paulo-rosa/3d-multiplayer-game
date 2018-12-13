@@ -162,11 +162,13 @@ public class MyNetworkManager : NetworkManager
         {
             StopMatchMaker();
             StopHost();
+            _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
         }
         else
         {
             StopMatchMaker();
             StopClient();
+            _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
         }
     }
 
