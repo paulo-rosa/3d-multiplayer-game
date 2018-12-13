@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -109,10 +110,10 @@ namespace Assets.Scripts.Multiplayer
             _multiplayerInterface = MultiplayerInterface.Instance;
             _myNetworkManager = MyNetworkManager.Instance;
             _isServer = MyNetworkManager._IsServer;
-
+            UpdateScoreBoard();
 
         }
-
+        
         private void OnSceneEnter()
         {
             CmdPlayerInScene();
@@ -205,11 +206,37 @@ namespace Assets.Scripts.Multiplayer
         }
 
         [Server]
-        public void KillSomeone(int playerId)
+        public void KillSomeone(int shooterId, int deadId)
         {
-            _playersList.Find(s => s.PlayerId == playerId).Killed();
+           var shooter = _playersList.Find(s => s.PlayerId == shooterId);
+            shooter.KillSomeone();
 
+            var victim = _playersList.Find(s => s.PlayerId == deadId);
+            victim.Died();
+
+            RpcUpdateScoreBoard();
         }
+
+        [ClientRpc]
+        private void RpcUpdateScoreBoard()
+        {
+            UpdateScoreBoard();
+        }
+
+
+        public void UpdateScoreBoard()
+        {
+            List<ScoreDTO> scores = new List<ScoreDTO>();
+
+            foreach(var player in _playersList)
+            {
+                ScoreDTO  score = new ScoreDTO(player.PlayerName, player.Kills, player.Deaths);
+                scores.Add(score);
+            }
+            scores = scores.OrderByDescending(x => x.Kills).ToList();
+            LeaderBoardManager.Instance.UpdateScoreBoard(scores);
+        }
+
         #region States
         private void OnEndLevel()
         {

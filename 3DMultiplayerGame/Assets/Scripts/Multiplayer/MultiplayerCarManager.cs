@@ -12,13 +12,52 @@ namespace Assets.Scripts.Multiplayer
         private CarBehaviour _carBehaviour;
 
         [SyncVar]
+        private string _playerName;
+
+        public string PlayerName
+        {
+            get
+            {
+                return _playerName;
+            }
+            set
+            {
+                _playerName = value;
+            }
+        }
+        [SyncVar(hook = "OnDeathUpdated")]
         private int _death = 0;
 
-        [SyncVar]
-        private int _victims = 0;
+        public int Deaths
+        {
+            get
+            {
+                return _death;
+            }
+            set
+            {
+                _death = value;
+            }
+        }
+
+        [SyncVar(hook ="OnKillUpdated")]
+        private int _kills = 0;
+
+        public int Kills
+        {
+            get
+            {
+                return _kills;
+            }
+            set
+            {
+                _kills = value;
+            }
+        }
 
         [SyncVar]
         private int _playerId;
+
         public int PlayerId
         {
             get
@@ -29,12 +68,6 @@ namespace Assets.Scripts.Multiplayer
             {
                 _playerId = value;
             }
-        }
-
-        public override void OnStartAuthority()
-        {
-            base.OnStartAuthority();
-
         }
 
         
@@ -60,10 +93,6 @@ namespace Assets.Scripts.Multiplayer
 
         public void OnPlayerDie()
         {
-            if (isServer)
-            {
-                _death++;
-            }
             if (hasAuthority)
             {
                 ReSpawnCar(); 
@@ -84,13 +113,27 @@ namespace Assets.Scripts.Multiplayer
 
         public void Died()
         {
+            _death++;
+            Debug.LogFormat("Player {0} was killed for the {1} time. Loser", PlayerId, _death);
 
         }
 
-        public void Killed()
+        public void KillSomeone()
         {
-            _victims++;
+            _kills++;
+            Debug.LogFormat("Player {0} killed someone for the {1}th time", PlayerId, _kills);
             //UpdatePlacar;
+        }
+
+        private void OnKillUpdated(int kill)
+        {
+            _kills = kill;
+            _gameManager.UpdateScoreBoard();
+        }
+        private void OnDeathUpdated(int death)
+        {
+            _death = death;
+            _gameManager.UpdateScoreBoard();
         }
     }
 
