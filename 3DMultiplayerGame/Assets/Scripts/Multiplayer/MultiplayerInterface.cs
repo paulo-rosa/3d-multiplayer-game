@@ -22,16 +22,6 @@ public class MultiplayerInterface : MonoBehaviour
 
     public Text _txtTimer;
 
-	private void Start ()
-    {
-		
-	}
-	
-	private void Update ()
-    {
-		
-	}
-
     internal void UpdateTime(float timerCounter)
     {
         var time = (int)timerCounter;

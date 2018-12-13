@@ -93,6 +93,7 @@ namespace Assets.Scripts.Multiplayer
             }
 
             _playersList.Add(player);
+            UpdateScoreBoard();
         }
 
 
@@ -113,8 +114,6 @@ namespace Assets.Scripts.Multiplayer
             _multiplayerInterface = MultiplayerInterface.Instance;
             _myNetworkManager = MyNetworkManager.Instance;
             _isServer = MyNetworkManager._IsServer;
-            UpdateScoreBoard();
-
         }
         
         //private void OnSceneEnter()
