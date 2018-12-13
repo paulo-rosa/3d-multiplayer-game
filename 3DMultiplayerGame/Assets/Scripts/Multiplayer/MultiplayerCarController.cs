@@ -38,9 +38,10 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         _carCollision = GetComponent<CarCollision>();
         Car.transform = GetComponent<Transform>();
         _carHealth = GetComponent<Health>();
-        _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
         _cannonsShooting = GetComponentsInChildren<CannonShooting>();
         _carManager = GetComponent<MultiplayerCarManager>();
+        _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
+
     }
 
     // Update is called once per frame

@@ -57,7 +57,7 @@ public class Health : NetworkBehaviour
             RpcTakeHealth(currentHealth);
             if(currentHealth <= 0)
             {
-                MultiplayerGameManager.Instance.KillSomeone(shooter);
+                MultiplayerGameManager.Instance.KillSomeone(shooter, GetComponent<MultiplayerCarManager>().PlayerId);
             }
         }
         return;

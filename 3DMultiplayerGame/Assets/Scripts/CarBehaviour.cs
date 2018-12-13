@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Multiplayer;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -62,9 +63,12 @@ public class CarBehaviour : NetworkBehaviour
     {
         ChangeState(PlayerStates.DEAD);
         Debug.Log("morreu");
-        if (OnPlayerDied != null)
+        if (hasAuthority)
         {
-            OnPlayerDied();
+            if (OnPlayerDied != null)
+            {
+                OnPlayerDied();
+            }
         }
 
     }

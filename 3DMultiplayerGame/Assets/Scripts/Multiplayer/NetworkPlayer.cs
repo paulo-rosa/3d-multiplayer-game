@@ -159,6 +159,7 @@ public class NetworkPlayer : NetworkBehaviour
     {
         Debug.Log("CmdClientReadyInScene");
         GameObject playerObject = Instantiate(playerPrefab);
+        playerObject.GetComponent<MultiplayerCarManager>().PlayerName = _playerName;
         NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
     }
     #endregion
