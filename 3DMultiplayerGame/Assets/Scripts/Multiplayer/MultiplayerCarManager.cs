@@ -70,16 +70,11 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        private bool _initialized = false;
-
-
         private void Start()
         {
             _carBehaviour = GetComponent<CarBehaviour>();
-
             _gameManager = MultiplayerGameManager.Instance;
             _gameManager.AddConnectedPlayer(this);
-            
         }
 
         private void Initialize()
@@ -88,10 +83,9 @@ namespace Assets.Scripts.Multiplayer
 
             if (_carBehaviour.hasAuthority)
             {
-
+                _gameManager.CmdPlayerConnected();
+                _gameManager.SetCarManager(this);
             }
-
-            
         }
 
 
@@ -112,12 +106,8 @@ namespace Assets.Scripts.Multiplayer
         
         void Update()
         {
-            if (!_initialized && hasAuthority)
-            {
-                _gameManager.CmdPlayerConnected();
-                _gameManager.SetCarManager(this);
-                _initialized = true;
-            }
+            Debug.Log("Has authority:" + hasAuthority);
+            Debug.Log("Car Behaviour Has authority:" + _carBehaviour.hasAuthority);
 
         }
 
@@ -125,7 +115,6 @@ namespace Assets.Scripts.Multiplayer
         {
             _death++;
             Debug.LogFormat("Player {0} was killed for the {1} time. Loser", PlayerId, _death);
-
         }
 
         public void KillSomeone()

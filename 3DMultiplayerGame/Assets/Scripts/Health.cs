@@ -128,10 +128,6 @@ public class Health : NetworkBehaviour
 
                 Destroy(gameObject, ExplosionSound.length);
             }
-            else
-            {
-
-            }
         }
         else
         {
