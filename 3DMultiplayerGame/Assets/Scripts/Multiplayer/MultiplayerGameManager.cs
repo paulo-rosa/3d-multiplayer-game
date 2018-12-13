@@ -106,7 +106,6 @@ namespace Assets.Scripts.Multiplayer
         public void CmdPlayerConnected()
         {
             _playerInScene++;
-            StartTimer();
         }
 
         private void Start()
@@ -116,10 +115,7 @@ namespace Assets.Scripts.Multiplayer
             _isServer = MyNetworkManager._IsServer;
         }
         
-        //private void OnSceneEnter()
-        //{
-        //    CmdPlayerInScene();
-        //} 
+
 
         private void OnPlayersInSceneChanged(int value)
         {
@@ -162,13 +158,6 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        //[Command]
-        //private void CmdPlayerInScene()
-        //{
-        //    _playerInScene++;
-        //    RpcPlayersInScene(_playerInScene);
-        //    StartTimer();
-        //}
 
         [ClientRpc]
         private void RpcPlayersInScene(int value)
@@ -239,6 +228,17 @@ namespace Assets.Scripts.Multiplayer
             LeaderBoardManager.Instance.UpdateScoreBoard(scores);
         }
 
+        //[Command]
+        //private void CmdPlayerInScene()
+        //{
+        //    _playerInScene++;
+        //    RpcPlayersInScene(_playerInScene);
+        //    StartTimer();
+        //}
+        //private void OnSceneEnter()
+        //{
+        //    CmdPlayerInScene();
+        //} 
         #region States
         private void OnEndLevel()
         {

@@ -70,26 +70,30 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        
-        void Start()
+        private bool _initialized = false;
+
+
+        private void Start()
         {
             _carBehaviour = GetComponent<CarBehaviour>();
 
             _gameManager = MultiplayerGameManager.Instance;
             _gameManager.AddConnectedPlayer(this);
-            Initialize();
+            
         }
 
         private void Initialize()
         {
             _carBehaviour.OnPlayerDied += OnPlayerDie;
 
-            if (hasAuthority)
+            if (_carBehaviour.hasAuthority)
             {
-                _gameManager.CmdPlayerConnected();
-                _gameManager.SetCarManager(this);
+
             }
+
+            
         }
+
 
         public void OnPlayerDie()
         {
@@ -108,6 +112,12 @@ namespace Assets.Scripts.Multiplayer
         
         void Update()
         {
+            if (!_initialized && hasAuthority)
+            {
+                _gameManager.CmdPlayerConnected();
+                _gameManager.SetCarManager(this);
+                _initialized = true;
+            }
 
         }
 
