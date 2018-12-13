@@ -55,7 +55,7 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        [SyncVar]
+        [SyncVar(hook ="OnPlayerIdUpdated")]
         private int _playerId;
 
         public int PlayerId
@@ -134,6 +134,10 @@ namespace Assets.Scripts.Multiplayer
         {
             _death = death;
             _gameManager.UpdateScoreBoard();
+        }
+        private void OnPlayerIdUpdated(int id)
+        {
+            _playerId = id;
         }
     }
 

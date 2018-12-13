@@ -60,10 +60,13 @@ namespace Assets.Scripts.Multiplayer
         private const float ROUND_TIME = 180;
         private MultiplayerInterface _multiplayerInterface;
         private float _timerCounter;
+
         [SyncVar]
         private bool _isTimerEnabled = false;
+
         [SyncVar(hook = "OnPlayersInSceneChanged")]
         private int _playerInScene = 0;
+
         private bool _isServer;
 
         #region multiplayer variables
@@ -114,10 +117,10 @@ namespace Assets.Scripts.Multiplayer
 
         }
         
-        private void OnSceneEnter()
-        {
-            CmdPlayerInScene();
-        } 
+        //private void OnSceneEnter()
+        //{
+        //    CmdPlayerInScene();
+        //} 
 
         private void OnPlayersInSceneChanged(int value)
         {
@@ -160,13 +163,13 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        [Command]
-        private void CmdPlayerInScene()
-        {
-            _playerInScene++;
-            RpcPlayersInScene(_playerInScene);
-            StartTimer();
-        }
+        //[Command]
+        //private void CmdPlayerInScene()
+        //{
+        //    _playerInScene++;
+        //    RpcPlayersInScene(_playerInScene);
+        //    StartTimer();
+        //}
 
         [ClientRpc]
         private void RpcPlayersInScene(int value)
