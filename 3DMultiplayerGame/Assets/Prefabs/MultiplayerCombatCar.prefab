@@ -478,7 +478,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000666976618354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.862495, y: 5.8963547, z: 123.95279}
+  m_LocalPosition: {x: 263, y: 5.8963547, z: 167}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4205363046357776}
@@ -1165,7 +1165,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1256,13 +1256,13 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000666976618354}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fde3635a814919e459d377d0a3a1b8fb, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
-  m_Pitch: 1
+  m_Pitch: 0.2
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -1355,7 +1355,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1776,6 +1776,11 @@ MonoBehaviour:
   _jumpForce: {x: 0, y: 3, z: 0}
   _speed: 0
   _turn: 0
+  GearRatio:
+  - 0
+  - 25
+  - 50
+  EngineSound: {fileID: 8300000, guid: fde3635a814919e459d377d0a3a1b8fb, type: 3}
 --- !u!114 &114310427882905892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1787,7 +1792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c629231022c09034fb6c9186bd9be3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarPrefab: {fileID: 0}
 --- !u!114 &114369046052620488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1886,7 +1890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb468cf2ebff75469509d0b095436d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   destroyOnDeath: 0
   ExplosionSound: {fileID: 8300000, guid: 339bfdeae6e3c724d8aa6b3558cc97e5, type: 3}
   GotShotSound: {fileID: 8300000, guid: dbea8252d5d9f5e408ae995e9a5faa3e, type: 3}

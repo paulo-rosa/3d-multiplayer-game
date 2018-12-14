@@ -25,11 +25,13 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     private bool _isFalling = false;
     private Health _carHealth;
     private CannonShooting[] _cannonsShooting;
-
     private MultiplayerCarManager _carManager;
-
     public event Action OnHealthChange;
-
+    public float[] GearRatio;//determines how many gears the car has, and at what speed the car shifts to the appropriate gear
+    private AudioSource[] _audioSources;
+    public AudioClip EngineSound;
+    private int gear;//current gear
+    private AudioSource _engineAudioSource;
 
     // Use this for initialization
     void Start()
@@ -41,7 +43,8 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         _cannonsShooting = GetComponentsInChildren<CannonShooting>();
         _carManager = GetComponent<MultiplayerCarManager>();
         _carHealth.OnHealthChange += _carHealth.OnHealthChanged;
-
+        _audioSources = GetComponents<AudioSource>();
+        _engineAudioSource = _audioSources.Where(a => a.clip == EngineSound).FirstOrDefault();
     }
 
     // Update is called once per frame
@@ -57,6 +60,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Jump();
         Fire();
         FixRotation();
+        PlayEngineSound();
     }
 
     private void FixRotation()
@@ -83,7 +87,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         }
         else if (!_carCollision.BackCollision() && !_carCollision.FrontCollision())
         {
-            _speed = Mathf.MoveTowards(_speed, 0, 2f);
+            _speed = Mathf.MoveTowards(_speed, 0, 0.5f);
         }
         else if (_carCollision.BackCollision())
         {
@@ -148,6 +152,44 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
                 CmdFire(cannonShooting.tag, _carManager.PlayerId,
                     position, ray, transformPosition);
             }
+        }
+    }
+
+    void PlayEngineSound()
+    {
+        for (int i = 0; i < GearRatio.Length; i++)
+        {
+            if (GearRatio[i] > _speed)
+            {
+                break;
+            }
+
+            float minGearValue = 0f;
+            float maxGearValue = 0f;
+            if (i == 0)
+            {
+                minGearValue = 0f;
+            }
+            else
+            {
+                minGearValue = GearRatio[i];
+            }
+
+            if (GearRatio.Length > i + 1)
+            {
+                maxGearValue = GearRatio[i + 1];
+            }
+
+            float pitch = ((_speed - minGearValue) / (maxGearValue - minGearValue) + 0.3f * (gear + 1));
+
+            Debug.Log("GEAR" + gear);
+            Debug.Log("MIN" + minGearValue);
+            Debug.Log("MAX" + maxGearValue);
+            Debug.Log("SPEED" + _speed);
+
+            _engineAudioSource.pitch = pitch;
+
+            gear = i;
         }
     }
 

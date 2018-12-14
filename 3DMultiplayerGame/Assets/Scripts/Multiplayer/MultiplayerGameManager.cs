@@ -57,7 +57,7 @@ namespace Assets.Scripts.Multiplayer
         public Transform _spawnPosition;
 
         private MyNetworkManager _myNetworkManager;
-        private const float ROUND_TIME = 10;
+        private const float ROUND_TIME = 1000;
         private MultiplayerInterface _multiplayerInterface;
         private float _timerCounter;
 
