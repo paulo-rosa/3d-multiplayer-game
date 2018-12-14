@@ -11,7 +11,7 @@ public class CannonShooting : MonoBehaviour
 {
     public int damagePerShot = 20;                          // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;                // The time between each shot.
-    public float range = 100f;                              // The distance the gun can fire.
+    public float range = Mathf.Infinity;                              // The distance the gun can fire.
     public Cannontype cannonType = Cannontype.staticCannon;
     public Light faceLight;
     public LayerMask shootableMask;
@@ -42,7 +42,6 @@ public class CannonShooting : MonoBehaviour
         Timer = 0f;
 
         // Play the gun shot audioclip.
-        Debug.Log("deu ruim");
         gunAudio.Play();
 
         // Enable the lights.
