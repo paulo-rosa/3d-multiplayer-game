@@ -21,7 +21,6 @@ public class CarCollision : MonoBehaviour {
     private void Start ()
     {
         _objectScale = _collider.transform.localScale;
-        Debug.Log(_objectScale);
     }
 
     private void Update ()
@@ -65,15 +64,12 @@ public class CarCollision : MonoBehaviour {
         if (Physics.Raycast(frontLeft, transform.TransformDirection(Vector3.forward), (_objectScale.z * .62f) * _collider.size.z, Layer))
         {
             return true;
-
         }
 
         if (Physics.Raycast(frontRight, transform.TransformDirection(Vector3.forward), (_objectScale.z * .62f) * _collider.size.z, Layer))
         {
             return true;
-
         }
-
         return false;
     }
 

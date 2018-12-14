@@ -20,11 +20,36 @@ public class MultiplayerInterface : MonoBehaviour
         }
     }
 
-    public Text _txtTimer;
-
+    public Text txtTimer;
+    public Text txtCounter;
+    public Text txtWinner;
+    public GameObject EndPanel;
+    private float _counter;
+    private bool _finalCounter = false;
     internal void UpdateTime(float timerCounter)
     {
         var time = (int)timerCounter;
-        _txtTimer.text = time.ToString();
+        txtTimer.text = time.ToString();
+    }
+
+    public void ShowEndPanel(string winner)
+    {
+        EndPanel.SetActive(true);
+        txtWinner.text = winner;
+        _counter = 5f;
+    }
+
+    public void UpdateCounter(int seconds)
+    {
+        txtCounter.text = "Leaving in... " + seconds;
+    }
+
+    private void Update()
+    {
+        if (_finalCounter)
+        {
+            _counter -= Time.deltaTime;
+            UpdateCounter((int)_counter);
+        }
     }
 }

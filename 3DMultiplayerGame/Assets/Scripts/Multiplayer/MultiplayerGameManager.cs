@@ -15,7 +15,7 @@ namespace Assets.Scripts.Multiplayer
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = FindObjectOfType<MultiplayerGameManager>();
                 }
@@ -24,7 +24,7 @@ namespace Assets.Scripts.Multiplayer
         }
 
         public GameObject CarPrefab;
-        public event Action<GameState> OnStateChange; 
+        public event Action<GameState> OnStateChange;
         private UserInterfaceManager _userInterfaceManager;
         private GameState _currentState;
 
@@ -57,7 +57,7 @@ namespace Assets.Scripts.Multiplayer
         public Transform _spawnPosition;
 
         private MyNetworkManager _myNetworkManager;
-        private const float ROUND_TIME = 180;
+        private const float ROUND_TIME = 10;
         private MultiplayerInterface _multiplayerInterface;
         private float _timerCounter;
 
@@ -75,7 +75,7 @@ namespace Assets.Scripts.Multiplayer
         private Teams _playerTeam;
         private MultiplayerCarManager _localPlayer;
         private List<MultiplayerCarManager> _playersList = new List<MultiplayerCarManager>();
-
+        private List<ScoreDTO> scores = new List<ScoreDTO>();
         public MultiplayerCarManager localPlayer
         {
             get
@@ -85,17 +85,28 @@ namespace Assets.Scripts.Multiplayer
         }
         #endregion
 
+        private void Start()
+        {
+            _multiplayerInterface = MultiplayerInterface.Instance;
+            _myNetworkManager = MyNetworkManager.Instance;
+            _isServer = MyNetworkManager._IsServer;
+            if (_isServer)
+            {
+                StartTimer();
+            }
+        }
+
         public void AddConnectedPlayer(MultiplayerCarManager player)
         {
             if (isServer)
             {
                 player.PlayerId = _playersList.Count + 1;
+                RpcUpdateClientTime(_timerCounter);
             }
 
             _playersList.Add(player);
             UpdateScoreBoard();
         }
-
 
         public void SetCarManager(MultiplayerCarManager car)
         {
@@ -108,22 +119,9 @@ namespace Assets.Scripts.Multiplayer
             _playerInScene++;
         }
 
-        private void Start()
-        {
-            _multiplayerInterface = MultiplayerInterface.Instance;
-            _myNetworkManager = MyNetworkManager.Instance;
-            _isServer = MyNetworkManager._IsServer;
-        }
-        
-
-
         private void OnPlayersInSceneChanged(int value)
         {
             _playerInScene = value;
-            if (_isServer)
-            {
-                StartTimer();
-            }
         }
 
         private void Update()
@@ -139,25 +137,25 @@ namespace Assets.Scripts.Multiplayer
                 _multiplayerInterface.UpdateTime(_timerCounter);
             }
 
-            if(isServer && _timerCounter <= 0 && _isTimerEnabled)
+            if (isServer && _timerCounter <= 0 && _isTimerEnabled)
             {
+                EndGame();
                 RpcEndRoud();
             }
         }
 
         private void StartTimer()
         {
-            if (_playerInScene < _myNetworkManager.ConnectedPlayerCount())
-                return;
-
-            if (MyNetworkManager._IsServer)
-            {
-                _timerCounter = ROUND_TIME;
-                _isTimerEnabled = true;
-                RpcStartTimer(_timerCounter, _isTimerEnabled);
-            }
+            _timerCounter = ROUND_TIME;
+            _isTimerEnabled = true;
+            RpcStartTimer(_timerCounter, _isTimerEnabled);
         }
 
+        [ClientRpc]
+        private void RpcUpdateClientTime(float time)
+        {
+            _timerCounter = time - 1;
+        }
 
         [ClientRpc]
         private void RpcPlayersInScene(int value)
@@ -186,11 +184,6 @@ namespace Assets.Scripts.Multiplayer
             _isTimerEnabled = isTimerEnable;
         }
 
-        private void Teste()
-        {
-            Debug.Log("tete");
-        }
-
         public Vector3 GetSpawnPosition()
         {
             return new Vector3(0, 5, 0);
@@ -217,7 +210,7 @@ namespace Assets.Scripts.Multiplayer
 
         public void UpdateScoreBoard()
         {
-            List<ScoreDTO> scores = new List<ScoreDTO>();
+            
 
             foreach(var player in _playersList)
             {
@@ -238,7 +231,25 @@ namespace Assets.Scripts.Multiplayer
         //private void OnSceneEnter()
         //{
         //    CmdPlayerInScene();
-        //} 
+        //}
+
+        private void EndGame()
+        {
+            _localPlayer.RpcEndGame();
+            RpcShowEndPanel();
+        }
+        private string GetWinner()
+        {
+            UpdateScoreBoard();
+            return scores[0].PlayerName;
+        }
+
+        [ClientRpc]
+        private void RpcShowEndPanel()
+        {
+            _multiplayerInterface.ShowEndPanel(GetWinner());
+
+        }
         #region States
         private void OnEndLevel()
         {

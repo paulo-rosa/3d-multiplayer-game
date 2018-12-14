@@ -25,6 +25,7 @@ namespace Assets.Scripts.Multiplayer
                 _playerName = value;
             }
         }
+
         [SyncVar(hook = "OnDeathUpdated")]
         private int _death = 0;
 
@@ -70,24 +71,25 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
+        private bool _isInitialized;
         private void Start()
         {
             _carBehaviour = GetComponent<CarBehaviour>();
             _gameManager = MultiplayerGameManager.Instance;
             _gameManager.AddConnectedPlayer(this);
+            Initialize();
         }
 
         private void Initialize()
         {
             _carBehaviour.OnPlayerDied += OnPlayerDie;
 
-            if (_carBehaviour.hasAuthority)
+            if (hasAuthority)
             {
                 _gameManager.CmdPlayerConnected();
                 _gameManager.SetCarManager(this);
             }
         }
-
 
         public void OnPlayerDie()
         {
@@ -97,18 +99,20 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-
         private void ReSpawnCar()
         {
             transform.position = SpawnsPoints.Instance.GetSpawnPoint().position;
         }
-
         
         void Update()
         {
-            Debug.Log("Has authority:" + hasAuthority);
-            Debug.Log("Car Behaviour Has authority:" + _carBehaviour.hasAuthority);
 
+            if (!_isInitialized && hasAuthority)
+            {
+                _gameManager.CmdPlayerConnected();
+                _gameManager.SetCarManager(this);
+                _isInitialized = true;
+            }
         }
 
         public void Died()
@@ -137,6 +141,12 @@ namespace Assets.Scripts.Multiplayer
         private void OnPlayerIdUpdated(int id)
         {
             _playerId = id;
+        }
+
+        [ClientRpc]
+        public void RpcEndGame()
+        {
+            Time.timeScale = 0;
         }
     }
 
