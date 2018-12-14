@@ -197,7 +197,6 @@ public class MyNetworkManager : NetworkManager
     {
         if (success)
         {
-            
              _menuManager.SwitchScreen(Screens.MULTIPLAYER_MENU);
         }
     }
