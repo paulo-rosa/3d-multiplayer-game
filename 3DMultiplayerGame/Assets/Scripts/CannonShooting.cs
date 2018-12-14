@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Multiplayer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,12 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CannonShooting: MonoBehaviour
+public class CannonShooting : MonoBehaviour
 {
     public int damagePerShot = 20;                          // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;                // The time between each shot.
     public float range = 100f;                              // The distance the gun can fire.
-    public Cannontype cannonType = Cannontype.staticCannon; 
+    public Cannontype cannonType = Cannontype.staticCannon;
     public Light faceLight;
     public LayerMask shootableMask;
     public float Timer { get; set; }                        // A timer to determine when to fire.
@@ -23,7 +24,6 @@ public class CannonShooting: MonoBehaviour
     private Light gunLight;                                 // Reference to the light component.
     public float effectsDisplayTime = 0.2f;                 // The proportion of the timeBetweenBullets that the effects will display for.
     private NetworkBehaviour _parentBehaviour;
-
     void Awake()
     {
         // Create a layer mask for the Shootable layer.
@@ -34,19 +34,15 @@ public class CannonShooting: MonoBehaviour
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
         _parentBehaviour = transform.root.GetComponent<NetworkBehaviour>();
-        //faceLight = GetComponentInChildren<Light> ();
     }
-    
-    public void Shoot(bool centerCannon, Vector3 mousePosition, bool giveDamage, int shooter)
-    {
-        // Set this to be the distance you want the object to be placed in front of the camera.
-        var position = Camera.main.ScreenToWorldPoint(mousePosition);
-        position.z = 10f;
 
+    public void Shoot(bool centerCannon, int shooter, Vector3 worldPosition, Ray centerCannonRay, Vector3 transformPosition)
+    {
         // Reset the timer.
         Timer = 0f;
 
         // Play the gun shot audioclip.
+        Debug.Log("deu ruim");
         gunAudio.Play();
 
         // Enable the lights.
@@ -59,38 +55,37 @@ public class CannonShooting: MonoBehaviour
 
         // Enable the line renderer and set it's first position to be the end of the gun.
         gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
-
-        // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-        shootRay.origin = transform.position;
+        gunLine.SetPosition(0, transformPosition);
 
         if (centerCannon)
         {
-
-            shootRay = Camera.main.ScreenPointToRay(position);
+            shootRay = centerCannonRay;
         }
         else
         {
+            shootRay.origin = transformPosition;
             shootRay.direction = transform.forward;
         }
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-        
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
-            if (!giveDamage)
-                return;
-            // Try and find an EnemyHealth script on the gameobject hit.
-            Health enemyHealth = shootHit.collider.GetComponentInParent<Health>();
+            var carManager = shootHit.collider.transform.root.GetComponent<MultiplayerCarManager>();
 
-
-            // If the EnemyHealth component exist...
-            if (enemyHealth != null)
+            if (carManager != null && shooter != carManager.PlayerId)
             {
-                
-                // ... the enemy should take damage.
-                if(enemyHealth.currentHealth > 0)
-                    enemyHealth.TakeDamage(damagePerShot, shooter);
+                // Try and find an EnemyHealth script on the gameobject hit.
+                Health enemyHealth = shootHit.collider.GetComponentInParent<Health>();
+
+                // If the EnemyHealth component exist...
+                if (enemyHealth != null)
+                {
+                    // ... the enemy should take damage.
+                    if (enemyHealth.currentHealth > 0)
+                    {
+                        enemyHealth.TakeDamage(damagePerShot, shooter);
+                    }
+                }
             }
 
             // Set the second position of the line renderer to the point the raycast hit.
@@ -102,7 +97,7 @@ public class CannonShooting: MonoBehaviour
             if (centerCannon)
             {
                 // ... set the second position of the line renderer to the fullest extent of the gun's range.
-                gunLine.SetPosition(1, position);
+                gunLine.SetPosition(1, worldPosition);
             }
             else
             {
@@ -124,8 +119,8 @@ public class CannonShooting: MonoBehaviour
 
     public IEnumerator DisableEfectsCoroutine()
     {
-        yield return new WaitForSeconds(timeBetweenBullets * effectsDisplayTime);        
-        DisableEffects();        
+        yield return new WaitForSeconds(timeBetweenBullets * effectsDisplayTime);
+        DisableEffects();
     }
 
 }

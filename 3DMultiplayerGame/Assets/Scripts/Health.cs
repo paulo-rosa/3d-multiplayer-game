@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Multiplayer;
 using System;
-using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -60,15 +59,9 @@ public class Health : NetworkBehaviour
                 MultiplayerGameManager.Instance.KillSomeone(shooter, GetComponent<MultiplayerCarManager>().PlayerId);
             }
         }
+
         return;
     }
-
-    //[Command]
-    //private void CmdTakeHealth(int health)
-    //{
-    //    currentHealth = health;
-    //    RpcTakeHealth(currentHealth);
-    //}
 
     [ClientRpc]
     private void RpcTakeHealth(int health)
