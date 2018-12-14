@@ -136,9 +136,13 @@ namespace Assets.Scripts.Multiplayer
                 _timerCounter -= Time.deltaTime;
                 _multiplayerInterface.UpdateTime(_timerCounter);
             }
-
-            if (isServer && _timerCounter <= 0 && _isTimerEnabled)
+            if (_timerCounter <= 0)
             {
+                Debug.Log("dsadas");
+            }
+            if (_isServer && _timerCounter <= 0 && _isTimerEnabled)
+            {
+                _isTimerEnabled = false;
                 EndGame();
                 RpcEndRoud();
             }
@@ -210,8 +214,7 @@ namespace Assets.Scripts.Multiplayer
 
         public void UpdateScoreBoard()
         {
-            
-
+            scores.Clear();
             foreach(var player in _playersList)
             {
                 ScoreDTO  score = new ScoreDTO(player.PlayerName, player.Kills, player.Deaths);
@@ -250,6 +253,12 @@ namespace Assets.Scripts.Multiplayer
             _multiplayerInterface.ShowEndPanel(GetWinner());
 
         }
+
+        public void LeaveToLobby()
+        {
+            MenuManager.Instance.SwitchScreen(Screens.MULTIPLAYER_MENU);
+        }
+
         #region States
         private void OnEndLevel()
         {

@@ -106,12 +106,9 @@ namespace Assets.Scripts.Multiplayer
         
         void Update()
         {
-
-            if (!_isInitialized && hasAuthority)
+            if(_gameManager.localPlayer == null && hasAuthority)
             {
-                _gameManager.CmdPlayerConnected();
                 _gameManager.SetCarManager(this);
-                _isInitialized = true;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Multiplayer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class MultiplayerInterface : MonoBehaviour
     public GameObject EndPanel;
     private float _counter;
     private bool _finalCounter = false;
+
     internal void UpdateTime(float timerCounter)
     {
         var time = (int)timerCounter;
@@ -34,9 +36,14 @@ public class MultiplayerInterface : MonoBehaviour
 
     public void ShowEndPanel(string winner)
     {
-        EndPanel.SetActive(true);
-        txtWinner.text = winner;
-        _counter = 5f;
+        if(EndPanel.activeSelf == false)
+        {
+            EndPanel.SetActive(true);
+            txtWinner.text = winner;
+            _finalCounter = true;
+            _counter = 5f;
+        }
+        
     }
 
     public void UpdateCounter(int seconds)
@@ -46,10 +53,16 @@ public class MultiplayerInterface : MonoBehaviour
 
     private void Update()
     {
-        if (_finalCounter)
+       if (_finalCounter)
         {
-            _counter -= Time.deltaTime;
+            _counter -= Time.unscaledDeltaTime;
             UpdateCounter((int)_counter);
+            if (_counter <= 0)
+            {
+                MultiplayerGameManager.Instance.LeaveToLobby();
+            }
         }
+
+        
     }
 }
