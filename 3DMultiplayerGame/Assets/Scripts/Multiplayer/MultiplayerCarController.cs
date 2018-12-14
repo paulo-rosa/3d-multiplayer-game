@@ -62,6 +62,15 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         Fire();
         FixRotation();
         PlayEngineSound();
+        FixPosition();
+    }
+
+    private void FixPosition()
+    {
+        if(transform.position.y < -100)
+        {
+            transform.position = new Vector3(0, 10, 0);
+        }
     }
 
     private void FixRotation()

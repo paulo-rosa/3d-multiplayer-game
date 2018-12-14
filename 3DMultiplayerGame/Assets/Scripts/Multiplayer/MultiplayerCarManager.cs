@@ -83,6 +83,10 @@ namespace Assets.Scripts.Multiplayer
         private void Initialize()
         {
             _carBehaviour.OnPlayerDied += OnPlayerDie;
+            if (hasAuthority)
+            {
+                ReSpawnCar();
+            }
 
             if (hasAuthority)
             {
@@ -99,7 +103,7 @@ namespace Assets.Scripts.Multiplayer
             }
         }
 
-        private void ReSpawnCar()
+        public void ReSpawnCar()
         {
             transform.position = SpawnsPoints.Instance.GetSpawnPoint().position;
         }

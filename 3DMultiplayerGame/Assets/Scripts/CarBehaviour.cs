@@ -9,6 +9,7 @@ public class CarBehaviour : NetworkBehaviour
     public GameObject CarGraphics;
     public Transform PivotPoint;
 
+    private MultiplayerCarManager _carManager;
     private MyCarController _carController;
     private Health _health;
     private IGameManager _gameManager;
@@ -23,6 +24,7 @@ public class CarBehaviour : NetworkBehaviour
         _carController = GetComponent<MyCarController>();
         _rigidBody = GetComponentInChildren<Rigidbody>();
         _gameManager = GeneralThings.FindGameManager();
+        _carManager = GetComponent<MultiplayerCarManager>();
         _health = GetComponent<Health>();
         _health.OnDie += PlayerDie;
         transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -34,7 +36,7 @@ public class CarBehaviour : NetworkBehaviour
     {
         Camera.main.GetComponent<CameraFollow>().SetTheTarget(this.gameObject);
         Camera.main.GetComponent<CameraFollow>().SetTarget(PivotPoint);
-
+        _carManager.ReSpawnCar();
         //_carController = GetComponent<MyCarController>();
         //_rigidBody = GetComponentInChildren<Rigidbody>();
         //_gameManager = GeneralThings.FindGameManager();
@@ -51,6 +53,7 @@ public class CarBehaviour : NetworkBehaviour
         if(!_assigned && hasAuthority)
         {
             Assign();
+            _assigned = true;
         }
     }
 
