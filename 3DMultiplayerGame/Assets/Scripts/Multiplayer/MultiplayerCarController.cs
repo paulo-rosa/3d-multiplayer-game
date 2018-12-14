@@ -19,6 +19,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
     [SerializeField]
     private Vector3 _jumpForce = new Vector3(0, 3, 0);
     private Rigidbody _rigidbody;
+    [SyncVar]
     public float _speed;
     public float _turn;
     private CarCollision _carCollision;
