@@ -182,11 +182,6 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
 
             float pitch = ((_speed - minGearValue) / (maxGearValue - minGearValue) + 0.3f * (gear + 1));
 
-            Debug.Log("GEAR" + gear);
-            Debug.Log("MIN" + minGearValue);
-            Debug.Log("MAX" + maxGearValue);
-            Debug.Log("SPEED" + _speed);
-
             _engineAudioSource.pitch = pitch;
 
             gear = i;

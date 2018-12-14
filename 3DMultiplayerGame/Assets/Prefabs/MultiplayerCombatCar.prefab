@@ -1779,7 +1779,7 @@ MonoBehaviour:
   GearRatio:
   - 0
   - 25
-  - 50
+  - 65
   EngineSound: {fileID: 8300000, guid: fde3635a814919e459d377d0a3a1b8fb, type: 3}
 --- !u!114 &114310427882905892
 MonoBehaviour:
