@@ -131,29 +131,34 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
             // Add the time since Update was last called to the timer.
             cannonShooting.Timer += Time.deltaTime;
 
-            Vector3 temp = Input.mousePosition;
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 10f;
+
+            // Set this to be the distance you want the object to be placed in front of the camera.
+            var position = Camera.main.ScreenToWorldPoint(mousePos);
+            var ray = Camera.main.ScreenPointToRay(mousePos);
 
             if (Input.GetKeyDown(KeyCode.Space) && cannonShooting.Timer >= cannonShooting.timeBetweenBullets && Time.timeScale != 0)
             {
-                var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == cannonShooting.tag).FirstOrDefault();
-                cannon.Shoot(cannon.tag == "CannonCenter", temp, false, _carManager.PlayerId);
+                var transformPosition = cannonShooting.transform.position;
 
-                CmdFire(cannonShooting.tag, temp, _carManager.PlayerId);
+                cannonShooting.Shoot(cannonShooting.tag == "CannonCenter", _carManager.PlayerId,
+                    position, ray, transformPosition);
+
+                CmdFire(cannonShooting.tag, _carManager.PlayerId,
+                    position, ray, transformPosition);
             }
         }
     }
 
     [Command]
-    private void CmdFire(string objTag, Vector3 mousePosition, int shooter)
+    private void CmdFire(string objTag, int shooter, Vector3 worldPosition, Ray centerCannonRay, Vector3 transformPosition)
     {
-        var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
-        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, true, shooter);
-
-        RpcFire(objTag, mousePosition, shooter);
+       RpcFire(objTag, shooter, worldPosition, centerCannonRay, transformPosition);
     }
 
     [ClientRpc]
-    private void RpcFire(string objTag, Vector3 mousePosition, int shooter)
+    private void RpcFire(string objTag, int shooter, Vector3 worldPosition, Ray centerCannonRay, Vector3 transformPosition)
     {
         if (hasAuthority)
         {
@@ -161,7 +166,7 @@ public class MultiplayerCarController : NetworkBehaviour, ICarController
         }
 
         var cannon = GetComponentsInChildren<CannonShooting>().Where(c => c.tag == objTag).FirstOrDefault();
-        cannon.Shoot(cannon.tag == "CannonCenter", mousePosition, false, shooter);
+        cannon.Shoot(cannon.tag == "CannonCenter", shooter, worldPosition, centerCannonRay, transformPosition);
     }
 
     public void SetIsFalling(bool value)

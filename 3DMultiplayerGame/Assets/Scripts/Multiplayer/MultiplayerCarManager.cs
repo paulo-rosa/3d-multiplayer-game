@@ -106,9 +106,8 @@ namespace Assets.Scripts.Multiplayer
         
         void Update()
         {
-            Debug.Log("Has authority:" + hasAuthority);
-            Debug.Log("Car Behaviour Has authority:" + _carBehaviour.hasAuthority);
-
+            //Debug.Log("Has authority:" + hasAuthority);
+            //Debug.Log("Car Behaviour Has authority:" + _carBehaviour.hasAuthority);
         }
 
         public void Died()
